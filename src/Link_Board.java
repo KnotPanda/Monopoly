@@ -10,6 +10,14 @@ public class Link_Board {
     public String occupiedBy;
 
     public Link_Board(String name, int price, boolean purchased, String owner, int rent, boolean isPurchasable, String special, int sellvalue, String occupiedBy){
-
+            this.name = name;
+            this.price = price;
+            this.purchased = purchased;
+            this.owner = owner;
+            this.rent = rent;
+            this.isPurchasable = isPurchasable;
+            this.special = special;
+            this.sellvalue = sellvalue;
+            this.occupiedBy = occupiedBy;
     }
 }
