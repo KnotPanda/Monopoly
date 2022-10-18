@@ -8,8 +8,13 @@ public class Link_Board {
     public String special;
     public int sellvalue;
     public String occupiedBy;
+    public int location;
+    public String print;
 
-    public Link_Board(String name, int price, boolean purchased, String owner, int rent, boolean isPurchasable, String special, int sellvalue, String occupiedBy){
+    public Link_Board next;
+
+
+    public Link_Board(String name, int price, boolean purchased, String owner, int rent, boolean isPurchasable, String special, int sellvalue, String occupiedBy, int location, String print){
             this.name = name;
             this.price = price;
             this.purchased = purchased;
@@ -19,5 +24,7 @@ public class Link_Board {
             this.special = special;
             this.sellvalue = sellvalue;
             this.occupiedBy = occupiedBy;
+            this.location = location;
+            this.print = print;
     }
 }
