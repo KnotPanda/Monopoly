@@ -2,45 +2,45 @@ public class Main {
 
     public static void main(String[] args) {
         Board_CLL board = new Board_CLL();
-        board.insert("Mediterranean Ave.", 60, false, null, 10, true, "", 30, "", 1);
-        board.insert("Community Chest", 0, false, null, 0, false, "Community Chest", 0, "", 2);
-        board.insert("Baltic Ave.", 60, false, null, 20, true, "", 30, "", 3);
-        board.insert("Income Tax", 0, false, null, 0, false, "", 0, "", 4);
-        board.insert("Reading Railroad", 200, false, null, 0, false, "", 0, "", 5);
-        board.insert("Oriental Ave.", 100, false, null, 0, false, "", 0, "", 6);
-        board.insert("Chance", 0, false, null, 0, false, "", 0, "", 7);
-        board.insert("Vermont Ave.", 100, false, null, 0, false, "", 0, "", 8);
-        board.insert("Connecticut Ave.", 120, false, null, 0, false, "", 0, "", 9);
-        board.insert("Jail/Just Visiting", 0, false, null, 0, false, "", 0, "", 10);
-        board.insert("St. Charles Place", 140, false, null, 0, false, "", 0, "", 11);
-        board.insert("Electric Company", 150, false, null, 0, false, "", 0, "", 12);
-        board.insert("States Ave.", 140, false, null, 0, false, "", 0, "", 13);
-        board.insert("Virginia Ave.", 160, false, null, 0, false, "", 0, "", 14);
-        board.insert("Pennsylvania Railroad", 200, false, null, 0, false, "", 0, "", 15);
-        board.insert("St. James Place", 180, false, null, 0, false, "", 0, "", 16);
-        board.insert("Community Chest", 0, false, null, 0, false, "", 0, "", 17);
-        board.insert("Tennessee Ave.", 180, false, null, 0, false, "", 0, "", 18);
-        board.insert("New York Ave.", 200, false, null, 0, false, "", 0, "", 19);
-        board.insert("Free Parking", 0, false, null, 0, false, "", 0, "", 20);
-        board.insert("Kentucky Ave.", 220, false, null, 0, false, "", 0, "", 21);
-        board.insert("Chance", 0, false, null, 0, false, "", 0, "", 22);
-        board.insert("Indiana Ave.", 220, false, null, 0, false, "", 0, "", 23);
-        board.insert("Illinois Ave.", 240, false, null, 0, false, "", 0, "", 24);
-        board.insert("B. & O. Railroad", 200, false, null, 0, false, "", 0, "", 25);
-        board.insert("Atlantic Ave.", 260, false, null, 0, false, "", 0, "", 26);
-        board.insert("Ventnor Ave.", 260, false, null, 0, false, "", 0, "", 27);
-        board.insert("Water Works", 150, false, null, 0, false, "", 0, "", 28);
-        board.insert("Marvin Gardens", 280, false, null, 0, false, "", 0, "", 29);
-        board.insert("Go To Jail", 0, false, null, 0, false, "", 0, "", 30);
-        board.insert("Pacific Ave.", 300, false, null, 0, false, "", 0, "", 31);
-        board.insert("North Carolina Ave.", 300, false, null, 0, false, "", 0, "", 32);
-        board.insert("Community Chest", 0, false, null, 0, false, "", 0, "", 33);
-        board.insert("Pennsylvania Ave.", 320, false, null, 0, false, "", 0, "", 34);
-        board.insert("Short Line", 200, false, null, 0, false, "", 0, "", 35);
-        board.insert("Chance", 0, false, null, 0, false, "", 0, "", 36);
-        board.insert("Park Place", 350, false, null, 0, false, "", 0, "", 37);
-        board.insert("Luxury Tax", 0, false, null, 0, false, "", 0, "", 38);
-        board.insert("Boardwalk", 400, false, null, 0, false, "", 0, "", 39);
+        BoardPiece one  = new BoardPiece("Mediterranean Ave.", 60, false, null, 10, true, "", 30, "", 1);
+        BoardPiece two  = new BoardPiece("Community Chest", 0, false, null, 0, false, "Community Chest", 0, "", 2);
+        BoardPiece three  = new BoardPiece("Baltic Ave.", 60, false, null, 20, true, "", 30, "", 3);
+        BoardPiece four  = new BoardPiece("Income Tax", 0, false, null, 0, false, "", 0, "", 4);
+        BoardPiece five  = new BoardPiece("Reading Railroad", 200, false, null, 0, false, "", 0, "", 5);
+        BoardPiece six  = new BoardPiece("Oriental Ave.", 100, false, null, 0, false, "", 0, "", 6);
+        BoardPiece seven  = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 7);
+        BoardPiece eight  = new BoardPiece("Vermont Ave.", 100, false, null, 0, false, "", 0, "", 8);
+        BoardPiece nine  = new BoardPiece("Connecticut Ave.", 120, false, null, 0, false, "", 0, "", 9);
+        BoardPiece ten  = new BoardPiece("Jail/Just Visiting", 0, false, null, 0, false, "", 0, "", 10);
+        BoardPiece eleven  = new BoardPiece("St. Charles Place", 140, false, null, 0, false, "", 0, "", 11);
+        BoardPiece twelve  = new BoardPiece("Electric Company", 150, false, null, 0, false, "", 0, "", 12);
+        BoardPiece thirteen  = new BoardPiece("States Ave.", 140, false, null, 0, false, "", 0, "", 13);
+        BoardPiece fourteen  = new BoardPiece("Virginia Ave.", 160, false, null, 0, false, "", 0, "", 14);
+        BoardPiece fifteen  = new BoardPiece("Pennsylvania Railroad", 200, false, null, 0, false, "", 0, "", 15);
+        BoardPiece sixteen  = new BoardPiece("St. James Place", 180, false, null, 0, false, "", 0, "", 16);
+        BoardPiece seventeen  = new BoardPiece("Community Chest", 0, false, null, 0, false, "", 0, "", 17);
+        BoardPiece eighteen  = new BoardPiece("Tennessee Ave.", 180, false, null, 0, false, "", 0, "", 18);
+        BoardPiece nineteen  = new BoardPiece("New York Ave.", 200, false, null, 0, false, "", 0, "", 19);
+        BoardPiece twenty  = new BoardPiece("Free Parking", 0, false, null, 0, false, "", 0, "", 20);
+        BoardPiece twentyone  = new BoardPiece("Kentucky Ave.", 220, false, null, 0, false, "", 0, "", 21);
+        BoardPiece twentytwo  = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 22);
+        BoardPiece twentythree  = new BoardPiece("Indiana Ave.", 220, false, null, 0, false, "", 0, "", 23);
+        BoardPiece twentyfour  = new BoardPiece("Illinois Ave.", 240, false, null, 0, false, "", 0, "", 24);
+        BoardPiece twentyfive  = new BoardPiece("B. & O. Railroad", 200, false, null, 0, false, "", 0, "", 25);
+        BoardPiece twentysix  = new BoardPiece("Atlantic Ave.", 260, false, null, 0, false, "", 0, "", 26);
+        BoardPiece twentyseven  = new BoardPiece("Ventnor Ave.", 260, false, null, 0, false, "", 0, "", 27);
+        BoardPiece twentyeight  = new BoardPiece("Water Works", 150, false, null, 0, false, "", 0, "", 28);
+        BoardPiece twentynine  = new BoardPiece("Marvin Gardens", 280, false, null, 0, false, "", 0, "", 29);
+        BoardPiece thirty  = new BoardPiece("Go To Jail", 0, false, null, 0, false, "", 0, "", 30);
+        BoardPiece thirtyone  = new BoardPiece("Pacific Ave.", 300, false, null, 0, false, "", 0, "", 31);
+        BoardPiece thirtytwo  = new BoardPiece("North Carolina Ave.", 300, false, null, 0, false, "", 0, "", 32);
+        BoardPiece thirtythree  = new BoardPiece("Community Chest", 0, false, null, 0, false, "", 0, "", 33);
+        BoardPiece thirtyfour  = new BoardPiece("Pennsylvania Ave.", 320, false, null, 0, false, "", 0, "", 34);
+        BoardPiece thirtyfive  = new BoardPiece("Short Line", 200, false, null, 0, false, "", 0, "", 35);
+        BoardPiece thirtysix  = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 36);
+        BoardPiece thiryseven  = new BoardPiece("Park Place", 350, false, null, 0, false, "", 0, "", 37);
+        BoardPiece thirtyeight  = new BoardPiece("Luxury Tax", 0, false, null, 0, false, "", 0, "", 38);
+        BoardPiece thirtynine  = new BoardPiece("Boardwalk", 400, false, null, 0, false, "", 0, "", 39);
 
         printBoard(board);
     }
@@ -121,19 +121,19 @@ public class Main {
         System.out.println("└----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘");
     }
 
-    public static String printOccupants(Link_Board link){
-        int count = link.occupiedBy.length();
+    public static String printOccupants(BoardPiece link){
+        int count = link.getOccupiedBy().length();
         switch (count){
             case 0:
                 return "          ";
             case 1:
-                return "    "+link.occupiedBy+"     ";
+                return "    "+link.getOccupiedBy()+"     ";
             case 2:
-                return "   "+link.occupiedBy.substring(0,1)+"  "+link.occupiedBy.substring(1,2)+"   ";
+                return "   "+link.getOccupiedBy().substring(0,1)+"  "+link.getOccupiedBy().substring(1,2)+"   ";
             case 3:
-                return "    "+link.occupiedBy.substring(0,1)+"    "+link.occupiedBy.substring(1,2)+"    "+link.occupiedBy.substring(2,3)+"    ";
+                return "  "+link.getOccupiedBy().substring(0,1)+"    "+link.getOccupiedBy().substring(1,2)+"    "+link.getOccupiedBy().substring(2,3)+"  ";
             case 4:
-                return "   "+link.occupiedBy.substring(0,1)+" "+link.occupiedBy.substring(1,2)+" "+link.occupiedBy.substring(2,3)+" "+link.occupiedBy.substring(3,4)+"   ";
+                return "   "+link.getOccupiedBy().substring(0,1)+" "+link.getOccupiedBy().substring(1,2)+" "+link.getOccupiedBy().substring(2,3)+" "+link.getOccupiedBy().substring(3,4)+"  ";
         }
         return "          ";
     }
