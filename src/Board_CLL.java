@@ -13,11 +13,14 @@ public class Board_CLL {
      */
     public void insert(String name, int price, boolean purchased, String owner, int rent, boolean isPurchasable, String special, int sellvalue, String occupiedBy, int location) {
         Link_Board link = new Link_Board(name, price, purchased, owner, rent, isPurchasable, special, sellvalue, occupiedBy, location);
-        if (first == null) {
+        if (last == null) {
             first = link;
-        } else {
             last = link;
-            last.next = first;
+            link.next = last;
+        } else {
+            last.next = link.next;
+            last.next = link;
+            last = link;
         }
     }
 
