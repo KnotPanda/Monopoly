@@ -6,11 +6,11 @@ public class BoardPiece {
     private int rent;
     private boolean isPurchasable;
     private String special;
-    private int sellvalue;
+    private int sellValue;
     private String occupiedBy;
     private int location;
 
-    public BoardPiece(String name, int price, boolean purchased, String owner, int rent, boolean isPurchasable, String special, int sellvalue, String occupiedBy, int location) {
+    public BoardPiece(String name, int price, boolean purchased, String owner, int rent, boolean isPurchasable, String special, int sellValue, String occupiedBy, int location) {
         this.name = name;
         this.price = price;
         this.purchased = purchased;
@@ -18,7 +18,7 @@ public class BoardPiece {
         this.rent = rent;
         this.isPurchasable = isPurchasable;
         this.special = special;
-        this.sellvalue = sellvalue;
+        this.sellValue = sellValue;
         this.occupiedBy = occupiedBy;
         this.location = location;
     }
@@ -79,12 +79,12 @@ public class BoardPiece {
         this.special = special;
     }
 
-    public int getSellvalue() {
-        return sellvalue;
+    public int getSellValue() {
+        return sellValue;
     }
 
-    public void setSellvalue(int sellvalue) {
-        this.sellvalue = sellvalue;
+    public void setSellValue(int sellValue) {
+        this.sellValue = sellValue;
     }
 
     public String getOccupiedBy() {
