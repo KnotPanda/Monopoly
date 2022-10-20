@@ -1,6 +1,6 @@
-public class Board_CLL {
-    public Link first;
-    public Link last;
+public class CLL<T> {
+    public Link<T> first;
+    public Link<T> last;
 
     public void Board_CLL() {
         first = null;
@@ -11,8 +11,7 @@ public class Board_CLL {
     insertFirst inserts a link at the end of the linked list, I chose to do this instead of inserting it as the
     first link because when adding links in a particular order, this would be easier to visualize.
      */
-    public void insert(String name, int price, boolean purchased, String owner, int rent, boolean isPurchasable, String special, int sellvalue, String occupiedBy, int location) {
-        BoardPiece data = new BoardPiece(name, price, purchased, owner, rent, isPurchasable, special, sellvalue, occupiedBy, location);
+    public void insert(T data) {
         Link link = new Link(data);
         if (last == null) {
             first = link;
@@ -25,7 +24,7 @@ public class Board_CLL {
         }
     }
 
-    public Link find(BoardPiece data) {
+    public Link find(T data) {
         Link current = first;
         while (current != last) {
             if (current.data == data) {
@@ -37,3 +36,4 @@ public class Board_CLL {
         return last;
     }
 }
+

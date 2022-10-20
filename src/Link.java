@@ -1,8 +1,8 @@
-public class Link {
-    public Link next;
-    public Object data;
+public class Link<T> {
+    public Link<T> next;
+    public T data;
 
-    public Link(Object data){
+    public Link(T data){
         this.data = data;
     }
 }
