@@ -2,6 +2,7 @@ public class Main {
 
     public static void main(String[] args) {
         CLL<BoardPiece> board = new CLL<>();
+        BoardPiece zero  = new BoardPiece("GO", 0, false, null, 0, false, "", 0, "", 0);
         BoardPiece one  = new BoardPiece("Mediterranean Ave.", 60, false, null, 10, true, "", 30, "", 1);
         BoardPiece two  = new BoardPiece("Community Chest", 0, false, null, 0, false, "Community Chest", 0, "", 2);
         BoardPiece three  = new BoardPiece("Baltic Ave.", 60, false, null, 20, true, "", 30, "", 3);
@@ -42,6 +43,7 @@ public class Main {
         BoardPiece thirtyeight  = new BoardPiece("Luxury Tax", 0, false, null, 0, false, "", 0, "", 38);
         BoardPiece thirtynine  = new BoardPiece("Boardwalk", 400, false, null, 0, false, "", 0, "", 39);
 
+        board.insert(zero);
         board.insert(one);
         board.insert(two);
         board.insert(three);
@@ -88,76 +90,77 @@ public class Main {
         System.out.println("┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐");
         System.out.println("|   Free   | | Kentucky | |  Chance  | | Indiana  | | Illinois | | B. & O.  | | Atlantic | | Ventnor  | |   Water  | |  Marvin  | |   GO TO  |");
         System.out.println("|  Parking | |    Ave   | |          | |    Ave   | |    Ave   | | Railroad | |    Ave   | |    Ave   | |   Works  | |  Gardens | |   JAIL   |");
-        System.out.println("|"+ printOccupants(board.find(20)) +"| |"+ printOccupants(board.find(21)) +"| |"+ printOccupants(board.find(22)) +
-                "| |"+ printOccupants(board.find(23)) +"| |"+ printOccupants(board.find(24)) +"| |"+ printOccupants(board.find(25)) +
-                "| |"+ printOccupants(board.find(26)) +"| |"+ printOccupants(board.find(27)) +"| |"+ printOccupants(board.find(28)) +
-                "| |"+ printOccupants(board.find(29)) +"| |"+ printOccupants(board.find(30)) +"|");
-        System.out.println("|          | |   "+ board.find(21).getPrice() +"$   | |          | |   "+ board.find(23).getPrice() +"$   | |   "+ board.find(24).getPrice() +
-                "$   | |   "+ board.find(25).getPrice() +"$   | |   "+ board.find(26).getPrice() +"$   | |   "+ board.find(27).getPrice() +"$   | |   "+ board.find(28).getPrice() +
-                "$   | |   "+ board.find(29).getPrice() +"$   | |          |");
+        System.out.println("|"+ printOccupants(board.find(22).data) +"| |"+ printOccupants(board.find(21).data) +"| |"+ printOccupants(board.find(22).data) +
+                "| |"+ printOccupants(board.find(23).data) +"| |"+ printOccupants(board.find(24).data) +"| |"+ printOccupants(board.find(25).data) +
+                "| |"+ printOccupants(board.find(26).data) +"| |"+ printOccupants(board.find(27).data) +"| |"+ printOccupants(board.find(28).data) +
+                "| |"+ printOccupants(board.find(29).data) +"| |"+ printOccupants(board.find(30).data) +"|");
+        System.out.println("|          | |   "+ board.find(21).data.getPrice() +"$   | |          | |   "+ board.find(23).data.getPrice() +"$   | |   "+ board.find(24).data.getPrice() +
+                "$   | |   "+ board.find(25).data.getPrice() +"$   | |   "+ board.find(26).data.getPrice() +"$   | |   "+ board.find(27).data.getPrice() +"$   | |   "+ board.find(28).data.getPrice() +
+                "$   | |   "+ board.find(29).data.getPrice() +"$   | |          |");
         System.out.println("└----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("| New York |                                                                                                                      | Pacific  |");
         System.out.println("|    Ave   |                                                                                                                      |    Ave   |");
-        System.out.println("|"+ printOccupants(board.find(19)) +"|                                                                                                                      |"+ printOccupants(board.find(31)) +"|");
-        System.out.println("|   "+ board.find(19).getPrice() +"$   |                                                                                                                      |   "+ board.find(31).getPrice() +"$   |");
+        System.out.println("|"+ printOccupants(board.find(19).data) +"|                                                                                                                      |"+ printOccupants(board.find(31).data) +"|");
+        System.out.println("|   "+ board.find(19).data.getPrice() +"$   |                                                                                                                      |   "+ board.find(31).data.getPrice() +"$   |");
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐           ___ _  _   _   _  _  ___ ___                                                                               ┌----------┐");
         System.out.println("|Tennessee |          / __| || | /_\\ | \\| |/ __| __|                                                                              |   North  |");
         System.out.println("|    Ave   |         | (__| __ |/ _ \\| .` | (__| _|                                                                               | Caro. Ave|");
-        System.out.println("|"+ printOccupants(board.find(18)) +"|          \\___|_||_/_/ \\_\\_|\\_|\\___|___|                                                                              |"+ printOccupants(board.find(32)) +"|");
-        System.out.println("|   "+ board.find(18).getPrice() +"$   |                                                                                                                      |   "+ board.find(32).getPrice() +"$   |");
+        System.out.println("|"+ printOccupants(board.find(18).data) +"|          \\___|_||_/_/ \\_\\_|\\_|\\___|___|                                                                              |"+ printOccupants(board.find(32).data) +"|");
+        System.out.println("|   "+ board.find(18).data.getPrice() +"$   |                                                                                                                      |   "+ board.find(32).data.getPrice() +"$   |");
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("|Community |                                                                                                                      |Community |");
         System.out.println("|  Chest   |                                                                                                                      |  Chest   |");
-        System.out.println("|"+ printOccupants(board.find(17)) +"|                                                                                                                      |"+ printOccupants(board.find(33)) +"|");
+        System.out.println("|"+ printOccupants(board.find(17).data) +"|                                                                                                                      |"+ printOccupants(board.find(33).data) +"|");
         System.out.println("|          |                                                                                                                      |          |");
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("| St. James|                                                                                                                      |   Penn.  |");
         System.out.println("|   Place  |                                                                                                                      |    Ave   |");
-        System.out.println("|"+ printOccupants(board.find(16)) +"|                                                                                                                      |"+ printOccupants(board.find(34)) +"|");
-        System.out.println("|   "+ board.find(16).getPrice() +"$   |                                                                                                                      |   "+ board.find(34).getPrice() +"$   |");
+        System.out.println("|"+ printOccupants(board.find(16).data) +"|                                                                                                                      |"+ printOccupants(board.find(34).data) +"|");
+        System.out.println("|   "+ board.find(16).data.getPrice() +"$   |                                                                                                                      |   "+ board.find(34).data.getPrice() +"$   |");
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐                 .___  ___.   ______   .__   __.   ______   .______     ______    __      ____    ____                ┌----------┐");
         System.out.println("|   Penn.  |                 |   \\/   |  /  __  \\  |  \\ |  |  /  __  \\  |   _  \\   /  __  \\  |  |     \\   \\  /   /                |   Short  |");
         System.out.println("| Railroad |                 |  \\  /  | |  |  |  | |   \\|  | |  |  |  | |  |_)  | |  |  |  | |  |      \\   \\/   /                 | Line (rr)|");
-        System.out.println("|"+ printOccupants(board.find(15)) +"|                 |  |\\/|  | |  |  |  | |  . `  | |  |  |  | |   ___/  |  |  |  | |  |       \\_    _/                  |"+ printOccupants(board.find(35)) +"|");
-        System.out.println("|   "+ board.find(15).getPrice() +"$   |                 |  |  |  | |  `--'  | |  |\\   | |  `--'  | |  |      |  `--'  | |  `----.    |  |                    |   "+ board.find(35).getPrice() +"$   |");
+        System.out.println("|"+ printOccupants(board.find(15).data) +"|                 |  |\\/|  | |  |  |  | |  . `  | |  |  |  | |   ___/  |  |  |  | |  |       \\_    _/                  |"+ printOccupants(board.find(35).data) +"|");
+        System.out.println("|   "+ board.find(15).data.getPrice() +"$   |                 |  |  |  | |  `--'  | |  |\\   | |  `--'  | |  |      |  `--'  | |  `----.    |  |                    |   "+ board.find(35).data.getPrice() +"$   |");
         System.out.println("└----------┘                 |__|  |__|  \\______/  |__| \\__|  \\______/  | _|       \\______/  |_______|    |__|                    └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("| Virginia |                                                                                                                      |  Chance  |");
         System.out.println("|    Ave   |                                                                                                                      |          |");
-        System.out.println("|"+ printOccupants(board.find(14)) +"|                                                                                                                      |"+ printOccupants(board.find(36)) +"|");
-        System.out.println("|   "+ board.find(14).getPrice() +"$   |                                                                                                                      |          |");
+        System.out.println("|"+ printOccupants(board.find(14).data) +"|                                                                                                                      |"+ printOccupants(board.find(36).data) +"|");
+        System.out.println("|   "+ board.find(14).data.getPrice() +"$   |                                                                                                                      |          |");
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("|  States  |                                                                                                                      |   Park   |");
         System.out.println("|    Ave   |                                                                                                                      |   Place  |");
-        System.out.println("|"+ printOccupants(board.find(13)) +"|                                                                                                                      |"+ printOccupants(board.find(37)) +"|");
-        System.out.println("|   "+ board.find(13).getPrice() +"$   |                                                                                                                      |   "+ board.find(37).getPrice() +"$   |");
+        System.out.println("|"+ printOccupants(board.find(13).data) +"|                                                                                                                      |"+ printOccupants(board.find(37).data) +"|");
+        System.out.println("|   "+ board.find(13).data.getPrice() +"$   |                                                                                                                      |   "+ board.find(37).data.getPrice() +"$   |");
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("| Electric |                                                                                                                      |  Luxury  |");
         System.out.println("|  Company |                                ___ ___  __  __ __  __ _   _ _  _ ___ _______   __   ___ _  _ ___ ___ _____           |    Tax   |");
-        System.out.println("|"+ printOccupants(board.find(12)) +"|                              / __/ _ \\|  \\/  |  \\/  | | | | \\| |_ _|_   _\\ \\ / /  / __| || | __/ __|_   _|           |"+ printOccupants(board.find(38)) +"|");
-        System.out.println("|   "+ board.find(12).getPrice() +"$   |                             | (_| (_) | |\\/| | |\\/| | |_| | .` || |  | |  \\ V /  | (__| __ | _|\\__ \\ | |             | Pay 100$ |");
+        System.out.println("|"+ printOccupants(board.find(12).data) +"|                              / __/ _ \\|  \\/  |  \\/  | | | | \\| |_ _|_   _\\ \\ / /  / __| || | __/ __|_   _|           |"+ printOccupants(board.find(38).data) +"|");
+        System.out.println("|   "+ board.find(12).data.getPrice() +"$   |                             | (_| (_) | |\\/| | |\\/| | |_| | .` || |  | |  \\ V /  | (__| __ | _|\\__ \\ | |             | Pay 100$ |");
         System.out.println("└----------┘                              \\___\\___/|_|  |_|_|  |_|\\___/|_|\\_|___| |_|   |_|    \\___|_||_|___|___/ |_|             └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("|St Charles|                                                                                                                      |Boardwalk |");
         System.out.println("|   Place  |                                                                                                                      |          |");
-        System.out.println("|"+ printOccupants(board.find(11)) +"|                                                                                                                      |"+ printOccupants(board.find(39)) +"|");
-        System.out.println("|   "+ board.find(11).getPrice() +"$   |                                                                                                                      |   "+ board.find(39).getPrice() +"$   |");
+        System.out.println("|"+ printOccupants(board.find(11).data) +"|                                                                                                                      |"+ printOccupants(board.find(39).data) +"|");
+        System.out.println("|   "+ board.find(11).data.getPrice() +"$   |                                                                                                                      |   "+ board.find(39).data.getPrice() +"$   |");
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐");
         System.out.println("|  JAIL &  | |   Conn.  | |  Vermont | |  Chance  | | Oriental | |  Reading | |  Income  | |  Baltic  | |Community | | Mediter. | |    GO    |");
         System.out.println("|  Just V. | |    Ave   | |    Ave   | |          | |    Ave   | | Railroad | |    Tax   | |    Ave   | |   Chest  | |   Ave    | |          |");
-        System.out.println("|"+ printOccupants(board.find(10)) +"| |"+ printOccupants(board.find(9)) +"| |"+ printOccupants(board.find(8)) +
-                "| |"+ printOccupants(board.find(7)) +"| |"+ printOccupants(board.find(6)) +"| |"+ printOccupants(board.find(5)) +
-                "| |"+ printOccupants(board.find(4)) +"| |"+ printOccupants(board.find(3)) +"| |"+ printOccupants(board.find(2)) +
-                "| |"+ printOccupants(board.find(1)) +"| |  Collect |");
-        System.out.println("|          | |   "+ board.find(9).getPrice() +"$   | |   "+ board.find(8).getPrice() +"$   | |          | |   "+ board.find(6).getPrice() +"$   | |   "+ board.find(5).getPrice() +"$   | | Pay 200$ | |    "+ board.find(3).getPrice() +"$   | |          | |    "+ board.find(one).getPrice(1) +"$   | |   200$   |");
+        System.out.println("|"+ printOccupants(board.find(10).data) +"| |"+ printOccupants(board.find(9).data) +"| |"+ printOccupants(board.find(8).data) +
+                "| |"+ printOccupants(board.find(7).data) +"| |"+ printOccupants(board.find(6).data) +"| |"+ printOccupants(board.find(5).data) +
+                "| |"+ printOccupants(board.find(4).data) +"| |"+ printOccupants(board.find(3).data) +"| |"+ printOccupants(board.find(2).data) +
+                "| |"+ printOccupants(board.find(1).data) +"| |"+ printOccupants(board.find(0).data) +"|");
+        System.out.println("|          | |   "+ board.find(9).data.getPrice() +"$   | |   "+ board.find(8).data.getPrice() +"$   | |          | |   "+ board.find(6).data.getPrice() +
+                "$   | |   "+ board.find(5).data.getPrice() +"$   | | Pay 200$ | |    "+ board.find(3).data.getPrice() +"$   | |          | |    "+ board.find(1).data.getPrice() +"$   | |  +200$   |");
         System.out.println("└----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘");
     }
 

@@ -24,8 +24,8 @@ public class CLL<T> {
         }
     }
 
-    public Link find(T data) {
-        Link current = first;
+    public Link<T> findLink(T data) {
+        Link<T> current = first;
         while (current != last) {
             if (current.data == data) {
                 return current;
@@ -35,5 +35,14 @@ public class CLL<T> {
         }
         return last;
     }
-}
+
+    public Link<T> find(int index){
+        Link<T> current = first;
+            for (int i = 0; i<index; i++){
+                current = current.next;
+            }
+            return current;
+        }
+    }
+
 
