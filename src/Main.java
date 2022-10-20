@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
     ArrayList<BoardPiece> properties1;
-    PlayerPiece Thimble = new PlayerPiece("Player One", 1500, false, 0, properties1, "W");
+    PlayerPiece Thimble = new PlayerPiece("Trapezoid", 1500, false, 0, properties1, "▰");
     ArrayList<BoardPiece> properties2;
-    PlayerPiece Iron = new PlayerPiece("Player Two", 1500, false, 0, properties2, "X");
+    PlayerPiece Iron = new PlayerPiece("Diamond", 1500, false, 0, properties2, "◆");
     ArrayList<BoardPiece> properties3;
-    PlayerPiece TopHat = new PlayerPiece("Player Three", 1500, false, 0, properties2, "Y");
+    PlayerPiece TopHat = new PlayerPiece("Circle", 1500, false, 0, properties2, "◕");
     ArrayList<BoardPiece> properties4;
-    PlayerPiece Battleship = new PlayerPiece("Player Four", 1500, false, 0, properties2, "Z");
+    PlayerPiece Battleship = new PlayerPiece("Triangle", 1500, false, 0, properties2, "◭");
 
     public static void main(String[] args) {
         CLL<BoardPiece> board = new CLL<>();
