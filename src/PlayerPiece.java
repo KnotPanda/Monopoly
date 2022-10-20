@@ -5,9 +5,9 @@ public class PlayerPiece {
     private boolean isJailed;
     private int railroadsOwned;
     private ArrayList<BoardPiece> properties;
-    private char piece;
+    private String piece;
 
-    public PlayerPiece(String name, int balance, boolean isJailed, int railroadsOwned, ArrayList<BoardPiece> properties, char piece){
+    public PlayerPiece(String name, int balance, boolean isJailed, int railroadsOwned, ArrayList<BoardPiece> properties, String piece){
         this.name = name;
         this.balance = balance;
         this.isJailed = isJailed;
@@ -56,11 +56,11 @@ public class PlayerPiece {
         this.properties = properties;
     }
 
-    public char getPiece() {
+    public String getPiece() {
         return piece;
     }
 
-    public void setPiece(char piece) {
+    public void setPiece(String piece) {
         this.piece = piece;
     }
 }
