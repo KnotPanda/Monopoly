@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
         CLL<BoardPiece> board = new CLL<>();
+        CLL<PlayerPiece> players = new CLL<>();
         BoardPiece zero  = new BoardPiece("GO", 0, false, null, 0, false, "", 0, "", 0);
         BoardPiece one  = new BoardPiece("Mediterranean Ave.", 60, false, null, 10, true, "", 30, "", 1);
         BoardPiece two  = new BoardPiece("Community Chest", 0, false, null, 0, false, "Community Chest", 0, "", 2);
@@ -85,6 +88,18 @@ public class Main {
         board.insert(thirtynine);
 
         printBoard(board);
+        Scanner input = new Scanner(System.in);
+        System.out.print("How many players are there:");
+        int amountOfPlayers = input.nextInt();
+        for (int i = 0; i<amountOfPlayers; i++){
+            System.out.println("Player " + 1 + ", enter your name:");
+            String name = input.nextLine();
+            System.out.println(name + " enter your character: (Choose one Char)");
+            String symbol = input.nextLine().substring(0,1);
+            ArrayList<BoardPiece> temp2 = new ArrayList<>();
+            PlayerPiece temp = new PlayerPiece(name, 1500, false, 0, temp2, symbol);
+            players.insert(temp);
+        }
     }
     public static void printBoard(CLL<BoardPiece> board){
         System.out.println("┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐");
