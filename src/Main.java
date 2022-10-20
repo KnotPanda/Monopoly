@@ -2,13 +2,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
     ArrayList<BoardPiece> properties1;
-    PlayerPiece Thimble = new PlayerPiece("Thimble", 1500, false, 0, properties1, null);
+    PlayerPiece Thimble = new PlayerPiece("Player One", 1500, false, 0, properties1, "W");
     ArrayList<BoardPiece> properties2;
-    PlayerPiece Iron = new PlayerPiece("Iron", 1500, false, 0, properties2, null);
+    PlayerPiece Iron = new PlayerPiece("Player Two", 1500, false, 0, properties2, "X");
     ArrayList<BoardPiece> properties3;
-    PlayerPiece TopHat = new PlayerPiece("TopHat", 1500, false, 0, properties2, null);
+    PlayerPiece TopHat = new PlayerPiece("Player Three", 1500, false, 0, properties2, "Y");
     ArrayList<BoardPiece> properties4;
-    PlayerPiece Battleship = new PlayerPiece("Battleship", 1500, false, 0, properties2, null);
+    PlayerPiece Battleship = new PlayerPiece("Player Four", 1500, false, 0, properties2, "Z");
 
     public static void main(String[] args) {
         CLL<BoardPiece> board = new CLL<>();
@@ -20,9 +20,9 @@ public class Main {
         BoardPiece four  = new BoardPiece("Income Tax", 0, false, null, 0, false, "", 0, "", 4);
         BoardPiece five  = new BoardPiece("Reading Railroad", 200, false, null, 0, false, "", 0, "", 5);
         BoardPiece six  = new BoardPiece("Oriental Ave.", 100, false, null, 0, false, "", 0, "", 6);
-        BoardPiece seven  = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 7);
+        BoardPiece seven  = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "cyau", 7);
         BoardPiece eight  = new BoardPiece("Vermont Ave.", 100, false, null, 0, false, "", 0, "", 8);
-        BoardPiece nine  = new BoardPiece("Connecticut Ave.", 120, false, null, 0, false, "", 0, "", 9);
+        BoardPiece nine  = new BoardPiece("Connecticut Ave.", 120, false, null, 0, false, "", 0, "sy", 9);
         BoardPiece ten  = new BoardPiece("Jail/Just Visiting", 0, false, null, 0, false, "", 0, "", 10);
         BoardPiece eleven  = new BoardPiece("St. Charles Place", 140, false, null, 0, false, "", 0, "", 11);
         BoardPiece twelve  = new BoardPiece("Electric Company", 150, false, null, 0, false, "", 0, "", 12);
@@ -96,18 +96,6 @@ public class Main {
         board.insert(thirtynine);
 
         printBoard(board);
-        Scanner input = new Scanner(System.in);
-        System.out.print("How many players are there:");
-        int amountOfPlayers = input.nextInt();
-        for (int i = 0; i<amountOfPlayers; i++){
-            System.out.println("Player " + 1 + ", enter your name:");
-            String name = input.nextLine();
-            System.out.println(name + " enter your character: (Choose one Char)");
-            String symbol = input.nextLine().substring(0,1);
-            ArrayList<BoardPiece> temp2 = new ArrayList<>();
-            PlayerPiece temp = new PlayerPiece(name, 1500, false, 0, temp2, symbol);
-            players.insert(temp);
-        }
     }
     public static void printBoard(CLL<BoardPiece> board){
         System.out.println("┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐");
