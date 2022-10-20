@@ -1,6 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 public class Main {
+    ArrayList<BoardPiece> properties1;
+    PlayerPiece Thimble = new PlayerPiece("Thimble", 1500, false, 0, properties1, null);
+    ArrayList<BoardPiece> properties2;
+    PlayerPiece Iron = new PlayerPiece("Iron", 1500, false, 0, properties2, null);
+    ArrayList<BoardPiece> properties3;
+    PlayerPiece TopHat = new PlayerPiece("TopHat", 1500, false, 0, properties2, null);
+    ArrayList<BoardPiece> properties4;
+    PlayerPiece Battleship = new PlayerPiece("Battleship", 1500, false, 0, properties2, null);
 
     public static void main(String[] args) {
         CLL<BoardPiece> board = new CLL<>();
