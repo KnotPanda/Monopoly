@@ -42,7 +42,17 @@ public class CLL<T> {
                 current = current.next;
             }
             return current;
+    }
+
+    public int length(){
+        Link<T> current = first;
+        int counter = 1;
+        while (current != last){
+            counter++;
+            current = current.next;
         }
+        return counter;
+    }
     }
 
 

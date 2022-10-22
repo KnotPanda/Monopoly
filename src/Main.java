@@ -101,6 +101,12 @@ public class Main {
         ArrayList<BoardPiece> properties4 = new ArrayList<>();
         PlayerPiece P4 = new PlayerPiece("Triangle", 1500, false, 0, properties4, "◭", "free", 0, 0);
 
+        players.insert(P1);
+        players.insert(P2);
+        players.insert(P3);
+        players.insert(P4);
+
+
         while(isGameOver) {
         }
     }
@@ -227,358 +233,434 @@ public class Main {
         }
     }
 
-    public static void CommunityChest(PlayerPiece P, CLL<BoardPiece> board) {
-
+    public static void CommunityChest(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer) {
+        Random rand = new Random();
+        int random = rand.nextInt(16);
+        switch (random) {
+            case 1:
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                currentPlayer.setLocation(40);
+                board.find(40).data.setOccupiedBy(currentPlayer.getPiece());
+                System.out.println("You Advanced To GO");
+                currentPlayer.setBalance(currentPlayer.getBalance() + 200);
+                break;
+            case 2:
+                System.out.println("Bank Error In Your Favor, You Got 200$");
+                currentPlayer.setBalance(currentPlayer.getBalance() + 200);
+                break;
+            case 3:
+                System.out.println("Doctor's Fee: 50$");
+                currentPlayer.setBalance(currentPlayer.getBalance() - 50);
+                break;
+            case 4:
+                System.out.println("Sold Some Stock, Got 50$");
+                currentPlayer.setBalance(currentPlayer.getBalance() + 50);
+                break;
+            case 5:
+                System.out.println("You Got A Get Out Of Jail Free Card");
+                currentPlayer.setGOOJF(currentPlayer.getGOOJF() + 1);
+                break;
+            case 6:
+                System.out.println("You Got Sent To Jail");
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                currentPlayer.setLocation(10);
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(currentPlayer.getPiece());
+                currentPlayer.setStatus("jail");
+                break;
+            case 7:
+                System.out.println("Holiday Fund Matures, You Received 100$");
+                currentPlayer.setBalance(currentPlayer.getBalance() + 100);
+                break;
+            case 8:
+                System.out.println("Income Tax Refund, You Received 20$");
+                currentPlayer.setBalance(currentPlayer.getBalance() + 20);
+                break;
+            case 9:
+                System.out.println("It's Your Birthday! You Collect 10$ From Everyone");
+                for (int i = 0; i<Players.length(); i++){
+                    if (Players.find(i).data == currentPlayer){
+                        currentPlayer.setBalance(currentPlayer.getBalance() + 10 * Players.length());
+                    }
+                    else{
+                        Players.find(i).data.setBalance(Players.find(i).data.getBalance() - 10);
+                    }
+                }
+                break;
+            case 10:
+                System.out.println("Life Insurance Matures, You Received 100$");
+                currentPlayer.setBalance(currentPlayer.getBalance() + 100);
+                break;
+            case 11:
+                System.out.println("Hospital Fee: 100$");
+                currentPlayer.setBalance(currentPlayer.getBalance() - 100);
+                break;
+            case 12:
+                System.out.println("School Fee: 50$");
+                currentPlayer.setBalance(currentPlayer.getBalance() - 50);
+                break;
+            case 13:
+                System.out.println("You Received A 50$ Consultancy Fee");
+                currentPlayer.setBalance(currentPlayer.getBalance() + 50);
+                break;
+            case 14:
+                System.out.println("You Placed Second In a Beauty Contest (Alex Won), You Receive 10$");
+                currentPlayer.setBalance(currentPlayer.getBalance() + 10);
+                break;
+            case 15:
+                System.out.println("You Inherit 100$");
+                currentPlayer.setBalance(currentPlayer.getBalance() + 100);
+                break;
+        }
     }
-    public static void Chance(PlayerPiece P, CLL<BoardPiece> board){
+    public static void Chance(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer){
         Random rand = new Random();
         int random = rand.nextInt(16);
         switch (random){
             case 1:
-                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                P.setLocation(39);
-                board.find(39).data.setOccupiedBy(P.getPiece());
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                currentPlayer.setLocation(39);
+                board.find(39).data.setOccupiedBy(currentPlayer.getPiece());
                 System.out.println("You Got Sent To Boardwalk");
                 if (board.find(39).data.isPurchased()){
-                    P.setBalance(P.getBalance() - board.find(39).data.getRent());
+                    currentPlayer.setBalance(currentPlayer.getBalance() - board.find(39).data.getRent());
                     System.out.println("You Paid Rent");
                 }
                 else{
                     System.out.println("Would You Like To Purchase It?");
                     Scanner Scan = new Scanner(System.in);
                     if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                        P.setBalance(P.getBalance() - board.find(39).data.getPrice());
-                        board.find(39).data.setOwner(P);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(39).data.getPrice());
+                        board.find(39).data.setOwner(currentPlayer);
                         board.find(39).data.setPurchased(true);
-                        P.getProperties().add(board.find(39).data);
+                        currentPlayer.getProperties().add(board.find(39).data);
                     }
                 }
                 break;
             case 2:
-                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                P.setLocation(40);
-                board.find(40).data.setOccupiedBy(P.getPiece());
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                currentPlayer.setLocation(40);
+                board.find(40).data.setOccupiedBy(currentPlayer.getPiece());
                 System.out.println("You Advanced To GO");
-                P.setBalance(P.getBalance() + 200);
+                currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                 break;
             case 3:
-                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                if (P.getLocation() > 24){
-                    P.setBalance(P.getBalance() + 200);
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                if (currentPlayer.getLocation() > 24){
+                    currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                 }
-                P.setLocation(24);
-                board.find(24).data.setOccupiedBy(P.getPiece());
+                currentPlayer.setLocation(24);
+                board.find(24).data.setOccupiedBy(currentPlayer.getPiece());
                 System.out.println("You Got Sent To Illinois Ave.");
                 if (board.find(24).data.isPurchased()){
-                    P.setBalance(P.getBalance() - board.find(24).data.getRent());
+                    currentPlayer.setBalance(currentPlayer.getBalance() - board.find(24).data.getRent());
                     System.out.println("You Paid Rent");
                 }
                 else{
                     System.out.println("Would You Like To Purchase It?");
                     Scanner Scan = new Scanner(System.in);
                     if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                        P.setBalance(P.getBalance() - board.find(24).data.getPrice());
-                        board.find(24).data.setOwner(P);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(24).data.getPrice());
+                        board.find(24).data.setOwner(currentPlayer);
                         board.find(24).data.setPurchased(true);
-                        P.getProperties().add(board.find(24).data);
+                        currentPlayer.getProperties().add(board.find(24).data);
                     }
                 }
                 break;
             case 4:
-                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                if (P.getLocation() > 11){
-                    P.setBalance(P.getBalance() + 200);
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                if (currentPlayer.getLocation() > 11){
+                    currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                 }
-                P.setLocation(11);
-                board.find(11).data.setOccupiedBy(P.getPiece());
+                currentPlayer.setLocation(11);
+                board.find(11).data.setOccupiedBy(currentPlayer.getPiece());
                 System.out.println("You Got Sent To St. Charles Place");
                 if (board.find(11).data.isPurchased()){
-                    P.setBalance(P.getBalance() - board.find(11).data.getRent());
+                    currentPlayer.setBalance(currentPlayer.getBalance() - board.find(11).data.getRent());
                     System.out.println("You Paid Rent");
                 }
                 else{
                     System.out.println("Would You Like To Purchase It?");
                     Scanner Scan = new Scanner(System.in);
                     if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                        P.setBalance(P.getBalance() - board.find(11).data.getPrice());
-                        board.find(11).data.setOwner(P);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(11).data.getPrice());
+                        board.find(11).data.setOwner(currentPlayer);
                         board.find(11).data.setPurchased(true);
-                        P.getProperties().add(board.find(11).data);
+                        currentPlayer.getProperties().add(board.find(11).data);
                     }
                 }
                 break;
             case 5:
             case 6:
-                int reading = Math.abs(P.getLocation() - 5);
-                int penn = Math.abs(P.getLocation() - 15);
-                int BO = Math.abs(P.getLocation() - 25);
-                int Short = Math.abs(P.getLocation() - 35);
+                int reading = Math.abs(currentPlayer.getLocation() - 5);
+                int penn = Math.abs(currentPlayer.getLocation() - 15);
+                int BO = Math.abs(currentPlayer.getLocation() - 25);
+                int Short = Math.abs(currentPlayer.getLocation() - 35);
 
-                if (reading < penn && reading < BO && reading < Short && P.getLocation() > 5){
-                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                    P.setBalance(P.getBalance() + 200);
-                    P.setLocation(5);
-                    board.find(5).data.setOccupiedBy(P.getPiece());
+                if (reading < penn && reading < BO && reading < Short && currentPlayer.getLocation() > 5){
+                    board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                    currentPlayer.setBalance(currentPlayer.getBalance() + 200);
+                    currentPlayer.setLocation(5);
+                    board.find(5).data.setOccupiedBy(currentPlayer.getPiece());
                     System.out.println("You Got Sent To Reading Railroad");
                     if (board.find(5).data.isPurchased()){
-                        P.setBalance(P.getBalance() - board.find(5).data.getRent() * board.find(5).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(5).data.getRent() * board.find(5).data.getOwner().getRailroadsOwned() * 2);
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
                         System.out.println("Would You Like To Purchase It?");
                         Scanner Scan = new Scanner(System.in);
                         if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                            P.setBalance(P.getBalance() - board.find(5).data.getPrice());
-                            board.find(5).data.setOwner(P);
+                            currentPlayer.setBalance(currentPlayer.getBalance() - board.find(5).data.getPrice());
+                            board.find(5).data.setOwner(currentPlayer);
                             board.find(5).data.setPurchased(true);
-                            P.getProperties().add(board.find(5).data);
-                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                            currentPlayer.getProperties().add(board.find(5).data);
+                            currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
                         }
                     }
                 }
                 if (reading < penn && reading < BO && reading < Short){
-                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                    P.setLocation(5);
-                    board.find(5).data.setOccupiedBy(P.getPiece());
+                    board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                    currentPlayer.setLocation(5);
+                    board.find(5).data.setOccupiedBy(currentPlayer.getPiece());
                     System.out.println("You Got Sent To Reading Railroad");
                     if (board.find(5).data.isPurchased()){
-                        P.setBalance(P.getBalance() - board.find(5).data.getRent() * board.find(5).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(5).data.getRent() * board.find(5).data.getOwner().getRailroadsOwned() * 2);
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
                         System.out.println("Would You Like To Purchase It?");
                         Scanner Scan = new Scanner(System.in);
                         if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                            P.setBalance(P.getBalance() - board.find(5).data.getPrice());
-                            board.find(5).data.setOwner(P);
+                            currentPlayer.setBalance(currentPlayer.getBalance() - board.find(5).data.getPrice());
+                            board.find(5).data.setOwner(currentPlayer);
                             board.find(5).data.setPurchased(true);
-                            P.getProperties().add(board.find(5).data);
-                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                            currentPlayer.getProperties().add(board.find(5).data);
+                            currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
                         }
                     }
                 }
 
 
-                if (penn < reading && penn < BO && penn < Short && P.getLocation() > 15){
-                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                    P.setBalance(P.getBalance() + 200);
-                    P.setLocation(15);
-                    board.find(15).data.setOccupiedBy(P.getPiece());
+                if (penn < reading && penn < BO && penn < Short && currentPlayer.getLocation() > 15){
+                    board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                    currentPlayer.setBalance(currentPlayer.getBalance() + 200);
+                    currentPlayer.setLocation(15);
+                    board.find(15).data.setOccupiedBy(currentPlayer.getPiece());
                     System.out.println("You Got Sent To Pennsylvania Railroad");
                     if (board.find(15).data.isPurchased()){
-                        P.setBalance(P.getBalance() - board.find(15).data.getRent() * board.find(15).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(15).data.getRent() * board.find(15).data.getOwner().getRailroadsOwned() * 2);
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
                         System.out.println("Would You Like To Purchase It?");
                         Scanner Scan = new Scanner(System.in);
                         if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                            P.setBalance(P.getBalance() - board.find(15).data.getPrice());
-                            board.find(15).data.setOwner(P);
+                            currentPlayer.setBalance(currentPlayer.getBalance() - board.find(15).data.getPrice());
+                            board.find(15).data.setOwner(currentPlayer);
                             board.find(15).data.setPurchased(true);
-                            P.getProperties().add(board.find(15).data);
-                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                            currentPlayer.getProperties().add(board.find(15).data);
+                            currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
                         }
                     }
                 }
                 if (penn < reading && penn < BO && penn < Short){
-                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                    P.setLocation(15);
-                    board.find(15).data.setOccupiedBy(P.getPiece());
+                    board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                    currentPlayer.setLocation(15);
+                    board.find(15).data.setOccupiedBy(currentPlayer.getPiece());
                     System.out.println("You Got Sent To Pennsylvania Railroad");
                     if (board.find(15).data.isPurchased()){
-                        P.setBalance(P.getBalance() - board.find(15).data.getRent() * board.find(15).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(15).data.getRent() * board.find(15).data.getOwner().getRailroadsOwned() * 2);
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
                         System.out.println("Would You Like To Purchase It?");
                         Scanner Scan = new Scanner(System.in);
                         if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                            P.setBalance(P.getBalance() - board.find(15).data.getPrice());
-                            board.find(15).data.setOwner(P);
+                            currentPlayer.setBalance(currentPlayer.getBalance() - board.find(15).data.getPrice());
+                            board.find(15).data.setOwner(currentPlayer);
                             board.find(15).data.setPurchased(true);
-                            P.getProperties().add(board.find(15).data);
-                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                            currentPlayer.getProperties().add(board.find(15).data);
+                            currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
                         }
                     }
                 }
 
 
-                if (BO < reading && BO < penn && BO < Short && P.getLocation() > 25){
-                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                    P.setBalance(P.getBalance() + 200);
-                    P.setLocation(25);
-                    board.find(25).data.setOccupiedBy(P.getPiece());
+                if (BO < reading && BO < penn && BO < Short && currentPlayer.getLocation() > 25){
+                    board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                    currentPlayer.setBalance(currentPlayer.getBalance() + 200);
+                    currentPlayer.setLocation(25);
+                    board.find(25).data.setOccupiedBy(currentPlayer.getPiece());
                     System.out.println("You Got Sent To B. & O. Railroad");
                     if (board.find(25).data.isPurchased()){
-                        P.setBalance(P.getBalance() - board.find(25).data.getRent() * board.find(25).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(25).data.getRent() * board.find(25).data.getOwner().getRailroadsOwned() * 2);
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
                         System.out.println("Would You Like To Purchase It?");
                         Scanner Scan = new Scanner(System.in);
                         if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                            P.setBalance(P.getBalance() - board.find(25).data.getPrice());
-                            board.find(25).data.setOwner(P);
+                            currentPlayer.setBalance(currentPlayer.getBalance() - board.find(25).data.getPrice());
+                            board.find(25).data.setOwner(currentPlayer);
                             board.find(25).data.setPurchased(true);
-                            P.getProperties().add(board.find(25).data);
-                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                            currentPlayer.getProperties().add(board.find(25).data);
+                            currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
                         }
                     }
                 }
                 if (BO < reading && BO < penn && BO < Short){
-                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                    P.setLocation(25);
-                    board.find(25).data.setOccupiedBy(P.getPiece());
+                    board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                    currentPlayer.setLocation(25);
+                    board.find(25).data.setOccupiedBy(currentPlayer.getPiece());
                     System.out.println("You Got Sent To B. & O. Railroad");
                     if (board.find(25).data.isPurchased()){
-                        P.setBalance(P.getBalance() - board.find(25).data.getRent() * board.find(25).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(25).data.getRent() * board.find(25).data.getOwner().getRailroadsOwned() * 2);
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
                         System.out.println("Would You Like To Purchase It?");
                         Scanner Scan = new Scanner(System.in);
                         if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                            P.setBalance(P.getBalance() - board.find(25).data.getPrice());
-                            board.find(25).data.setOwner(P);
+                            currentPlayer.setBalance(currentPlayer.getBalance() - board.find(25).data.getPrice());
+                            board.find(25).data.setOwner(currentPlayer);
                             board.find(25).data.setPurchased(true);
-                            P.getProperties().add(board.find(25).data);
-                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                            currentPlayer.getProperties().add(board.find(25).data);
+                            currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
                         }
                     }
                 }
 
 
-                if (Short < reading && Short < penn && Short < BO && P.getLocation() > 35){
-                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                    P.setBalance(P.getBalance() + 200);
-                    P.setLocation(35);
-                    board.find(35).data.setOccupiedBy(P.getPiece());
+                if (Short < reading && Short < penn && Short < BO && currentPlayer.getLocation() > 35){
+                    board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                    currentPlayer.setBalance(currentPlayer.getBalance() + 200);
+                    currentPlayer.setLocation(35);
+                    board.find(35).data.setOccupiedBy(currentPlayer.getPiece());
                     System.out.println("You Got Sent To The Short Line");
                     if (board.find(35).data.isPurchased()){
-                        P.setBalance(P.getBalance() - board.find(35).data.getRent() * board.find(35).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(35).data.getRent() * board.find(35).data.getOwner().getRailroadsOwned() * 2);
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
                         System.out.println("Would You Like To Purchase It?");
                         Scanner Scan = new Scanner(System.in);
                         if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                            P.setBalance(P.getBalance() - board.find(35).data.getPrice());
-                            board.find(35).data.setOwner(P);
+                            currentPlayer.setBalance(currentPlayer.getBalance() - board.find(35).data.getPrice());
+                            board.find(35).data.setOwner(currentPlayer);
                             board.find(35).data.setPurchased(true);
-                            P.getProperties().add(board.find(35).data);
-                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                            currentPlayer.getProperties().add(board.find(35).data);
+                            currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
                         }
                     }
                 }
                 if (Short < reading && Short < penn && Short < BO){
-                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                    P.setLocation(35);
-                    board.find(35).data.setOccupiedBy(P.getPiece());
+                    board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                    currentPlayer.setLocation(35);
+                    board.find(35).data.setOccupiedBy(currentPlayer.getPiece());
                     System.out.println("You Got Sent To The Short Line");
                     if (board.find(35).data.isPurchased()){
-                        P.setBalance(P.getBalance() - board.find(35).data.getRent() * board.find(35).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(35).data.getRent() * board.find(35).data.getOwner().getRailroadsOwned() * 2);
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
                         System.out.println("Would You Like To Purchase It?");
                         Scanner Scan = new Scanner(System.in);
                         if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                            P.setBalance(P.getBalance() - board.find(35).data.getPrice());
-                            board.find(35).data.setOwner(P);
+                            currentPlayer.setBalance(currentPlayer.getBalance() - board.find(35).data.getPrice());
+                            board.find(35).data.setOwner(currentPlayer);
                             board.find(35).data.setPurchased(true);
-                            P.getProperties().add(board.find(35).data);
-                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                            currentPlayer.getProperties().add(board.find(35).data);
+                            currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
                         }
                     }
                 }
                 break;
 
             case 7:
-                int Electricity = Math.abs(P.getLocation() - 12);
-                int Water = Math.abs(P.getLocation() - 28);
+                int Electricity = Math.abs(currentPlayer.getLocation() - 12);
+                int Water = Math.abs(currentPlayer.getLocation() - 28);
 
-                if (Electricity < Water && P.getLocation() > 12){
-                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                    P.setBalance(P.getBalance() + 200);
-                    P.setLocation(12);
-                    board.find(12).data.setOccupiedBy(P.getPiece());
+                if (Electricity < Water && currentPlayer.getLocation() > 12){
+                    board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                    currentPlayer.setBalance(currentPlayer.getBalance() + 200);
+                    currentPlayer.setLocation(12);
+                    board.find(12).data.setOccupiedBy(currentPlayer.getPiece());
                     System.out.println("You Got Sent To The Electric Company");
                     if (board.find(12).data.isPurchased()){
-                        P.setBalance(P.getBalance() - board.find(12).data.getRent() * board.find(12).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(12).data.getRent() * board.find(12).data.getOwner().getRailroadsOwned() * 2);
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
                         System.out.println("Would You Like To Purchase It?");
                         Scanner Scan = new Scanner(System.in);
                         if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                            P.setBalance(P.getBalance() - board.find(12).data.getPrice());
-                            board.find(12).data.setOwner(P);
+                            currentPlayer.setBalance(currentPlayer.getBalance() - board.find(12).data.getPrice());
+                            board.find(12).data.setOwner(currentPlayer);
                             board.find(12).data.setPurchased(true);
-                            P.getProperties().add(board.find(12).data);
+                            currentPlayer.getProperties().add(board.find(12).data);
                         }
                     }
                 }
                 if (Electricity < Water){
-                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                    P.setLocation(12);
-                    board.find(12).data.setOccupiedBy(P.getPiece());
+                    board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                    currentPlayer.setLocation(12);
+                    board.find(12).data.setOccupiedBy(currentPlayer.getPiece());
                     System.out.println("You Got Sent To The Electric Company");
                     if (board.find(12).data.isPurchased()){
-                        P.setBalance(P.getBalance() - board.find(12).data.getRent() * board.find(12).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(12).data.getRent() * board.find(12).data.getOwner().getRailroadsOwned() * 2);
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
                         System.out.println("Would You Like To Purchase It?");
                         Scanner Scan = new Scanner(System.in);
                         if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                            P.setBalance(P.getBalance() - board.find(12).data.getPrice());
-                            board.find(12).data.setOwner(P);
+                            currentPlayer.setBalance(currentPlayer.getBalance() - board.find(12).data.getPrice());
+                            board.find(12).data.setOwner(currentPlayer);
                             board.find(12).data.setPurchased(true);
-                            P.getProperties().add(board.find(12).data);
+                            currentPlayer.getProperties().add(board.find(12).data);
                         }
                     }
                 }
 
 
-                if (Electricity > Water && P.getLocation() > 28){
-                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                    P.setBalance(P.getBalance() + 200);
-                    P.setLocation(28);
-                    board.find(28).data.setOccupiedBy(P.getPiece());
+                if (Electricity > Water && currentPlayer.getLocation() > 28){
+                    board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                    currentPlayer.setBalance(currentPlayer.getBalance() + 200);
+                    currentPlayer.setLocation(28);
+                    board.find(28).data.setOccupiedBy(currentPlayer.getPiece());
                     System.out.println("You Got Sent To The Water Works");
                     if (board.find(28).data.isPurchased()){
-                        P.setBalance(P.getBalance() - board.find(28).data.getRent() * board.find(28).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(28).data.getRent() * board.find(28).data.getOwner().getRailroadsOwned() * 2);
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
                         System.out.println("Would You Like To Purchase It?");
                         Scanner Scan = new Scanner(System.in);
                         if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                            P.setBalance(P.getBalance() - board.find(28).data.getPrice());
-                            board.find(28).data.setOwner(P);
+                            currentPlayer.setBalance(currentPlayer.getBalance() - board.find(28).data.getPrice());
+                            board.find(28).data.setOwner(currentPlayer);
                             board.find(28).data.setPurchased(true);
-                            P.getProperties().add(board.find(28).data);
+                            currentPlayer.getProperties().add(board.find(28).data);
                         }
                     }
                 }
                 if (Electricity > Water){
-                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                    P.setLocation(28);
-                    board.find(28).data.setOccupiedBy(P.getPiece());
+                    board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                    currentPlayer.setLocation(28);
+                    board.find(28).data.setOccupiedBy(currentPlayer.getPiece());
                     System.out.println("You Got Sent To Water Works");
                     if (board.find(28).data.isPurchased()){
-                        P.setBalance(P.getBalance() - board.find(28).data.getRent() * board.find(28).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(28).data.getRent() * board.find(28).data.getOwner().getRailroadsOwned() * 2);
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
                         System.out.println("Would You Like To Purchase It?");
                         Scanner Scan = new Scanner(System.in);
                         if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                            P.setBalance(P.getBalance() - board.find(28).data.getPrice());
-                            board.find(28).data.setOwner(P);
+                            currentPlayer.setBalance(currentPlayer.getBalance() - board.find(28).data.getPrice());
+                            board.find(28).data.setOwner(currentPlayer);
                             board.find(28).data.setPurchased(true);
-                            P.getProperties().add(board.find(28).data);
+                            currentPlayer.getProperties().add(board.find(28).data);
                         }
                     }
                 }
@@ -586,58 +668,67 @@ public class Main {
                 break;
             case 8:
                 System.out.println("The Bank Pays You A Dividend of $50");
-                P.setBalance(P.getBalance() + 50);
+                currentPlayer.setBalance(currentPlayer.getBalance() + 50);
                 break;
             case 9:
                 System.out.println("You Got A Get Out Of Jail Free Card");
-                P.setGOOJF(P.getGOOJF() + 1);
+                currentPlayer.setGOOJF(currentPlayer.getGOOJF() + 1);
                 break;
             case 10:
                 System.out.println("You Got Sent Back 3 Spaces (You do not pay rent)");
-                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                P.setLocation(P.getLocation() - 3);
-                board.find(P.getLocation()).data.setOccupiedBy(P.getPiece());
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                currentPlayer.setLocation(currentPlayer.getLocation() - 3);
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(currentPlayer.getPiece());
                 break;
             case 11:
                 System.out.println("You Got Sent To Jail");
-                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                P.setLocation(10);
-                board.find(P.getLocation()).data.setOccupiedBy(P.getPiece());
-                P.setStatus("jail");
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                currentPlayer.setLocation(10);
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(currentPlayer.getPiece());
+                currentPlayer.setStatus("jail");
                 break;
             case 12:
                 System.out.println("Speeding Fine: 15$");
-                P.setBalance(P.getBalance() - 15);
+                currentPlayer.setBalance(currentPlayer.getBalance() - 15);
                 break;
             case 13:
-                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
-                if (P.getLocation() > 5) {
-                    P.setBalance(P.getBalance() + 200);
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+                if (currentPlayer.getLocation() > 5) {
+                    currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                 }
-                    P.setLocation(5);
-                    board.find(5).data.setOccupiedBy(P.getPiece());
+                    currentPlayer.setLocation(5);
+                    board.find(5).data.setOccupiedBy(currentPlayer.getPiece());
                     System.out.println("You Got Sent To Reading Railroad");
                     if (board.find(5).data.isPurchased()){
-                        P.setBalance(P.getBalance() - board.find(5).data.getRent() * board.find(5).data.getOwner().getRailroadsOwned());
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(5).data.getRent() * board.find(5).data.getOwner().getRailroadsOwned());
                         System.out.println("You Paid Rent");
                     }
                     else{
                         System.out.println("Would You Like To Purchase It?");
                         Scanner Scan = new Scanner(System.in);
                         if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
-                            P.setBalance(P.getBalance() - board.find(5).data.getPrice());
-                            board.find(5).data.setOwner(P);
+                            currentPlayer.setBalance(currentPlayer.getBalance() - board.find(5).data.getPrice());
+                            board.find(5).data.setOwner(currentPlayer);
                             board.find(5).data.setPurchased(true);
-                            P.getProperties().add(board.find(5).data);
-                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                            currentPlayer.getProperties().add(board.find(5).data);
+                            currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
                         }
                     }
                 break;
             case 14:
                 System.out.println("Your building loan matures, You get 150$");
-                P.setBalance(P.getBalance() + 150);
+                currentPlayer.setBalance(currentPlayer.getBalance() + 150);
                 break;
             case 15:
+                System.out.println("You have been elected Chairman of the Board. You pay each player $50");
+                for (int i = 0; i<Players.length(); i++){
+                    if (Players.find(i).data == currentPlayer){
+                        currentPlayer.setBalance(currentPlayer.getBalance() - 50 * Players.length());
+                    }
+                    else{
+                        Players.find(i).data.setBalance(Players.find(i).data.getBalance() + 50);
+                    }
+                }
                 break;
         }
     }
