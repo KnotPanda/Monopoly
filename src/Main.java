@@ -1,58 +1,55 @@
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
+import java.util.Random;
+import java.lang.Math;
+
 public class Main {
-    ArrayList<BoardPiece> properties1;
-    PlayerPiece Thimble = new PlayerPiece("Trapezoid", 1500, false, 0, properties1, "▰");
-    ArrayList<BoardPiece> properties2;
-    PlayerPiece Iron = new PlayerPiece("Diamond", 1500, false, 0, properties2, "◆");
-    ArrayList<BoardPiece> properties3;
-    PlayerPiece TopHat = new PlayerPiece("Circle", 1500, false, 0, properties2, "◕");
-    ArrayList<BoardPiece> properties4;
-    PlayerPiece Battleship = new PlayerPiece("Triangle", 1500, false, 0, properties2, "◭");
 
     public static void main(String[] args) {
+
         CLL<BoardPiece> board = new CLL<>();
         CLL<PlayerPiece> players = new CLL<>();
-        BoardPiece zero  = new BoardPiece("GO", 0, false, null, 0, false, "", 0, "", 0);
-        BoardPiece one  = new BoardPiece("Mediterranean Ave.", 60, false, null, 10, true, "", 30, "", 1);
-        BoardPiece two  = new BoardPiece("Community Chest", 0, false, null, 0, false, "Community Chest", 0, "", 2);
-        BoardPiece three  = new BoardPiece("Baltic Ave.", 60, false, null, 20, true, "", 30, "", 3);
-        BoardPiece four  = new BoardPiece("Income Tax", 0, false, null, 0, false, "", 0, "", 4);
-        BoardPiece five  = new BoardPiece("Reading Railroad", 200, false, null, 0, false, "", 0, "", 5);
-        BoardPiece six  = new BoardPiece("Oriental Ave.", 100, false, null, 0, false, "", 0, "", 6);
-        BoardPiece seven  = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "cyau", 7);
-        BoardPiece eight  = new BoardPiece("Vermont Ave.", 100, false, null, 0, false, "", 0, "", 8);
-        BoardPiece nine  = new BoardPiece("Connecticut Ave.", 120, false, null, 0, false, "", 0, "sy", 9);
-        BoardPiece ten  = new BoardPiece("Jail/Just Visiting", 0, false, null, 0, false, "", 0, "", 10);
-        BoardPiece eleven  = new BoardPiece("St. Charles Place", 140, false, null, 0, false, "", 0, "", 11);
-        BoardPiece twelve  = new BoardPiece("Electric Company", 150, false, null, 0, false, "", 0, "", 12);
-        BoardPiece thirteen  = new BoardPiece("States Ave.", 140, false, null, 0, false, "", 0, "", 13);
-        BoardPiece fourteen  = new BoardPiece("Virginia Ave.", 160, false, null, 0, false, "", 0, "", 14);
-        BoardPiece fifteen  = new BoardPiece("Pennsylvania Railroad", 200, false, null, 0, false, "", 0, "", 15);
-        BoardPiece sixteen  = new BoardPiece("St. James Place", 180, false, null, 0, false, "", 0, "", 16);
-        BoardPiece seventeen  = new BoardPiece("Community Chest", 0, false, null, 0, false, "", 0, "", 17);
-        BoardPiece eighteen  = new BoardPiece("Tennessee Ave.", 180, false, null, 0, false, "", 0, "", 18);
-        BoardPiece nineteen  = new BoardPiece("New York Ave.", 200, false, null, 0, false, "", 0, "", 19);
-        BoardPiece twenty  = new BoardPiece("Free Parking", 0, false, null, 0, false, "", 0, "", 20);
-        BoardPiece twentyone  = new BoardPiece("Kentucky Ave.", 220, false, null, 0, false, "", 0, "", 21);
-        BoardPiece twentytwo  = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 22);
-        BoardPiece twentythree  = new BoardPiece("Indiana Ave.", 220, false, null, 0, false, "", 0, "", 23);
-        BoardPiece twentyfour  = new BoardPiece("Illinois Ave.", 240, false, null, 0, false, "", 0, "", 24);
-        BoardPiece twentyfive  = new BoardPiece("B. & O. Railroad", 200, false, null, 0, false, "", 0, "", 25);
-        BoardPiece twentysix  = new BoardPiece("Atlantic Ave.", 260, false, null, 0, false, "", 0, "", 26);
-        BoardPiece twentyseven  = new BoardPiece("Ventnor Ave.", 260, false, null, 0, false, "", 0, "", 27);
-        BoardPiece twentyeight  = new BoardPiece("Water Works", 150, false, null, 0, false, "", 0, "", 28);
-        BoardPiece twentynine  = new BoardPiece("Marvin Gardens", 280, false, null, 0, false, "", 0, "", 29);
-        BoardPiece thirty  = new BoardPiece("Go To Jail", 0, false, null, 0, false, "", 0, "", 30);
-        BoardPiece thirtyone  = new BoardPiece("Pacific Ave.", 300, false, null, 0, false, "", 0, "", 31);
-        BoardPiece thirtytwo  = new BoardPiece("North Carolina Ave.", 300, false, null, 0, false, "", 0, "", 32);
-        BoardPiece thirtythree  = new BoardPiece("Community Chest", 0, false, null, 0, false, "", 0, "", 33);
-        BoardPiece thirtyfour  = new BoardPiece("Pennsylvania Ave.", 320, false, null, 0, false, "", 0, "", 34);
-        BoardPiece thirtyfive  = new BoardPiece("Short Line", 200, false, null, 0, false, "", 0, "", 35);
-        BoardPiece thirtysix  = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 36);
-        BoardPiece thirtyseven  = new BoardPiece("Park Place", 350, false, null, 0, false, "", 0, "", 37);
-        BoardPiece thirtyeight  = new BoardPiece("Luxury Tax", 0, false, null, 0, false, "", 0, "", 38);
-        BoardPiece thirtynine  = new BoardPiece("Boardwalk", 400, false, null, 0, false, "", 0, "", 39);
+        BoardPiece zero = new BoardPiece("GO", 0, false, null, 0, false, "", 0, "", 0);
+        BoardPiece one = new BoardPiece("Mediterranean Ave.", 60, false, null, 10, true, "", 30, "", 1);
+        BoardPiece two = new BoardPiece("Community Chest", 0, false, null, 0, false, "Community Chest", 0, "", 2);
+        BoardPiece three = new BoardPiece("Baltic Ave.", 60, false, null, 20, true, "", 30, "", 3);
+        BoardPiece four = new BoardPiece("Income Tax", 0, false, null, 0, false, "", 0, "", 4);
+        BoardPiece five = new BoardPiece("Reading Railroad", 200, false, null, 0, false, "", 0, "", 5);
+        BoardPiece six = new BoardPiece("Oriental Ave.", 100, false, null, 0, false, "", 0, "", 6);
+        BoardPiece seven = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "cyau", 7);
+        BoardPiece eight = new BoardPiece("Vermont Ave.", 100, false, null, 0, false, "", 0, "", 8);
+        BoardPiece nine = new BoardPiece("Connecticut Ave.", 120, false, null, 0, false, "", 0, "sy", 9);
+        BoardPiece ten = new BoardPiece("Jail/Just Visiting", 0, false, null, 0, false, "", 0, "", 10);
+        BoardPiece eleven = new BoardPiece("St. Charles Place", 140, false, null, 0, false, "", 0, "", 11);
+        BoardPiece twelve = new BoardPiece("Electric Company", 150, false, null, 0, false, "", 0, "", 12);
+        BoardPiece thirteen = new BoardPiece("States Ave.", 140, false, null, 0, false, "", 0, "", 13);
+        BoardPiece fourteen = new BoardPiece("Virginia Ave.", 160, false, null, 0, false, "", 0, "", 14);
+        BoardPiece fifteen = new BoardPiece("Pennsylvania Railroad", 200, false, null, 0, false, "", 0, "", 15);
+        BoardPiece sixteen = new BoardPiece("St. James Place", 180, false, null, 0, false, "", 0, "", 16);
+        BoardPiece seventeen = new BoardPiece("Community Chest", 0, false, null, 0, false, "", 0, "", 17);
+        BoardPiece eighteen = new BoardPiece("Tennessee Ave.", 180, false, null, 0, false, "", 0, "", 18);
+        BoardPiece nineteen = new BoardPiece("New York Ave.", 200, false, null, 0, false, "", 0, "", 19);
+        BoardPiece twenty = new BoardPiece("Free Parking", 0, false, null, 0, false, "", 0, "", 20);
+        BoardPiece twentyone = new BoardPiece("Kentucky Ave.", 220, false, null, 0, false, "", 0, "", 21);
+        BoardPiece twentytwo = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 22);
+        BoardPiece twentythree = new BoardPiece("Indiana Ave.", 220, false, null, 0, false, "", 0, "", 23);
+        BoardPiece twentyfour = new BoardPiece("Illinois Ave.", 240, false, null, 0, false, "", 0, "", 24);
+        BoardPiece twentyfive = new BoardPiece("B. & O. Railroad", 200, false, null, 0, false, "", 0, "", 25);
+        BoardPiece twentysix = new BoardPiece("Atlantic Ave.", 260, false, null, 0, false, "", 0, "", 26);
+        BoardPiece twentyseven = new BoardPiece("Ventnor Ave.", 260, false, null, 0, false, "", 0, "", 27);
+        BoardPiece twentyeight = new BoardPiece("Water Works", 150, false, null, 0, false, "", 0, "", 28);
+        BoardPiece twentynine = new BoardPiece("Marvin Gardens", 280, false, null, 0, false, "", 0, "", 29);
+        BoardPiece thirty = new BoardPiece("Go To Jail", 0, false, null, 0, false, "", 0, "", 30);
+        BoardPiece thirtyone = new BoardPiece("Pacific Ave.", 300, false, null, 0, false, "", 0, "", 31);
+        BoardPiece thirtytwo = new BoardPiece("North Carolina Ave.", 300, false, null, 0, false, "", 0, "", 32);
+        BoardPiece thirtythree = new BoardPiece("Community Chest", 0, false, null, 0, false, "", 0, "", 33);
+        BoardPiece thirtyfour = new BoardPiece("Pennsylvania Ave.", 320, false, null, 0, false, "", 0, "", 34);
+        BoardPiece thirtyfive = new BoardPiece("Short Line", 200, false, null, 0, false, "", 0, "", 35);
+        BoardPiece thirtysix = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 36);
+        BoardPiece thirtyseven = new BoardPiece("Park Place", 350, false, null, 0, false, "", 0, "", 37);
+        BoardPiece thirtyeight = new BoardPiece("Luxury Tax", 0, false, null, 0, false, "", 0, "", 38);
+        BoardPiece thirtynine = new BoardPiece("Boardwalk", 400, false, null, 0, false, "", 0, "", 39);
 
         board.insert(zero);
         board.insert(one);
@@ -95,7 +92,17 @@ public class Main {
         board.insert(thirtyeight);
         board.insert(thirtynine);
 
-        printBoard(board);
+        ArrayList<BoardPiece> properties1 = new ArrayList<>();
+        PlayerPiece P1 = new PlayerPiece("Trapezoid", 1500, false, 0, properties1, "▰", "free", 0, 0);
+        ArrayList<BoardPiece> properties2 = new ArrayList<>();
+        PlayerPiece P2 = new PlayerPiece("Diamond", 1500, false, 0, properties2, "◆", "free", 0, 0);
+        ArrayList<BoardPiece> properties3 = new ArrayList<>();
+        PlayerPiece P3 = new PlayerPiece("Circle", 1500, false, 0, properties3, "◕", "free", 0, 0);
+        ArrayList<BoardPiece> properties4 = new ArrayList<>();
+        PlayerPiece P4 = new PlayerPiece("Triangle", 1500, false, 0, properties4, "◭", "free", 0, 0);
+
+        while(isGameOver) {
+        }
     }
     public static void printBoard(CLL<BoardPiece> board){
         System.out.println("┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐");
@@ -190,6 +197,449 @@ public class Main {
                 return "   "+link.getOccupiedBy().substring(0,1)+" "+link.getOccupiedBy().substring(1,2)+" "+link.getOccupiedBy().substring(2,3)+" "+link.getOccupiedBy().substring(3,4)+"  ";
         }
         return "          ";
+    }
+
+    public static void playerTurn(PlayerPiece P, CLL<BoardPiece> board){
+        Random dice = new Random();
+        int d1 = dice.nextInt(7);
+        int d2 = dice.nextInt(7);
+        int total = d1 + d2;
+
+        if (P.getStatus().equals("free")) {
+            Scanner in = new Scanner(System.in);
+            System.out.println("You Rolled A " + total);
+            if (P.getLocation() + total <= 39) {
+                P.setLocation(P.getLocation() + total);
+            }
+            else{
+                P.setLocation((P.getLocation() + total) - 40);
+                P.setBalance(P.getBalance() + 200);
+            }
+            if (P.getLocation() == 30){
+                P.setStatus("jail");
+                P.setLocation(10);
+                System.out.println("You Got Sent To Jail");
+            }
+            else{
+                System.out.println("You Landed on " + board.find(P.getLocation()).data.getName());
+            }
+
+        }
+    }
+
+    public static void CommunityChest(PlayerPiece P, CLL<BoardPiece> board) {
+
+    }
+    public static void Chance(PlayerPiece P, CLL<BoardPiece> board){
+        Random rand = new Random();
+        int random = rand.nextInt(16);
+        switch (random){
+            case 1:
+                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                P.setLocation(39);
+                board.find(39).data.setOccupiedBy(P.getPiece());
+                System.out.println("You Got Sent To Boardwalk");
+                if (board.find(39).data.isPurchased()){
+                    P.setBalance(P.getBalance() - board.find(39).data.getRent());
+                    System.out.println("You Paid Rent");
+                }
+                else{
+                    System.out.println("Would You Like To Purchase It?");
+                    Scanner Scan = new Scanner(System.in);
+                    if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                        P.setBalance(P.getBalance() - board.find(39).data.getPrice());
+                        board.find(39).data.setOwner(P);
+                        board.find(39).data.setPurchased(true);
+                        P.getProperties().add(board.find(39).data);
+                    }
+                }
+                break;
+            case 2:
+                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                P.setLocation(40);
+                board.find(40).data.setOccupiedBy(P.getPiece());
+                System.out.println("You Advanced To GO");
+                P.setBalance(P.getBalance() + 200);
+                break;
+            case 3:
+                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                if (P.getLocation() > 24){
+                    P.setBalance(P.getBalance() + 200);
+                }
+                P.setLocation(24);
+                board.find(24).data.setOccupiedBy(P.getPiece());
+                System.out.println("You Got Sent To Illinois Ave.");
+                if (board.find(24).data.isPurchased()){
+                    P.setBalance(P.getBalance() - board.find(24).data.getRent());
+                    System.out.println("You Paid Rent");
+                }
+                else{
+                    System.out.println("Would You Like To Purchase It?");
+                    Scanner Scan = new Scanner(System.in);
+                    if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                        P.setBalance(P.getBalance() - board.find(24).data.getPrice());
+                        board.find(24).data.setOwner(P);
+                        board.find(24).data.setPurchased(true);
+                        P.getProperties().add(board.find(24).data);
+                    }
+                }
+                break;
+            case 4:
+                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                if (P.getLocation() > 11){
+                    P.setBalance(P.getBalance() + 200);
+                }
+                P.setLocation(11);
+                board.find(11).data.setOccupiedBy(P.getPiece());
+                System.out.println("You Got Sent To St. Charles Place");
+                if (board.find(11).data.isPurchased()){
+                    P.setBalance(P.getBalance() - board.find(11).data.getRent());
+                    System.out.println("You Paid Rent");
+                }
+                else{
+                    System.out.println("Would You Like To Purchase It?");
+                    Scanner Scan = new Scanner(System.in);
+                    if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                        P.setBalance(P.getBalance() - board.find(11).data.getPrice());
+                        board.find(11).data.setOwner(P);
+                        board.find(11).data.setPurchased(true);
+                        P.getProperties().add(board.find(11).data);
+                    }
+                }
+                break;
+            case 5:
+            case 6:
+                int reading = Math.abs(P.getLocation() - 5);
+                int penn = Math.abs(P.getLocation() - 15);
+                int BO = Math.abs(P.getLocation() - 25);
+                int Short = Math.abs(P.getLocation() - 35);
+
+                if (reading < penn && reading < BO && reading < Short && P.getLocation() > 5){
+                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                    P.setBalance(P.getBalance() + 200);
+                    P.setLocation(5);
+                    board.find(5).data.setOccupiedBy(P.getPiece());
+                    System.out.println("You Got Sent To Reading Railroad");
+                    if (board.find(5).data.isPurchased()){
+                        P.setBalance(P.getBalance() - board.find(5).data.getRent() * board.find(5).data.getOwner().getRailroadsOwned() * 2);
+                        System.out.println("You Paid Double The Rent");
+                    }
+                    else{
+                        System.out.println("Would You Like To Purchase It?");
+                        Scanner Scan = new Scanner(System.in);
+                        if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                            P.setBalance(P.getBalance() - board.find(5).data.getPrice());
+                            board.find(5).data.setOwner(P);
+                            board.find(5).data.setPurchased(true);
+                            P.getProperties().add(board.find(5).data);
+                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                        }
+                    }
+                }
+                if (reading < penn && reading < BO && reading < Short){
+                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                    P.setLocation(5);
+                    board.find(5).data.setOccupiedBy(P.getPiece());
+                    System.out.println("You Got Sent To Reading Railroad");
+                    if (board.find(5).data.isPurchased()){
+                        P.setBalance(P.getBalance() - board.find(5).data.getRent() * board.find(5).data.getOwner().getRailroadsOwned() * 2);
+                        System.out.println("You Paid Double The Rent");
+                    }
+                    else{
+                        System.out.println("Would You Like To Purchase It?");
+                        Scanner Scan = new Scanner(System.in);
+                        if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                            P.setBalance(P.getBalance() - board.find(5).data.getPrice());
+                            board.find(5).data.setOwner(P);
+                            board.find(5).data.setPurchased(true);
+                            P.getProperties().add(board.find(5).data);
+                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                        }
+                    }
+                }
+
+
+                if (penn < reading && penn < BO && penn < Short && P.getLocation() > 15){
+                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                    P.setBalance(P.getBalance() + 200);
+                    P.setLocation(15);
+                    board.find(15).data.setOccupiedBy(P.getPiece());
+                    System.out.println("You Got Sent To Pennsylvania Railroad");
+                    if (board.find(15).data.isPurchased()){
+                        P.setBalance(P.getBalance() - board.find(15).data.getRent() * board.find(15).data.getOwner().getRailroadsOwned() * 2);
+                        System.out.println("You Paid Double The Rent");
+                    }
+                    else{
+                        System.out.println("Would You Like To Purchase It?");
+                        Scanner Scan = new Scanner(System.in);
+                        if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                            P.setBalance(P.getBalance() - board.find(15).data.getPrice());
+                            board.find(15).data.setOwner(P);
+                            board.find(15).data.setPurchased(true);
+                            P.getProperties().add(board.find(15).data);
+                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                        }
+                    }
+                }
+                if (penn < reading && penn < BO && penn < Short){
+                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                    P.setLocation(15);
+                    board.find(15).data.setOccupiedBy(P.getPiece());
+                    System.out.println("You Got Sent To Pennsylvania Railroad");
+                    if (board.find(15).data.isPurchased()){
+                        P.setBalance(P.getBalance() - board.find(15).data.getRent() * board.find(15).data.getOwner().getRailroadsOwned() * 2);
+                        System.out.println("You Paid Double The Rent");
+                    }
+                    else{
+                        System.out.println("Would You Like To Purchase It?");
+                        Scanner Scan = new Scanner(System.in);
+                        if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                            P.setBalance(P.getBalance() - board.find(15).data.getPrice());
+                            board.find(15).data.setOwner(P);
+                            board.find(15).data.setPurchased(true);
+                            P.getProperties().add(board.find(15).data);
+                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                        }
+                    }
+                }
+
+
+                if (BO < reading && BO < penn && BO < Short && P.getLocation() > 25){
+                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                    P.setBalance(P.getBalance() + 200);
+                    P.setLocation(25);
+                    board.find(25).data.setOccupiedBy(P.getPiece());
+                    System.out.println("You Got Sent To B. & O. Railroad");
+                    if (board.find(25).data.isPurchased()){
+                        P.setBalance(P.getBalance() - board.find(25).data.getRent() * board.find(25).data.getOwner().getRailroadsOwned() * 2);
+                        System.out.println("You Paid Double The Rent");
+                    }
+                    else{
+                        System.out.println("Would You Like To Purchase It?");
+                        Scanner Scan = new Scanner(System.in);
+                        if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                            P.setBalance(P.getBalance() - board.find(25).data.getPrice());
+                            board.find(25).data.setOwner(P);
+                            board.find(25).data.setPurchased(true);
+                            P.getProperties().add(board.find(25).data);
+                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                        }
+                    }
+                }
+                if (BO < reading && BO < penn && BO < Short){
+                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                    P.setLocation(25);
+                    board.find(25).data.setOccupiedBy(P.getPiece());
+                    System.out.println("You Got Sent To B. & O. Railroad");
+                    if (board.find(25).data.isPurchased()){
+                        P.setBalance(P.getBalance() - board.find(25).data.getRent() * board.find(25).data.getOwner().getRailroadsOwned() * 2);
+                        System.out.println("You Paid Double The Rent");
+                    }
+                    else{
+                        System.out.println("Would You Like To Purchase It?");
+                        Scanner Scan = new Scanner(System.in);
+                        if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                            P.setBalance(P.getBalance() - board.find(25).data.getPrice());
+                            board.find(25).data.setOwner(P);
+                            board.find(25).data.setPurchased(true);
+                            P.getProperties().add(board.find(25).data);
+                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                        }
+                    }
+                }
+
+
+                if (Short < reading && Short < penn && Short < BO && P.getLocation() > 35){
+                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                    P.setBalance(P.getBalance() + 200);
+                    P.setLocation(35);
+                    board.find(35).data.setOccupiedBy(P.getPiece());
+                    System.out.println("You Got Sent To The Short Line");
+                    if (board.find(35).data.isPurchased()){
+                        P.setBalance(P.getBalance() - board.find(35).data.getRent() * board.find(35).data.getOwner().getRailroadsOwned() * 2);
+                        System.out.println("You Paid Double The Rent");
+                    }
+                    else{
+                        System.out.println("Would You Like To Purchase It?");
+                        Scanner Scan = new Scanner(System.in);
+                        if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                            P.setBalance(P.getBalance() - board.find(35).data.getPrice());
+                            board.find(35).data.setOwner(P);
+                            board.find(35).data.setPurchased(true);
+                            P.getProperties().add(board.find(35).data);
+                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                        }
+                    }
+                }
+                if (Short < reading && Short < penn && Short < BO){
+                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                    P.setLocation(35);
+                    board.find(35).data.setOccupiedBy(P.getPiece());
+                    System.out.println("You Got Sent To The Short Line");
+                    if (board.find(35).data.isPurchased()){
+                        P.setBalance(P.getBalance() - board.find(35).data.getRent() * board.find(35).data.getOwner().getRailroadsOwned() * 2);
+                        System.out.println("You Paid Double The Rent");
+                    }
+                    else{
+                        System.out.println("Would You Like To Purchase It?");
+                        Scanner Scan = new Scanner(System.in);
+                        if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                            P.setBalance(P.getBalance() - board.find(35).data.getPrice());
+                            board.find(35).data.setOwner(P);
+                            board.find(35).data.setPurchased(true);
+                            P.getProperties().add(board.find(35).data);
+                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                        }
+                    }
+                }
+                break;
+
+            case 7:
+                int Electricity = Math.abs(P.getLocation() - 12);
+                int Water = Math.abs(P.getLocation() - 28);
+
+                if (Electricity < Water && P.getLocation() > 12){
+                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                    P.setBalance(P.getBalance() + 200);
+                    P.setLocation(12);
+                    board.find(12).data.setOccupiedBy(P.getPiece());
+                    System.out.println("You Got Sent To The Electric Company");
+                    if (board.find(12).data.isPurchased()){
+                        P.setBalance(P.getBalance() - board.find(12).data.getRent() * board.find(12).data.getOwner().getRailroadsOwned() * 2);
+                        System.out.println("You Paid Double The Rent");
+                    }
+                    else{
+                        System.out.println("Would You Like To Purchase It?");
+                        Scanner Scan = new Scanner(System.in);
+                        if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                            P.setBalance(P.getBalance() - board.find(12).data.getPrice());
+                            board.find(12).data.setOwner(P);
+                            board.find(12).data.setPurchased(true);
+                            P.getProperties().add(board.find(12).data);
+                        }
+                    }
+                }
+                if (Electricity < Water){
+                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                    P.setLocation(12);
+                    board.find(12).data.setOccupiedBy(P.getPiece());
+                    System.out.println("You Got Sent To The Electric Company");
+                    if (board.find(12).data.isPurchased()){
+                        P.setBalance(P.getBalance() - board.find(12).data.getRent() * board.find(12).data.getOwner().getRailroadsOwned() * 2);
+                        System.out.println("You Paid Double The Rent");
+                    }
+                    else{
+                        System.out.println("Would You Like To Purchase It?");
+                        Scanner Scan = new Scanner(System.in);
+                        if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                            P.setBalance(P.getBalance() - board.find(12).data.getPrice());
+                            board.find(12).data.setOwner(P);
+                            board.find(12).data.setPurchased(true);
+                            P.getProperties().add(board.find(12).data);
+                        }
+                    }
+                }
+
+
+                if (Electricity > Water && P.getLocation() > 28){
+                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                    P.setBalance(P.getBalance() + 200);
+                    P.setLocation(28);
+                    board.find(28).data.setOccupiedBy(P.getPiece());
+                    System.out.println("You Got Sent To The Water Works");
+                    if (board.find(28).data.isPurchased()){
+                        P.setBalance(P.getBalance() - board.find(28).data.getRent() * board.find(28).data.getOwner().getRailroadsOwned() * 2);
+                        System.out.println("You Paid Double The Rent");
+                    }
+                    else{
+                        System.out.println("Would You Like To Purchase It?");
+                        Scanner Scan = new Scanner(System.in);
+                        if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                            P.setBalance(P.getBalance() - board.find(28).data.getPrice());
+                            board.find(28).data.setOwner(P);
+                            board.find(28).data.setPurchased(true);
+                            P.getProperties().add(board.find(28).data);
+                        }
+                    }
+                }
+                if (Electricity > Water){
+                    board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                    P.setLocation(28);
+                    board.find(28).data.setOccupiedBy(P.getPiece());
+                    System.out.println("You Got Sent To Water Works");
+                    if (board.find(28).data.isPurchased()){
+                        P.setBalance(P.getBalance() - board.find(28).data.getRent() * board.find(28).data.getOwner().getRailroadsOwned() * 2);
+                        System.out.println("You Paid Double The Rent");
+                    }
+                    else{
+                        System.out.println("Would You Like To Purchase It?");
+                        Scanner Scan = new Scanner(System.in);
+                        if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                            P.setBalance(P.getBalance() - board.find(28).data.getPrice());
+                            board.find(28).data.setOwner(P);
+                            board.find(28).data.setPurchased(true);
+                            P.getProperties().add(board.find(28).data);
+                        }
+                    }
+                }
+
+                break;
+            case 8:
+                System.out.println("The Bank Pays You A Dividend of $50");
+                P.setBalance(P.getBalance() + 50);
+                break;
+            case 9:
+                System.out.println("You Got A Get Out Of Jail Free Card");
+                P.setGOOJF(P.getGOOJF() + 1);
+                break;
+            case 10:
+                System.out.println("You Got Sent Back 3 Spaces (You do not pay rent)");
+                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                P.setLocation(P.getLocation() - 3);
+                board.find(P.getLocation()).data.setOccupiedBy(P.getPiece());
+                break;
+            case 11:
+                System.out.println("You Got Sent To Jail");
+                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                P.setLocation(10);
+                board.find(P.getLocation()).data.setOccupiedBy(P.getPiece());
+                P.setStatus("jail");
+                break;
+            case 12:
+                System.out.println("Speeding Fine: 15$");
+                P.setBalance(P.getBalance() - 15);
+                break;
+            case 13:
+                board.find(P.getLocation()).data.setOccupiedBy(board.find(P.getLocation()).data.getOccupiedBy().replace(P.getPiece(), ""));
+                if (P.getLocation() > 5) {
+                    P.setBalance(P.getBalance() + 200);
+                }
+                    P.setLocation(5);
+                    board.find(5).data.setOccupiedBy(P.getPiece());
+                    System.out.println("You Got Sent To Reading Railroad");
+                    if (board.find(5).data.isPurchased()){
+                        P.setBalance(P.getBalance() - board.find(5).data.getRent() * board.find(5).data.getOwner().getRailroadsOwned());
+                        System.out.println("You Paid Rent");
+                    }
+                    else{
+                        System.out.println("Would You Like To Purchase It?");
+                        Scanner Scan = new Scanner(System.in);
+                        if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")){
+                            P.setBalance(P.getBalance() - board.find(5).data.getPrice());
+                            board.find(5).data.setOwner(P);
+                            board.find(5).data.setPurchased(true);
+                            P.getProperties().add(board.find(5).data);
+                            P.setRailroadsOwned(P.getRailroadsOwned() + 1);
+                        }
+                    }
+                break;
+            case 14:
+                System.out.println("Your building loan matures, You get 150$");
+                P.setBalance(P.getBalance() + 150);
+                break;
+            case 15:
+                break;
+        }
     }
 }
 

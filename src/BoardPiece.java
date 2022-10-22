@@ -2,7 +2,7 @@ public class BoardPiece {
     private String name;
     private int price;
     private boolean purchased;
-    private String owner;
+    private PlayerPiece owner;
     private int rent;
     private boolean isPurchasable;
     private String special;
@@ -10,7 +10,7 @@ public class BoardPiece {
     private String occupiedBy;
     private int location;
 
-    public BoardPiece(String name, int price, boolean purchased, String owner, int rent, boolean isPurchasable, String special, int sellValue, String occupiedBy, int location) {
+    public BoardPiece(String name, int price, boolean purchased, PlayerPiece owner, int rent, boolean isPurchasable, String special, int sellValue, String occupiedBy, int location) {
         this.name = name;
         this.price = price;
         this.purchased = purchased;
@@ -47,11 +47,11 @@ public class BoardPiece {
         this.purchased = purchased;
     }
 
-    public String getOwner() {
+    public PlayerPiece getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(PlayerPiece owner) {
         this.owner = owner;
     }
 

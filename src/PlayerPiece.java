@@ -6,14 +6,20 @@ public class PlayerPiece {
     private int railroadsOwned;
     private ArrayList<BoardPiece> properties;
     private String piece;
+    private String status;
+    private int location;
+    private int GOOJF;
 
-    public PlayerPiece(String name, int balance, boolean isJailed, int railroadsOwned, ArrayList<BoardPiece> properties, String piece){
+    public PlayerPiece(String name, int balance, boolean isJailed, int railroadsOwned, ArrayList<BoardPiece> properties, String piece, String status, int location, int GOOJF){
         this.name = name;
         this.balance = balance;
         this.isJailed = isJailed;
         this.railroadsOwned = railroadsOwned;
         this.properties = properties;
         this.piece = piece;
+        this.status = status;
+        this.location = location;
+        this.GOOJF = GOOJF;
     }
 
     public String getName() {
@@ -62,6 +68,30 @@ public class PlayerPiece {
 
     public void setPiece(String piece) {
         this.piece = piece;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getLocation() {
+        return location;
+    }
+
+    public void setLocation(int location) {
+        this.location = location;
+    }
+
+    public int getGOOJF() {
+        return GOOJF;
+    }
+
+    public void setGOOJF(int GOOJF) {
+        this.GOOJF = GOOJF;
     }
 }
 
