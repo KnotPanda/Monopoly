@@ -9,8 +9,10 @@ public class PlayerPiece {
     private String status;
     private int location;
     private int GOOJF;
+    private int utilitiesOwned;
+    private int jailCount;
 
-    public PlayerPiece(String name, int balance, boolean isJailed, int railroadsOwned, ArrayList<BoardPiece> properties, String piece, String status, int location, int GOOJF){
+    public PlayerPiece(String name, int balance, boolean isJailed, int railroadsOwned, ArrayList<BoardPiece> properties, String piece, String status, int location, int GOOJF, int utilitiesOwned, int jailCount){
         this.name = name;
         this.balance = balance;
         this.isJailed = isJailed;
@@ -20,6 +22,8 @@ public class PlayerPiece {
         this.status = status;
         this.location = location;
         this.GOOJF = GOOJF;
+        this.utilitiesOwned = utilitiesOwned;
+        this.jailCount = jailCount;
     }
 
     public String getName() {
@@ -92,6 +96,22 @@ public class PlayerPiece {
 
     public void setGOOJF(int GOOJF) {
         this.GOOJF = GOOJF;
+    }
+
+    public int getUtilitiesOwned() {
+        return utilitiesOwned;
+    }
+
+    public void setUtilitiesOwned(int utilitiesOwned) {
+        this.utilitiesOwned = utilitiesOwned;
+    }
+
+    public int getJailCount() {
+        return jailCount;
+    }
+
+    public void setJailCount(int jailCount) {
+        this.jailCount = jailCount;
     }
 }
 

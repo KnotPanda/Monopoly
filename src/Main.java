@@ -93,13 +93,13 @@ public class Main {
         board.insert(thirtynine);
 
         ArrayList<BoardPiece> properties1 = new ArrayList<>();
-        PlayerPiece P1 = new PlayerPiece("Trapezoid", 1500, false, 0, properties1, "▰", "free", 0, 0);
+        PlayerPiece P1 = new PlayerPiece("Trapezoid", 1500, false, 0, properties1, "▰", "free", 0, 0, 0, 0);
         ArrayList<BoardPiece> properties2 = new ArrayList<>();
-        PlayerPiece P2 = new PlayerPiece("Diamond", 1500, false, 0, properties2, "◆", "free", 0, 0);
+        PlayerPiece P2 = new PlayerPiece("Diamond", 1500, false, 0, properties2, "◆", "free", 0, 0, 0, 0);
         ArrayList<BoardPiece> properties3 = new ArrayList<>();
-        PlayerPiece P3 = new PlayerPiece("Circle", 1500, false, 0, properties3, "◕", "free", 0, 0);
+        PlayerPiece P3 = new PlayerPiece("Circle", 1500, false, 0, properties3, "◕", "free", 0, 0, 0, 0);
         ArrayList<BoardPiece> properties4 = new ArrayList<>();
-        PlayerPiece P4 = new PlayerPiece("Triangle", 1500, false, 0, properties4, "◭", "free", 0, 0);
+        PlayerPiece P4 = new PlayerPiece("Triangle", 1500, false, 0, properties4, "◭", "free", 0, 0, 0, 0);
 
         players.insert(P1);
         players.insert(P2);
@@ -205,31 +205,174 @@ public class Main {
         return "          ";
     }
 
-    public static void playerTurn(PlayerPiece P, CLL<BoardPiece> board){
+    public static void freePlayerTurn(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer) {
         Random dice = new Random();
         int d1 = dice.nextInt(7);
         int d2 = dice.nextInt(7);
         int total = d1 + d2;
 
-        if (P.getStatus().equals("free")) {
             Scanner in = new Scanner(System.in);
             System.out.println("You Rolled A " + total);
-            if (P.getLocation() + total <= 39) {
-                P.setLocation(P.getLocation() + total);
+            board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
+            if (currentPlayer.getLocation() + total <= 39) {
+                currentPlayer.setLocation(currentPlayer.getLocation() + total);
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy() + currentPlayer.getPiece());
+
+            } else {
+                currentPlayer.setLocation((currentPlayer.getLocation() + total) - 40);
+                currentPlayer.setBalance(currentPlayer.getBalance() + 200);
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy() + currentPlayer.getPiece());
             }
-            else{
-                P.setLocation((P.getLocation() + total) - 40);
-                P.setBalance(P.getBalance() + 200);
-            }
-            if (P.getLocation() == 30){
-                P.setStatus("jail");
-                P.setLocation(10);
+            if (currentPlayer.getLocation() == 30) {
+                currentPlayer.setStatus("jail");
+                currentPlayer.setLocation(10);
+                board.find(10).data.setOccupiedBy(board.find(10).data.getOccupiedBy() + currentPlayer.getPiece());
                 System.out.println("You Got Sent To Jail");
             }
-            else{
-                System.out.println("You Landed on " + board.find(P.getLocation()).data.getName());
+            if (board.find(currentPlayer.getLocation()).data.isPurchasable() && !board.find(currentPlayer.getLocation()).data.isPurchased()) {
+                System.out.println("You Landed on " + board.find(currentPlayer.getLocation()).data.getName());
+                System.out.println("Would You Like To Purchase It?");
+                Scanner Scan = new Scanner(System.in);
+                if (Scan.nextLine().toLowerCase(Locale.ROOT).equals("yes")) {
+                    currentPlayer.setBalance(currentPlayer.getBalance() - board.find(currentPlayer.getLocation()).data.getPrice());
+                    board.find(currentPlayer.getLocation()).data.setOwner(currentPlayer);
+                    board.find(currentPlayer.getLocation()).data.setPurchased(true);
+                    currentPlayer.getProperties().add(board.find(currentPlayer.getLocation()).data);
+                    if (board.find(currentPlayer.getLocation()).data.getSpecial().equals("railroad")){
+                        currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
+                    }
+                    if (board.find(currentPlayer.getLocation()).data.getSpecial().equals("utility")){
+                        currentPlayer.setRailroadsOwned(currentPlayer.getUtilitiesOwned() + 1);
+                    }
+                }
             }
+            if (board.find(currentPlayer.getLocation()).data.isPurchasable() && board.find(currentPlayer.getLocation()).data.isPurchased()) {
+                System.out.println("You Landed on " + board.find(currentPlayer.getLocation()).data.getName());
+                if (board.find(currentPlayer.getLocation()).data.getSpecial().equals("railroad")){
+                    currentPlayer.setBalance(currentPlayer.getBalance() - board.find(currentPlayer.getLocation()).data.getRent() * board.find(currentPlayer.getLocation()).data.getOwner().getRailroadsOwned());
+                    board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent() * board.find(currentPlayer.getLocation()).data.getOwner().getRailroadsOwned());
+                }
+                if (board.find(currentPlayer.getLocation()).data.getSpecial().equals("utility")) {
+                    currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * total);
+                    board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * total);
 
+                }
+                else {
+                    currentPlayer.setBalance(currentPlayer.getBalance() - board.find(currentPlayer.getLocation()).data.getRent());
+                    board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent());
+
+                }
+                System.out.println("You Paid Rent");
+            }
+            if (!board.find(currentPlayer.getLocation()).data.isPurchasable()) {
+                switch (board.find(currentPlayer.getLocation()).data.getSpecial()) {
+                    case "Community Chest":
+                        CommunityChest(Players, board, currentPlayer);
+                        break;
+                    case "Chance":
+                        Chance(Players, board, currentPlayer, total);
+                        break;
+                    case "Free Parking":
+                        System.out.println("You Landed on Free Parking");
+                        break;
+                    case "GO":
+                        System.out.println("You landed on GO");
+                        currentPlayer.setBalance(currentPlayer.getBalance() + 200);
+                        System.out.println("200$ was added to your balance");
+                        break;
+                    case "jail":
+                        System.out.println("You're just visiting");
+                        break;
+                    case "income tax":
+                        Scanner taxChoice = new Scanner(System.in);
+                        System.out.println("You landed on income tax, enter 1 to pay 10% of your balance or 2 to pay 200$");
+                        int choice = taxChoice.nextInt();
+                        if (choice == 1) {
+                            System.out.println("You paid " + currentPlayer.getBalance() / 10 + " to the feds");
+                            currentPlayer.setBalance((9 * currentPlayer.getBalance()) / 10);
+                        } else {
+                            System.out.println("You paid 200$");
+                            currentPlayer.setBalance(currentPlayer.getBalance() - 200);
+                        }
+                        break;
+                    case " luxury tax":
+                        System.out.println("You paid 100$ to the feds for luxury tax");
+                        currentPlayer.setBalance(currentPlayer.getBalance() - 100);
+                        break;
+                }
+            }
+        }
+
+    public static void jailPlayerTurn(CLL<BoardPiece> board, PlayerPiece currentPlayer){
+        if (currentPlayer.getJailCount() < 3){
+            if (currentPlayer.getGOOJF() > 0){
+                System.out.println("Enter 1 to use a Get Out Of Jail Free card, 2 to pay 50$ and get out of jail, or 3 to attempt to roll doubles");
+                Scanner scan = new Scanner(System.in);
+                int input = scan.nextInt();
+                switch (input){
+                    case 1:
+                        currentPlayer.setGOOJF(currentPlayer.getGOOJF() - 1);
+                        currentPlayer.setStatus("free");
+                        currentPlayer.setJailCount(0);
+                        System.out.println("You used a get out of jail free card, you are now just visiting");
+                        break;
+                    case 2:
+                        currentPlayer.setBalance(currentPlayer.getBalance() - 50);
+                        currentPlayer.setStatus("free");
+                        currentPlayer.setJailCount(0);
+                        System.out.println("You paid the 50$ jail fee, you are now just visiting");
+                        break;
+                    case 3:
+                        Random dice = new Random();
+                        int d1 = dice.nextInt(7);
+                        int d2 = dice.nextInt(7);
+                        System.out.println("You rolled a " + d1 + " and a " + d2);
+                        if (d1 == d2){
+                            currentPlayer.setStatus("free");
+                            currentPlayer.setJailCount(0);
+                            System.out.println("You rolled doubles! You are now just visiting");
+                        }
+                        else{
+                            currentPlayer.setJailCount(currentPlayer.getJailCount() + 1);
+                            System.out.println("You didn't roll doubles");
+                        }
+                        break;
+                }
+            }
+            else {
+                System.out.println("Enter 1 to pay 50$ and get out of jail, or 2 to attempt to roll doubles");
+                Scanner scan = new Scanner(System.in);
+                int input = scan.nextInt();
+                switch (input){
+                    case 1:
+                        currentPlayer.setBalance(currentPlayer.getBalance() - 50);
+                        currentPlayer.setStatus("free");
+                        currentPlayer.setJailCount(0);
+                        System.out.println("You paid the 50$ jail fee, you are now just visiting");
+                        break;
+                    case 2:
+                        Random dice = new Random();
+                        int d1 = dice.nextInt(7);
+                        int d2 = dice.nextInt(7);
+                        System.out.println("You rolled a " + d1 + " and a " + d2);
+                        if (d1 == d2){
+                            currentPlayer.setStatus("free");
+                            currentPlayer.setJailCount(0);
+                            System.out.println("You rolled doubles! You are now just visiting");
+                        }
+                        else{
+                            currentPlayer.setJailCount(currentPlayer.getJailCount() + 1);
+                            System.out.println("You didn't roll doubles");
+                        }
+                        break;
+                }
+            }
+        }
+        else{
+            System.out.println("It has been 3 turns in jail, you must pay the 50$ fee");
+            currentPlayer.setBalance(currentPlayer.getBalance() - 50);
+            currentPlayer.setStatus("free");
+            currentPlayer.setJailCount(0);
         }
     }
 
@@ -240,7 +383,7 @@ public class Main {
             case 1:
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 currentPlayer.setLocation(40);
-                board.find(40).data.setOccupiedBy(currentPlayer.getPiece());
+                board.find(40).data.setOccupiedBy(board.find(40).data.getOccupiedBy() + currentPlayer.getPiece());
                 System.out.println("You Advanced To GO");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                 break;
@@ -264,7 +407,7 @@ public class Main {
                 System.out.println("You Got Sent To Jail");
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 currentPlayer.setLocation(10);
-                board.find(currentPlayer.getLocation()).data.setOccupiedBy(currentPlayer.getPiece());
+                board.find(10).data.setOccupiedBy(board.find(10).data.getOccupiedBy() + currentPlayer.getPiece());
                 currentPlayer.setStatus("jail");
                 break;
             case 7:
@@ -312,17 +455,18 @@ public class Main {
                 break;
         }
     }
-    public static void Chance(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer){
+    public static void Chance(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer, int roll){
         Random rand = new Random();
         int random = rand.nextInt(16);
         switch (random){
             case 1:
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 currentPlayer.setLocation(39);
-                board.find(39).data.setOccupiedBy(currentPlayer.getPiece());
+                board.find(39).data.setOccupiedBy(board.find(39).data.getOccupiedBy() + currentPlayer.getPiece());
                 System.out.println("You Got Sent To Boardwalk");
                 if (board.find(39).data.isPurchased()){
                     currentPlayer.setBalance(currentPlayer.getBalance() - board.find(39).data.getRent());
+                    board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent());
                     System.out.println("You Paid Rent");
                 }
                 else{
@@ -339,7 +483,7 @@ public class Main {
             case 2:
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 currentPlayer.setLocation(40);
-                board.find(40).data.setOccupiedBy(currentPlayer.getPiece());
+                board.find(40).data.setOccupiedBy(board.find(40).data.getOccupiedBy() + currentPlayer.getPiece());
                 System.out.println("You Advanced To GO");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                 break;
@@ -349,10 +493,11 @@ public class Main {
                     currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                 }
                 currentPlayer.setLocation(24);
-                board.find(24).data.setOccupiedBy(currentPlayer.getPiece());
+                board.find(24).data.setOccupiedBy(board.find(24).data.getOccupiedBy() + currentPlayer.getPiece());
                 System.out.println("You Got Sent To Illinois Ave.");
                 if (board.find(24).data.isPurchased()){
                     currentPlayer.setBalance(currentPlayer.getBalance() - board.find(24).data.getRent());
+                    board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent());
                     System.out.println("You Paid Rent");
                 }
                 else{
@@ -372,10 +517,12 @@ public class Main {
                     currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                 }
                 currentPlayer.setLocation(11);
-                board.find(11).data.setOccupiedBy(currentPlayer.getPiece());
+                board.find(11).data.setOccupiedBy(board.find(11).data.getOccupiedBy() + currentPlayer.getPiece());
                 System.out.println("You Got Sent To St. Charles Place");
                 if (board.find(11).data.isPurchased()){
                     currentPlayer.setBalance(currentPlayer.getBalance() - board.find(11).data.getRent());
+                    board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent());
+
                     System.out.println("You Paid Rent");
                 }
                 else{
@@ -400,10 +547,12 @@ public class Main {
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                     currentPlayer.setLocation(5);
-                    board.find(5).data.setOccupiedBy(currentPlayer.getPiece());
+                    board.find(5).data.setOccupiedBy(board.find(5).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To Reading Railroad");
                     if (board.find(5).data.isPurchased()){
                         currentPlayer.setBalance(currentPlayer.getBalance() - board.find(5).data.getRent() * board.find(5).data.getOwner().getRailroadsOwned() * 2);
+                        board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent() * board.find(currentPlayer.getLocation()).data.getOwner().getRailroadsOwned() * 2);
+
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
@@ -421,10 +570,12 @@ public class Main {
                 if (reading < penn && reading < BO && reading < Short){
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setLocation(5);
-                    board.find(5).data.setOccupiedBy(currentPlayer.getPiece());
+                    board.find(5).data.setOccupiedBy(board.find(5).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To Reading Railroad");
                     if (board.find(5).data.isPurchased()){
                         currentPlayer.setBalance(currentPlayer.getBalance() - board.find(5).data.getRent() * board.find(5).data.getOwner().getRailroadsOwned() * 2);
+                        board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent() * board.find(currentPlayer.getLocation()).data.getOwner().getRailroadsOwned() * 2);
+
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
@@ -445,10 +596,12 @@ public class Main {
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                     currentPlayer.setLocation(15);
-                    board.find(15).data.setOccupiedBy(currentPlayer.getPiece());
+                    board.find(15).data.setOccupiedBy(board.find(15).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To Pennsylvania Railroad");
                     if (board.find(15).data.isPurchased()){
                         currentPlayer.setBalance(currentPlayer.getBalance() - board.find(15).data.getRent() * board.find(15).data.getOwner().getRailroadsOwned() * 2);
+                        board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent() * board.find(currentPlayer.getLocation()).data.getOwner().getRailroadsOwned() * 2);
+
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
@@ -466,10 +619,12 @@ public class Main {
                 if (penn < reading && penn < BO && penn < Short){
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setLocation(15);
-                    board.find(15).data.setOccupiedBy(currentPlayer.getPiece());
+                    board.find(15).data.setOccupiedBy(board.find(15).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To Pennsylvania Railroad");
                     if (board.find(15).data.isPurchased()){
                         currentPlayer.setBalance(currentPlayer.getBalance() - board.find(15).data.getRent() * board.find(15).data.getOwner().getRailroadsOwned() * 2);
+                        board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent() * board.find(currentPlayer.getLocation()).data.getOwner().getRailroadsOwned() * 2);
+
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
@@ -490,10 +645,12 @@ public class Main {
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                     currentPlayer.setLocation(25);
-                    board.find(25).data.setOccupiedBy(currentPlayer.getPiece());
+                    board.find(25).data.setOccupiedBy(board.find(25).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To B. & O. Railroad");
                     if (board.find(25).data.isPurchased()){
                         currentPlayer.setBalance(currentPlayer.getBalance() - board.find(25).data.getRent() * board.find(25).data.getOwner().getRailroadsOwned() * 2);
+                        board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent() * board.find(currentPlayer.getLocation()).data.getOwner().getRailroadsOwned() * 2);
+
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
@@ -511,10 +668,12 @@ public class Main {
                 if (BO < reading && BO < penn && BO < Short){
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setLocation(25);
-                    board.find(25).data.setOccupiedBy(currentPlayer.getPiece());
+                    board.find(25).data.setOccupiedBy(board.find(25).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To B. & O. Railroad");
                     if (board.find(25).data.isPurchased()){
                         currentPlayer.setBalance(currentPlayer.getBalance() - board.find(25).data.getRent() * board.find(25).data.getOwner().getRailroadsOwned() * 2);
+                        board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent() * board.find(currentPlayer.getLocation()).data.getOwner().getRailroadsOwned() * 2);
+
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
@@ -535,10 +694,12 @@ public class Main {
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                     currentPlayer.setLocation(35);
-                    board.find(35).data.setOccupiedBy(currentPlayer.getPiece());
+                    board.find(35).data.setOccupiedBy(board.find(35).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To The Short Line");
                     if (board.find(35).data.isPurchased()){
                         currentPlayer.setBalance(currentPlayer.getBalance() - board.find(35).data.getRent() * board.find(35).data.getOwner().getRailroadsOwned() * 2);
+                        board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent() * board.find(currentPlayer.getLocation()).data.getOwner().getRailroadsOwned() * 2);
+
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
@@ -556,10 +717,12 @@ public class Main {
                 if (Short < reading && Short < penn && Short < BO){
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setLocation(35);
-                    board.find(35).data.setOccupiedBy(currentPlayer.getPiece());
+                    board.find(35).data.setOccupiedBy(board.find(35).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To The Short Line");
                     if (board.find(35).data.isPurchased()){
                         currentPlayer.setBalance(currentPlayer.getBalance() - board.find(35).data.getRent() * board.find(35).data.getOwner().getRailroadsOwned() * 2);
+                        board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent() * board.find(currentPlayer.getLocation()).data.getOwner().getRailroadsOwned() * 2);
+
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
@@ -584,10 +747,12 @@ public class Main {
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                     currentPlayer.setLocation(12);
-                    board.find(12).data.setOccupiedBy(currentPlayer.getPiece());
+                    board.find(12).data.setOccupiedBy(board.find(12).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To The Electric Company");
                     if (board.find(12).data.isPurchased()){
-                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(12).data.getRent() * board.find(12).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
+                        board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
+
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
@@ -604,10 +769,12 @@ public class Main {
                 if (Electricity < Water){
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setLocation(12);
-                    board.find(12).data.setOccupiedBy(currentPlayer.getPiece());
+                    board.find(12).data.setOccupiedBy(board.find(12).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To The Electric Company");
                     if (board.find(12).data.isPurchased()){
-                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(12).data.getRent() * board.find(12).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
+                        board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
+
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
@@ -627,10 +794,12 @@ public class Main {
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                     currentPlayer.setLocation(28);
-                    board.find(28).data.setOccupiedBy(currentPlayer.getPiece());
+                    board.find(28).data.setOccupiedBy(board.find(28).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To The Water Works");
                     if (board.find(28).data.isPurchased()){
-                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(28).data.getRent() * board.find(28).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
+                        board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
+
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
@@ -647,10 +816,12 @@ public class Main {
                 if (Electricity > Water){
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setLocation(28);
-                    board.find(28).data.setOccupiedBy(currentPlayer.getPiece());
+                    board.find(28).data.setOccupiedBy(board.find(28).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To Water Works");
                     if (board.find(28).data.isPurchased()){
-                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(28).data.getRent() * board.find(28).data.getOwner().getRailroadsOwned() * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
+                        board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
+
                         System.out.println("You Paid Double The Rent");
                     }
                     else{
@@ -678,13 +849,13 @@ public class Main {
                 System.out.println("You Got Sent Back 3 Spaces (You do not pay rent)");
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 currentPlayer.setLocation(currentPlayer.getLocation() - 3);
-                board.find(currentPlayer.getLocation()).data.setOccupiedBy(currentPlayer.getPiece());
+                board.find(currentPlayer.getLocation() - 3).data.setOccupiedBy(board.find(currentPlayer.getLocation() - 3).data.getOccupiedBy() + currentPlayer.getPiece());
                 break;
             case 11:
                 System.out.println("You Got Sent To Jail");
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 currentPlayer.setLocation(10);
-                board.find(currentPlayer.getLocation()).data.setOccupiedBy(currentPlayer.getPiece());
+                board.find(10).data.setOccupiedBy(board.find(currentPlayer.getLocation() - 3).data.getOccupiedBy() + currentPlayer.getPiece());
                 currentPlayer.setStatus("jail");
                 break;
             case 12:
@@ -697,10 +868,12 @@ public class Main {
                     currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                 }
                     currentPlayer.setLocation(5);
-                    board.find(5).data.setOccupiedBy(currentPlayer.getPiece());
+                board.find(5).data.setOccupiedBy(board.find(5).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To Reading Railroad");
                     if (board.find(5).data.isPurchased()){
                         currentPlayer.setBalance(currentPlayer.getBalance() - board.find(5).data.getRent() * board.find(5).data.getOwner().getRailroadsOwned());
+                        board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + board.find(currentPlayer.getLocation()).data.getRent() * board.find(currentPlayer.getLocation()).data.getOwner().getRailroadsOwned());
+
                         System.out.println("You Paid Rent");
                     }
                     else{
