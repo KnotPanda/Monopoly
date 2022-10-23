@@ -10,14 +10,14 @@ public class Main {
 
         CLL<BoardPiece> board = new CLL<>();
         CLL<PlayerPiece> players = new CLL<>();
-        BoardPiece zero = new BoardPiece("GO", 0, false, null, 0, false, "", 0, "", 0);
+        BoardPiece zero = new BoardPiece("GO", 0, false, null, 0, false, "", 0, "GO", 0);
         BoardPiece one = new BoardPiece("Mediterranean Ave.", 60, false, null, 10, true, "", 30, "", 1);
         BoardPiece two = new BoardPiece("Community Chest", 0, false, null, 0, false, "Community Chest", 0, "", 2);
         BoardPiece three = new BoardPiece("Baltic Ave.", 60, false, null, 20, true, "", 30, "", 3);
         BoardPiece four = new BoardPiece("Income Tax", 0, false, null, 0, false, "", 0, "", 4);
         BoardPiece five = new BoardPiece("Reading Railroad", 200, false, null, 0, false, "", 0, "", 5);
         BoardPiece six = new BoardPiece("Oriental Ave.", 100, false, null, 0, false, "", 0, "", 6);
-        BoardPiece seven = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "cyau", 7);
+        BoardPiece seven = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "chance", 7);
         BoardPiece eight = new BoardPiece("Vermont Ave.", 100, false, null, 0, false, "", 0, "", 8);
         BoardPiece nine = new BoardPiece("Connecticut Ave.", 120, false, null, 0, false, "", 0, "sy", 9);
         BoardPiece ten = new BoardPiece("Jail/Just Visiting", 0, false, null, 0, false, "", 0, "", 10);
@@ -108,6 +108,18 @@ public class Main {
 
 
         while(isGameOver) {
+                for (int i = 1; i < players.length(); i++){
+                    if (players.find(i).data.getStatus().equals("free")){
+                        printBoard(board);
+                        freePlayerTurn(players, board, players.find(i).data);
+                        printBoard(board);
+                    }
+                    else{
+                        printBoard(board);
+                        jailPlayerTurn(board, players.find(i).data);
+                        printBoard(board);
+                    }
+                }
         }
     }
     public static void printBoard(CLL<BoardPiece> board){
@@ -266,13 +278,13 @@ public class Main {
             }
             if (!board.find(currentPlayer.getLocation()).data.isPurchasable()) {
                 switch (board.find(currentPlayer.getLocation()).data.getSpecial()) {
-                    case "Community Chest":
+                    case "community chest":
                         CommunityChest(Players, board, currentPlayer);
                         break;
-                    case "Chance":
+                    case "chance":
                         Chance(Players, board, currentPlayer, total);
                         break;
-                    case "Free Parking":
+                    case "free parking":
                         System.out.println("You Landed on Free Parking");
                         break;
                     case "GO":
