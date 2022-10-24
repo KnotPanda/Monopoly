@@ -93,13 +93,13 @@ public class Main {
         board.insert(thirtynine);
 
         ArrayList<BoardPiece> properties1 = new ArrayList<>();
-        PlayerPiece P1 = new PlayerPiece("Trapezoid", 1500, false, 0, properties1, "▰", "free", 0, 0, 0, 0);
+        PlayerPiece P1 = new PlayerPiece("Trapezoid", 1500, false, 0, properties1, "■", "free", 0, 0, 0, 0);
         ArrayList<BoardPiece> properties2 = new ArrayList<>();
         PlayerPiece P2 = new PlayerPiece("Diamond", 1500, false, 0, properties2, "◆", "free", 0, 0, 0, 0);
         ArrayList<BoardPiece> properties3 = new ArrayList<>();
         PlayerPiece P3 = new PlayerPiece("Circle", 1500, false, 0, properties3, "◕", "free", 0, 0, 0, 0);
         ArrayList<BoardPiece> properties4 = new ArrayList<>();
-        PlayerPiece P4 = new PlayerPiece("Triangle", 1500, false, 0, properties4, "◭", "free", 0, 0, 0, 0);
+        PlayerPiece P4 = new PlayerPiece("Triangle", 1500, false, 0, properties4, "▲", "free", 0, 0, 0, 0);
 
         players.insert(P1);
         players.insert(P2);
@@ -109,7 +109,7 @@ public class Main {
         printBoard(board);
 
         while(isGameOver) {
-                for (int i = 1; i < players.length(); i++){
+                for (int i = 0; i < players.length(); i++){
                     Random dice = new Random();
                     int d1 = dice.nextInt(7);
                     int d2 = dice.nextInt(7);
@@ -244,7 +244,7 @@ public class Main {
     public static String printPrice(BoardPiece link){
         int count = String.valueOf(link.getPrice()).length();
         if (link.getPrice() == 0 && link.isPurchasable()){
-            return " " + "PURCHASED" + " ";
+            return "  " + "PURCHASED" + "  ";
         }
         else{
             switch (count){
