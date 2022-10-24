@@ -10,7 +10,7 @@ public class Main {
 
         CLL<BoardPiece> board = new CLL<>();
         CLL<PlayerPiece> players = new CLL<>();
-        BoardPiece zero = new BoardPiece("GO", 0, false, null, 0, false, "", 0, "", 0, false);
+        BoardPiece zero = new BoardPiece("GO", 0, false, null, 0, false, "", 0, "■◆◕▲◉▮", 0, false);
         BoardPiece one = new BoardPiece("Mediterranean Ave.", 60, false, null, 10, true, "", 30, "", 1, false);
         BoardPiece two = new BoardPiece("Community Chest", 0, false, null, 0, false, "Community Chest", 0, "", 2, false);
         BoardPiece three = new BoardPiece("Baltic Ave.", 60, false, null, 20, true, "", 30, "", 3, false);
@@ -93,13 +93,18 @@ public class Main {
         board.insert(thirtynine);
 
         ArrayList<BoardPiece> properties1 = new ArrayList<>();
-        PlayerPiece P1 = new PlayerPiece("Trapezoid", 1500, false, 0, properties1, "■", "free", 0, 0, 0, 0);
+        PlayerPiece P1 = new PlayerPiece("square", 1500, false, 0, properties1, "■", "free", 0, 0, 0, 0);
         ArrayList<BoardPiece> properties2 = new ArrayList<>();
         PlayerPiece P2 = new PlayerPiece("Diamond", 1500, false, 0, properties2, "◆", "free", 0, 0, 0, 0);
         ArrayList<BoardPiece> properties3 = new ArrayList<>();
         PlayerPiece P3 = new PlayerPiece("Circle", 1500, false, 0, properties3, "◕", "free", 0, 0, 0, 0);
         ArrayList<BoardPiece> properties4 = new ArrayList<>();
         PlayerPiece P4 = new PlayerPiece("Triangle", 1500, false, 0, properties4, "▲", "free", 0, 0, 0, 0);
+        ArrayList<BoardPiece> properties5 = new ArrayList<>();
+        PlayerPiece P5 = new PlayerPiece("Half-Circle", 1500, false, 0, properties5, "◉", "free", 0, 0, 0, 0);
+        ArrayList<BoardPiece> properties6 = new ArrayList<>();
+        PlayerPiece P6 = new PlayerPiece("Triangle", 1500, false, 0, properties6, "▮", "free", 0, 0, 0, 0);
+
 
         players.insert(P1);
         players.insert(P2);
@@ -108,7 +113,7 @@ public class Main {
 
         printBoard(board);
 
-        while(isGameOver) {
+        while(isGameOver(players)) {
                 for (int i = 0; i < players.length(); i++){
                     Random dice = new Random();
                     int d1 = dice.nextInt(7);
@@ -202,7 +207,7 @@ public class Main {
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("| Electric |                                                                                                                      |  Luxury  |");
-        System.out.println("|  Company |                                ___ ___  __  __ __  __ _   _ _  _ ___ _______   __   ___ _  _ ___ ___ _____           |    Tax   |");
+        System.out.println("|  Company |                               ___ ___  __  __ __  __ _   _ _  _ ___ _______   __   ___ _  _ ___ ___ _____           |    Tax   |");
         System.out.println("|"+ printOccupants(board.find(12).data) +"|                              / __/ _ \\|  \\/  |  \\/  | | | | \\| |_ _|_   _\\ \\ / /  / __| || | __/ __|_   _|           |"+ printOccupants(board.find(38).data) +"|");
         System.out.println("|"+ printPrice(board.find(12).data) +"|                             | (_| (_) | |\\/| | |\\/| | |_| | .` || |  | |  \\ V /  | (__| __ | _|\\__ \\ | |             | Pay 100$ |");
         System.out.println("└----------┘                              \\___\\___/|_|  |_|_|  |_|\\___/|_|\\_|___| |_|   |_|    \\___|_||_|___|___/ |_|             └----------┘");
@@ -237,6 +242,10 @@ public class Main {
                 return "  "+link.getOccupiedBy().substring(0,1)+"    "+link.getOccupiedBy().substring(1,2)+"    "+link.getOccupiedBy().substring(2,3)+"  ";
             case 4:
                 return "   "+link.getOccupiedBy().substring(0,1)+" "+link.getOccupiedBy().substring(1,2)+" "+link.getOccupiedBy().substring(2,3)+" "+link.getOccupiedBy().substring(3,4)+"  ";
+            case 5:
+                return  "  "+link.getOccupiedBy().substring(0,1)+" "+link.getOccupiedBy().substring(1,2)+" "+link.getOccupiedBy().substring(2,3)+" "+link.getOccupiedBy().substring(3,4)+" "+link.getOccupiedBy().substring(4,5)+"  ";
+            case 6:
+                return  " "+link.getOccupiedBy().substring(0,1)+"  "+link.getOccupiedBy().substring(1,2)+"  "+link.getOccupiedBy().substring(2,3)+"  "+link.getOccupiedBy().substring(3,4)+"  "+link.getOccupiedBy().substring(4,5)+"  "+link.getOccupiedBy().substring(5,6) + "  ";
         }
         return "          ";
     }
@@ -967,7 +976,7 @@ public class Main {
                 break;
         }
     }
-    public boolean isGameOver(CLL<PlayerPiece> players){
+    public static boolean isGameOver(CLL<PlayerPiece> players){
         PlayerPiece current;
         for(int i = 0; i<players.length(); i++){
             if(players.find(i).data.getBalance() <= 0){

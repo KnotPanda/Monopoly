@@ -83,6 +83,6 @@ public class CLL<T> {
         }
         return counter;
     }
-    }
+}
 
 
