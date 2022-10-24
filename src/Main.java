@@ -15,41 +15,41 @@ public class Main {
         BoardPiece two = new BoardPiece("Community Chest", 0, false, null, 0, false, "Community Chest", 0, "", 2, false);
         BoardPiece three = new BoardPiece("Baltic Ave.", 60, false, null, 20, true, "", 30, "", 3, false);
         BoardPiece four = new BoardPiece("Income Tax", 0, false, null, 0, false, "", 0, "", 4, false);
-        BoardPiece five = new BoardPiece("Reading Railroad", 200, false, null, 0, false, "", 0, "", 5, false);
-        BoardPiece six = new BoardPiece("Oriental Ave.", 100, false, null, 0, false, "", 0, "", 6, false);
+        BoardPiece five = new BoardPiece("Reading Railroad", 200, false, null, 25, false, "", 100, "", 5, false);
+        BoardPiece six = new BoardPiece("Oriental Ave.", 100, false, null, 30, false, "", 50, "", 6, false);
         BoardPiece seven = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 7, false);
-        BoardPiece eight = new BoardPiece("Vermont Ave.", 100, false, null, 0, false, "", 0, "", 8, false);
-        BoardPiece nine = new BoardPiece("Connecticut Ave.", 120, false, null, 0, false, "", 0, "", 9, false);
+        BoardPiece eight = new BoardPiece("Vermont Ave.", 100, false, null, 30, false, "", 50, "", 8, false);
+        BoardPiece nine = new BoardPiece("Connecticut Ave.", 120, false, null, 40, false, "", 60, "", 9, false);
         BoardPiece ten = new BoardPiece("Jail/Just Visiting", 0, false, null, 0, false, "", 0, "", 10, false);
-        BoardPiece eleven = new BoardPiece("St. Charles Place", 140, false, null, 0, false, "", 0, "", 11, false);
-        BoardPiece twelve = new BoardPiece("Electric Company", 150, false, null, 0, false, "", 0, "", 12, false);
-        BoardPiece thirteen = new BoardPiece("States Ave.", 140, false, null, 0, false, "", 0, "", 13, false);
-        BoardPiece fourteen = new BoardPiece("Virginia Ave.", 160, false, null, 0, false, "", 0, "", 14, false);
-        BoardPiece fifteen = new BoardPiece("Pennsylvania Railroad", 200, false, null, 0, false, "", 0, "", 15, false);
-        BoardPiece sixteen = new BoardPiece("St. James Place", 180, false, null, 0, false, "", 0, "", 16, false);
+        BoardPiece eleven = new BoardPiece("St. Charles Place", 140, false, null, 50, false, "", 70, "", 11, false);
+        BoardPiece twelve = new BoardPiece("Electric Company", 150, false, null, 0, false, "", 75, "", 12, false);
+        BoardPiece thirteen = new BoardPiece("States Ave.", 140, false, null, 50, false, "", 70, "", 13, false);
+        BoardPiece fourteen = new BoardPiece("Virginia Ave.", 160, false, null, 60, false, "", 80, "", 14, false);
+        BoardPiece fifteen = new BoardPiece("Pennsylvania Railroad", 200, false, null, 25, false, "", 100, "", 15, false);
+        BoardPiece sixteen = new BoardPiece("St. James Place", 180, false, null, 70, false, "", 90, "", 16, false);
         BoardPiece seventeen = new BoardPiece("Community Chest", 0, false, null, 0, false, "", 0, "", 17, false);
-        BoardPiece eighteen = new BoardPiece("Tennessee Ave.", 180, false, null, 0, false, "", 0, "", 18, false);
-        BoardPiece nineteen = new BoardPiece("New York Ave.", 200, false, null, 0, false, "", 0, "", 19, false);
+        BoardPiece eighteen = new BoardPiece("Tennessee Ave.", 180, false, null, 70, false, "", 90, "", 18, false);
+        BoardPiece nineteen = new BoardPiece("New York Ave.", 200, false, null, 80, false, "", 100, "", 19, false);
         BoardPiece twenty = new BoardPiece("Free Parking", 0, false, null, 0, false, "", 0, "", 20, false);
-        BoardPiece twentyone = new BoardPiece("Kentucky Ave.", 220, false, null, 0, false, "", 0, "", 21, false);
+        BoardPiece twentyone = new BoardPiece("Kentucky Ave.", 220, false, null, 90, false, "", 110, "", 21, false);
         BoardPiece twentytwo = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 22, false);
-        BoardPiece twentythree = new BoardPiece("Indiana Ave.", 220, false, null, 0, false, "", 0, "", 23, false);
-        BoardPiece twentyfour = new BoardPiece("Illinois Ave.", 240, false, null, 0, false, "", 0, "", 24, false);
-        BoardPiece twentyfive = new BoardPiece("B. & O. Railroad", 200, false, null, 0, false, "", 0, "", 25, false);
-        BoardPiece twentysix = new BoardPiece("Atlantic Ave.", 260, false, null, 0, false, "", 0, "", 26, false);
-        BoardPiece twentyseven = new BoardPiece("Ventnor Ave.", 260, false, null, 0, false, "", 0, "", 27, false);
-        BoardPiece twentyeight = new BoardPiece("Water Works", 150, false, null, 0, false, "", 0, "", 28, false);
-        BoardPiece twentynine = new BoardPiece("Marvin Gardens", 280, false, null, 0, false, "", 0, "", 29, false);
+        BoardPiece twentythree = new BoardPiece("Indiana Ave.", 220, false, null, 90, false, "", 110, "", 23, false);
+        BoardPiece twentyfour = new BoardPiece("Illinois Ave.", 240, false, null, 100, false, "", 120, "", 24, false);
+        BoardPiece twentyfive = new BoardPiece("B. & O. Railroad", 200, false, null, 25, false, "", 100, "", 25, false);
+        BoardPiece twentysix = new BoardPiece("Atlantic Ave.", 260, false, null, 110, false, "", 130, "", 26, false);
+        BoardPiece twentyseven = new BoardPiece("Ventnor Ave.", 260, false, null, 110, false, "", 130, "", 27, false);
+        BoardPiece twentyeight = new BoardPiece("Water Works", 150, false, null, 0, false, "", 75, "", 28, false);
+        BoardPiece twentynine = new BoardPiece("Marvin Gardens", 280, false, null, 120, false, "", 140, "", 29, false);
         BoardPiece thirty = new BoardPiece("Go To Jail", 0, false, null, 0, false, "", 0, "", 30, false);
-        BoardPiece thirtyone = new BoardPiece("Pacific Ave.", 300, false, null, 0, false, "", 0, "", 31, false);
-        BoardPiece thirtytwo = new BoardPiece("North Carolina Ave.", 300, false, null, 0, false, "", 0, "", 32, false);
+        BoardPiece thirtyone = new BoardPiece("Pacific Ave.", 300, false, null, 130, false, "", 150, "", 31, false);
+        BoardPiece thirtytwo = new BoardPiece("North Carolina Ave.", 300, false, null, 130, false, "", 150, "", 32, false);
         BoardPiece thirtythree = new BoardPiece("Community Chest", 0, false, null, 0, false, "", 0, "", 33, false);
-        BoardPiece thirtyfour = new BoardPiece("Pennsylvania Ave.", 320, false, null, 0, false, "", 0, "", 34, false);
-        BoardPiece thirtyfive = new BoardPiece("Short Line", 200, false, null, 0, false, "", 0, "", 35, false);
+        BoardPiece thirtyfour = new BoardPiece("Pennsylvania Ave.", 320, false, null, 150, false, "", 160, "", 34, false);
+        BoardPiece thirtyfive = new BoardPiece("Short Line", 200, false, null, 25, false, "", 100, "", 35, false);
         BoardPiece thirtysix = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 36, false);
-        BoardPiece thirtyseven = new BoardPiece("Park Place", 350, false, null, 0, false, "", 0, "", 37, false);
+        BoardPiece thirtyseven = new BoardPiece("Park Place", 350, false, null, 175, false, "", 175, "", 37, false);
         BoardPiece thirtyeight = new BoardPiece("Luxury Tax", 0, false, null, 0, false, "", 0, "", 38, false);
-        BoardPiece thirtynine = new BoardPiece("Boardwalk", 400, false, null, 0, false, "", 0, "", 39, false);
+        BoardPiece thirtynine = new BoardPiece("Boardwalk", 400, false, null, 200, false, "", 200, "", 39, false);
 
         board.insert(zero);
         board.insert(one);
@@ -108,7 +108,7 @@ public class Main {
 
         printBoard(board);
 
-        while(isGameOver) {
+        while(isGameOver(players)) {
                 for (int i = 0; i < players.length(); i++){
                     Random dice = new Random();
                     int d1 = dice.nextInt(7);
@@ -967,7 +967,7 @@ public class Main {
                 break;
         }
     }
-    public boolean isGameOver(CLL<PlayerPiece> players){
+    public static boolean isGameOver(CLL<PlayerPiece> players){
         PlayerPiece current;
         for(int i = 0; i<players.length(); i++){
             if(players.find(i).data.getBalance() <= 0){
