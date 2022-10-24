@@ -9,8 +9,9 @@ public class BoardPiece {
     private int sellValue;
     private String occupiedBy;
     private int location;
+    private boolean isMortgaged;
 
-    public BoardPiece(String name, int price, boolean purchased, PlayerPiece owner, int rent, boolean isPurchasable, String special, int sellValue, String occupiedBy, int location) {
+    public BoardPiece(String name, int price, boolean purchased, PlayerPiece owner, int rent, boolean isPurchasable, String special, int sellValue, String occupiedBy, int location, boolean isMortgaged) {
         this.name = name;
         this.price = price;
         this.purchased = purchased;
@@ -21,6 +22,7 @@ public class BoardPiece {
         this.sellValue = sellValue;
         this.occupiedBy = occupiedBy;
         this.location = location;
+        this.isMortgaged = isMortgaged;
     }
 
     public String getName() {
@@ -101,5 +103,13 @@ public class BoardPiece {
 
     public void setLocation(int location) {
         this.location = location;
+    }
+
+    public boolean isMortgaged() {
+        return isMortgaged;
+    }
+
+    public void setMortgaged(boolean mortgaged) {
+        isMortgaged = mortgaged;
     }
 }

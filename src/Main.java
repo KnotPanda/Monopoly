@@ -10,46 +10,46 @@ public class Main {
 
         CLL<BoardPiece> board = new CLL<>();
         CLL<PlayerPiece> players = new CLL<>();
-        BoardPiece zero = new BoardPiece("GO", 0, false, null, 0, false, "", 0, "GO", 0);
-        BoardPiece one = new BoardPiece("Mediterranean Ave.", 60, false, null, 10, true, "", 30, "", 1);
-        BoardPiece two = new BoardPiece("Community Chest", 0, false, null, 0, false, "Community Chest", 0, "", 2);
-        BoardPiece three = new BoardPiece("Baltic Ave.", 60, false, null, 20, true, "", 30, "", 3);
-        BoardPiece four = new BoardPiece("Income Tax", 0, false, null, 0, false, "", 0, "", 4);
-        BoardPiece five = new BoardPiece("Reading Railroad", 200, false, null, 0, false, "", 0, "", 5);
-        BoardPiece six = new BoardPiece("Oriental Ave.", 100, false, null, 0, false, "", 0, "", 6);
-        BoardPiece seven = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "chance", 7);
-        BoardPiece eight = new BoardPiece("Vermont Ave.", 100, false, null, 0, false, "", 0, "", 8);
-        BoardPiece nine = new BoardPiece("Connecticut Ave.", 120, false, null, 0, false, "", 0, "sy", 9);
-        BoardPiece ten = new BoardPiece("Jail/Just Visiting", 0, false, null, 0, false, "", 0, "", 10);
-        BoardPiece eleven = new BoardPiece("St. Charles Place", 140, false, null, 0, false, "", 0, "", 11);
-        BoardPiece twelve = new BoardPiece("Electric Company", 150, false, null, 0, false, "", 0, "", 12);
-        BoardPiece thirteen = new BoardPiece("States Ave.", 140, false, null, 0, false, "", 0, "", 13);
-        BoardPiece fourteen = new BoardPiece("Virginia Ave.", 160, false, null, 0, false, "", 0, "", 14);
-        BoardPiece fifteen = new BoardPiece("Pennsylvania Railroad", 200, false, null, 0, false, "", 0, "", 15);
-        BoardPiece sixteen = new BoardPiece("St. James Place", 180, false, null, 0, false, "", 0, "", 16);
-        BoardPiece seventeen = new BoardPiece("Community Chest", 0, false, null, 0, false, "", 0, "", 17);
-        BoardPiece eighteen = new BoardPiece("Tennessee Ave.", 180, false, null, 0, false, "", 0, "", 18);
-        BoardPiece nineteen = new BoardPiece("New York Ave.", 200, false, null, 0, false, "", 0, "", 19);
-        BoardPiece twenty = new BoardPiece("Free Parking", 0, false, null, 0, false, "", 0, "", 20);
-        BoardPiece twentyone = new BoardPiece("Kentucky Ave.", 220, false, null, 0, false, "", 0, "", 21);
-        BoardPiece twentytwo = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 22);
-        BoardPiece twentythree = new BoardPiece("Indiana Ave.", 220, false, null, 0, false, "", 0, "", 23);
-        BoardPiece twentyfour = new BoardPiece("Illinois Ave.", 240, false, null, 0, false, "", 0, "", 24);
-        BoardPiece twentyfive = new BoardPiece("B. & O. Railroad", 200, false, null, 0, false, "", 0, "", 25);
-        BoardPiece twentysix = new BoardPiece("Atlantic Ave.", 260, false, null, 0, false, "", 0, "", 26);
-        BoardPiece twentyseven = new BoardPiece("Ventnor Ave.", 260, false, null, 0, false, "", 0, "", 27);
-        BoardPiece twentyeight = new BoardPiece("Water Works", 150, false, null, 0, false, "", 0, "", 28);
-        BoardPiece twentynine = new BoardPiece("Marvin Gardens", 280, false, null, 0, false, "", 0, "", 29);
-        BoardPiece thirty = new BoardPiece("Go To Jail", 0, false, null, 0, false, "", 0, "", 30);
-        BoardPiece thirtyone = new BoardPiece("Pacific Ave.", 300, false, null, 0, false, "", 0, "", 31);
-        BoardPiece thirtytwo = new BoardPiece("North Carolina Ave.", 300, false, null, 0, false, "", 0, "", 32);
-        BoardPiece thirtythree = new BoardPiece("Community Chest", 0, false, null, 0, false, "", 0, "", 33);
-        BoardPiece thirtyfour = new BoardPiece("Pennsylvania Ave.", 320, false, null, 0, false, "", 0, "", 34);
-        BoardPiece thirtyfive = new BoardPiece("Short Line", 200, false, null, 0, false, "", 0, "", 35);
-        BoardPiece thirtysix = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 36);
-        BoardPiece thirtyseven = new BoardPiece("Park Place", 350, false, null, 0, false, "", 0, "", 37);
-        BoardPiece thirtyeight = new BoardPiece("Luxury Tax", 0, false, null, 0, false, "", 0, "", 38);
-        BoardPiece thirtynine = new BoardPiece("Boardwalk", 400, false, null, 0, false, "", 0, "", 39);
+        BoardPiece zero = new BoardPiece("GO", 0, false, null, 0, false, "", 0, "GO", 0, false);
+        BoardPiece one = new BoardPiece("Mediterranean Ave.", 60, false, null, 10, true, "", 30, "", 1, false);
+        BoardPiece two = new BoardPiece("Community Chest", 0, false, null, 0, false, "Community Chest", 0, "", 2, false);
+        BoardPiece three = new BoardPiece("Baltic Ave.", 60, false, null, 20, true, "", 30, "", 3, false);
+        BoardPiece four = new BoardPiece("Income Tax", 0, false, null, 0, false, "", 0, "", 4, false);
+        BoardPiece five = new BoardPiece("Reading Railroad", 200, false, null, 0, false, "", 0, "", 5, false);
+        BoardPiece six = new BoardPiece("Oriental Ave.", 100, false, null, 0, false, "", 0, "", 6, false);
+        BoardPiece seven = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "chance", 7, false);
+        BoardPiece eight = new BoardPiece("Vermont Ave.", 100, false, null, 0, false, "", 0, "", 8, false);
+        BoardPiece nine = new BoardPiece("Connecticut Ave.", 120, false, null, 0, false, "", 0, "sy", 9, false);
+        BoardPiece ten = new BoardPiece("Jail/Just Visiting", 0, false, null, 0, false, "", 0, "", 10, false);
+        BoardPiece eleven = new BoardPiece("St. Charles Place", 140, false, null, 0, false, "", 0, "", 11, false);
+        BoardPiece twelve = new BoardPiece("Electric Company", 150, false, null, 0, false, "", 0, "", 12, false);
+        BoardPiece thirteen = new BoardPiece("States Ave.", 140, false, null, 0, false, "", 0, "", 13, false);
+        BoardPiece fourteen = new BoardPiece("Virginia Ave.", 160, false, null, 0, false, "", 0, "", 14, false);
+        BoardPiece fifteen = new BoardPiece("Pennsylvania Railroad", 200, false, null, 0, false, "", 0, "", 15, false);
+        BoardPiece sixteen = new BoardPiece("St. James Place", 180, false, null, 0, false, "", 0, "", 16, false);
+        BoardPiece seventeen = new BoardPiece("Community Chest", 0, false, null, 0, false, "", 0, "", 17, false);
+        BoardPiece eighteen = new BoardPiece("Tennessee Ave.", 180, false, null, 0, false, "", 0, "", 18, false);
+        BoardPiece nineteen = new BoardPiece("New York Ave.", 200, false, null, 0, false, "", 0, "", 19, false);
+        BoardPiece twenty = new BoardPiece("Free Parking", 0, false, null, 0, false, "", 0, "", 20, false);
+        BoardPiece twentyone = new BoardPiece("Kentucky Ave.", 220, false, null, 0, false, "", 0, "", 21, false);
+        BoardPiece twentytwo = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 22, false);
+        BoardPiece twentythree = new BoardPiece("Indiana Ave.", 220, false, null, 0, false, "", 0, "", 23, false);
+        BoardPiece twentyfour = new BoardPiece("Illinois Ave.", 240, false, null, 0, false, "", 0, "", 24, false);
+        BoardPiece twentyfive = new BoardPiece("B. & O. Railroad", 200, false, null, 0, false, "", 0, "", 25, false);
+        BoardPiece twentysix = new BoardPiece("Atlantic Ave.", 260, false, null, 0, false, "", 0, "", 26, false);
+        BoardPiece twentyseven = new BoardPiece("Ventnor Ave.", 260, false, null, 0, false, "", 0, "", 27, false);
+        BoardPiece twentyeight = new BoardPiece("Water Works", 150, false, null, 0, false, "", 0, "", 28, false);
+        BoardPiece twentynine = new BoardPiece("Marvin Gardens", 280, false, null, 0, false, "", 0, "", 29, false);
+        BoardPiece thirty = new BoardPiece("Go To Jail", 0, false, null, 0, false, "", 0, "", 30, false);
+        BoardPiece thirtyone = new BoardPiece("Pacific Ave.", 300, false, null, 0, false, "", 0, "", 31, false);
+        BoardPiece thirtytwo = new BoardPiece("North Carolina Ave.", 300, false, null, 0, false, "", 0, "", 32, false);
+        BoardPiece thirtythree = new BoardPiece("Community Chest", 0, false, null, 0, false, "", 0, "", 33, false);
+        BoardPiece thirtyfour = new BoardPiece("Pennsylvania Ave.", 320, false, null, 0, false, "", 0, "", 34, false);
+        BoardPiece thirtyfive = new BoardPiece("Short Line", 200, false, null, 0, false, "", 0, "", 35, false);
+        BoardPiece thirtysix = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 36, false);
+        BoardPiece thirtyseven = new BoardPiece("Park Place", 350, false, null, 0, false, "", 0, "", 37, false);
+        BoardPiece thirtyeight = new BoardPiece("Luxury Tax", 0, false, null, 0, false, "", 0, "", 38, false);
+        BoardPiece thirtynine = new BoardPiece("Boardwalk", 400, false, null, 0, false, "", 0, "", 39, false);
 
         board.insert(zero);
         board.insert(one);
@@ -109,15 +109,41 @@ public class Main {
 
         while(isGameOver) {
                 for (int i = 1; i < players.length(); i++){
+                    Random dice = new Random();
+                    int d1 = dice.nextInt(7);
+                    int d2 = dice.nextInt(7);
+                    int total = d1 + d2;
                     if (players.find(i).data.getStatus().equals("free")){
                         printBoard(board);
-                        freePlayerTurn(players, board, players.find(i).data);
+                        System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
+                        freePlayerTurn(players, board, players.find(i).data, total);
                         printBoard(board);
+                        System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
                     }
                     else{
                         printBoard(board);
-                        jailPlayerTurn(board, players.find(i).data);
+                        System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
+                        jailPlayerTurn(board, players.find(i).data, d1, d2);
                         printBoard(board);
+                        System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
+                    }
+                    if (d1 == d2){
+                        System.out.println("you rolled doubles, you get to go again");
+                        if (players.find(i).data.getStatus().equals("free")){
+                            printBoard(board);
+                            System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
+                            freePlayerTurn(players, board, players.find(i).data, total);
+                            printBoard(board);
+                            System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
+                        }
+                        else{
+                            printBoard(board);
+                            System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
+                            jailPlayerTurn(board, players.find(i).data, d1, d2);
+                            printBoard(board);
+                            System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
+
+                        }
                     }
                 }
         }
@@ -130,21 +156,21 @@ public class Main {
                 "| |"+ printOccupants(board.find(23).data) +"| |"+ printOccupants(board.find(24).data) +"| |"+ printOccupants(board.find(25).data) +
                 "| |"+ printOccupants(board.find(26).data) +"| |"+ printOccupants(board.find(27).data) +"| |"+ printOccupants(board.find(28).data) +
                 "| |"+ printOccupants(board.find(29).data) +"| |"+ printOccupants(board.find(30).data) +"|");
-        System.out.println("|          | |   "+ board.find(21).data.getPrice() +"$   | |          | |   "+ board.find(23).data.getPrice() +"$   | |   "+ board.find(24).data.getPrice() +
-                "$   | |   "+ board.find(25).data.getPrice() +"$   | |   "+ board.find(26).data.getPrice() +"$   | |   "+ board.find(27).data.getPrice() +"$   | |   "+ board.find(28).data.getPrice() +
-                "$   | |   "+ board.find(29).data.getPrice() +"$   | |          |");
+        System.out.println("|          | |"+ printPrice(board.find(21).data) +"| |          | |"+ printPrice(board.find(23).data) +"| |"+ printPrice(board.find(24).data) +
+        "| |"+ printPrice(board.find(25).data) +"| |"+ printPrice(board.find(26).data) +"| |"+ printPrice(board.find(27).data) +"| |"+ printPrice(board.find(28).data) +
+        "| |"+ printPrice(board.find(29).data) +"| |          |");
         System.out.println("└----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("| New York |                                                                                                                      | Pacific  |");
         System.out.println("|    Ave   |                                                                                                                      |    Ave   |");
         System.out.println("|"+ printOccupants(board.find(19).data) +"|                                                                                                                      |"+ printOccupants(board.find(31).data) +"|");
-        System.out.println("|   "+ board.find(19).data.getPrice() +"$   |                                                                                                                      |   "+ board.find(31).data.getPrice() +"$   |");
+        System.out.println("|"+ printPrice(board.find(19).data) +"|                                                                                                                      |"+ printPrice(board.find(31).data) +"|");
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐           ___ _  _   _   _  _  ___ ___                                                                               ┌----------┐");
         System.out.println("|Tennessee |          / __| || | /_\\ | \\| |/ __| __|                                                                              |   North  |");
         System.out.println("|    Ave   |         | (__| __ |/ _ \\| .` | (__| _|                                                                               | Caro. Ave|");
         System.out.println("|"+ printOccupants(board.find(18).data) +"|          \\___|_||_/_/ \\_\\_|\\_|\\___|___|                                                                              |"+ printOccupants(board.find(32).data) +"|");
-        System.out.println("|   "+ board.find(18).data.getPrice() +"$   |                                                                                                                      |   "+ board.find(32).data.getPrice() +"$   |");
+        System.out.println("|"+ printPrice(board.find(18).data) +"|                                                                                                                      |"+ printPrice(board.find(32).data) +"|");
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("|Community |                                                                                                                      |Community |");
@@ -156,37 +182,37 @@ public class Main {
         System.out.println("| St. James|                                                                                                                      |   Penn.  |");
         System.out.println("|   Place  |                                                                                                                      |    Ave   |");
         System.out.println("|"+ printOccupants(board.find(16).data) +"|                                                                                                                      |"+ printOccupants(board.find(34).data) +"|");
-        System.out.println("|   "+ board.find(16).data.getPrice() +"$   |                                                                                                                      |   "+ board.find(34).data.getPrice() +"$   |");
+        System.out.println("|"+ printPrice(board.find(16).data) +"|                                                                                                                      |"+ printPrice(board.find(34).data) +"|");
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐                 .___  ___.   ______   .__   __.   ______   .______     ______    __      ____    ____                ┌----------┐");
         System.out.println("|   Penn.  |                 |   \\/   |  /  __  \\  |  \\ |  |  /  __  \\  |   _  \\   /  __  \\  |  |     \\   \\  /   /                |   Short  |");
         System.out.println("| Railroad |                 |  \\  /  | |  |  |  | |   \\|  | |  |  |  | |  |_)  | |  |  |  | |  |      \\   \\/   /                 | Line (rr)|");
         System.out.println("|"+ printOccupants(board.find(15).data) +"|                 |  |\\/|  | |  |  |  | |  . `  | |  |  |  | |   ___/  |  |  |  | |  |       \\_    _/                  |"+ printOccupants(board.find(35).data) +"|");
-        System.out.println("|   "+ board.find(15).data.getPrice() +"$   |                 |  |  |  | |  `--'  | |  |\\   | |  `--'  | |  |      |  `--'  | |  `----.    |  |                    |   "+ board.find(35).data.getPrice() +"$   |");
+        System.out.println("|"+ printPrice(board.find(15).data) +"|                 |  |  |  | |  `--'  | |  |\\   | |  `--'  | |  |      |  `--'  | |  `----.    |  |                    |"+ printPrice(board.find(35).data) +"|");
         System.out.println("└----------┘                 |__|  |__|  \\______/  |__| \\__|  \\______/  | _|       \\______/  |_______|    |__|                    └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("| Virginia |                                                                                                                      |  Chance  |");
         System.out.println("|    Ave   |                                                                                                                      |          |");
         System.out.println("|"+ printOccupants(board.find(14).data) +"|                                                                                                                      |"+ printOccupants(board.find(36).data) +"|");
-        System.out.println("|   "+ board.find(14).data.getPrice() +"$   |                                                                                                                      |          |");
+        System.out.println("|"+ printPrice(board.find(14).data) +"|                                                                                                                      |          |");
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("|  States  |                                                                                                                      |   Park   |");
         System.out.println("|    Ave   |                                                                                                                      |   Place  |");
         System.out.println("|"+ printOccupants(board.find(13).data) +"|                                                                                                                      |"+ printOccupants(board.find(37).data) +"|");
-        System.out.println("|   "+ board.find(13).data.getPrice() +"$   |                                                                                                                      |   "+ board.find(37).data.getPrice() +"$   |");
+        System.out.println("|"+ printPrice(board.find(13).data) +"|                                                                                                                      |"+ printPrice(board.find(37).data) +"|");
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("| Electric |                                                                                                                      |  Luxury  |");
         System.out.println("|  Company |                                ___ ___  __  __ __  __ _   _ _  _ ___ _______   __   ___ _  _ ___ ___ _____           |    Tax   |");
         System.out.println("|"+ printOccupants(board.find(12).data) +"|                              / __/ _ \\|  \\/  |  \\/  | | | | \\| |_ _|_   _\\ \\ / /  / __| || | __/ __|_   _|           |"+ printOccupants(board.find(38).data) +"|");
-        System.out.println("|   "+ board.find(12).data.getPrice() +"$   |                             | (_| (_) | |\\/| | |\\/| | |_| | .` || |  | |  \\ V /  | (__| __ | _|\\__ \\ | |             | Pay 100$ |");
+        System.out.println("|"+ printPrice(board.find(12).data) +"|                             | (_| (_) | |\\/| | |\\/| | |_| | .` || |  | |  \\ V /  | (__| __ | _|\\__ \\ | |             | Pay 100$ |");
         System.out.println("└----------┘                              \\___\\___/|_|  |_|_|  |_|\\___/|_|\\_|___| |_|   |_|    \\___|_||_|___|___/ |_|             └----------┘");
         System.out.println("┌----------┐                                                                                                                      ┌----------┐");
         System.out.println("|St Charles|                                                                                                                      |Boardwalk |");
         System.out.println("|   Place  |                                                                                                                      |          |");
         System.out.println("|"+ printOccupants(board.find(11).data) +"|                                                                                                                      |"+ printOccupants(board.find(39).data) +"|");
-        System.out.println("|   "+ board.find(11).data.getPrice() +"$   |                                                                                                                      |   "+ board.find(39).data.getPrice() +"$   |");
+        System.out.println("|"+ printPrice(board.find(11).data) +"|                                                                                                                      |"+ printPrice(board.find(39).data) +"|");
         System.out.println("└----------┘                                                                                                                      └----------┘");
         System.out.println("┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐ ┌----------┐");
         System.out.println("|  JAIL &  | |   Conn.  | |  Vermont | |  Chance  | | Oriental | |  Reading | |  Income  | |  Baltic  | |Community | | Mediter. | |    GO    |");
@@ -195,8 +221,8 @@ public class Main {
                 "| |"+ printOccupants(board.find(7).data) +"| |"+ printOccupants(board.find(6).data) +"| |"+ printOccupants(board.find(5).data) +
                 "| |"+ printOccupants(board.find(4).data) +"| |"+ printOccupants(board.find(3).data) +"| |"+ printOccupants(board.find(2).data) +
                 "| |"+ printOccupants(board.find(1).data) +"| |"+ printOccupants(board.find(0).data) +"|");
-        System.out.println("|          | |   "+ board.find(9).data.getPrice() +"$   | |   "+ board.find(8).data.getPrice() +"$   | |          | |   "+ board.find(6).data.getPrice() +
-                "$   | |   "+ board.find(5).data.getPrice() +"$   | | Pay 200$ | |    "+ board.find(3).data.getPrice() +"$   | |          | |    "+ board.find(1).data.getPrice() +"$   | |  +200$   |");
+        System.out.println("|          | |"+ printPrice(board.find(9).data) +"| |"+ printPrice(board.find(8).data) +"| |          | |"+ printPrice(board.find(6).data) +
+                "| |"+ printPrice(board.find(5).data) +"| | Pay  Tax | |"+ printPrice(board.find(3).data) +"| |          | |"+ printPrice(board.find(1).data) +"| |  +200$   |");
         System.out.println("└----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘ └----------┘");
     }
 
@@ -216,13 +242,24 @@ public class Main {
         }
         return "          ";
     }
+    
+    public static String printPrice(BoardPiece link){
+        int count = String.valueOf(link.getPrice()).length();
+        if (link.getPrice() == 0 && link.isPurchasable()){
+            return " " + "PURCHASED" + " ";
+        }
+        else{
+            switch (count){
+                case 2:
+                    return "    "+ link.getPrice() +"$   ";
+                case 3:
+                    return "   "+ link.getPrice() +"$   ";
+            }
+        }
+        return "          ";
+    }
 
-    public static void freePlayerTurn(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer) {
-        Random dice = new Random();
-        int d1 = dice.nextInt(7);
-        int d2 = dice.nextInt(7);
-        int total = d1 + d2;
-
+    public static void freePlayerTurn(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer, int total) {
             Scanner in = new Scanner(System.in);
             System.out.println("You Rolled A " + total);
             board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
@@ -250,6 +287,7 @@ public class Main {
                     board.find(currentPlayer.getLocation()).data.setOwner(currentPlayer);
                     board.find(currentPlayer.getLocation()).data.setPurchased(true);
                     currentPlayer.getProperties().add(board.find(currentPlayer.getLocation()).data);
+                    board.find(currentPlayer.getLocation()).data.setPrice(0);
                     if (board.find(currentPlayer.getLocation()).data.getSpecial().equals("railroad")){
                         currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
                     }
@@ -315,7 +353,7 @@ public class Main {
             }
         }
 
-    public static void jailPlayerTurn(CLL<BoardPiece> board, PlayerPiece currentPlayer){
+    public static void jailPlayerTurn(CLL<BoardPiece> board, PlayerPiece currentPlayer, int d1, int d2){
         if (currentPlayer.getJailCount() < 3){
             if (currentPlayer.getGOOJF() > 0){
                 System.out.println("Enter 1 to use a Get Out Of Jail Free card, 2 to pay 50$ and get out of jail, or 3 to attempt to roll doubles");
@@ -335,9 +373,6 @@ public class Main {
                         System.out.println("You paid the 50$ jail fee, you are now just visiting");
                         break;
                     case 3:
-                        Random dice = new Random();
-                        int d1 = dice.nextInt(7);
-                        int d2 = dice.nextInt(7);
                         System.out.println("You rolled a " + d1 + " and a " + d2);
                         if (d1 == d2){
                             currentPlayer.setStatus("free");
@@ -363,9 +398,6 @@ public class Main {
                         System.out.println("You paid the 50$ jail fee, you are now just visiting");
                         break;
                     case 2:
-                        Random dice = new Random();
-                        int d1 = dice.nextInt(7);
-                        int d2 = dice.nextInt(7);
                         System.out.println("You rolled a " + d1 + " and a " + d2);
                         if (d1 == d2){
                             currentPlayer.setStatus("free");
@@ -386,6 +418,10 @@ public class Main {
             currentPlayer.setStatus("free");
             currentPlayer.setJailCount(0);
         }
+    }
+
+    public static void mortgage(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer){
+        System.out.println("Would you like to mortgage any of your properties?");
     }
 
     public static void CommunityChest(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer) {
@@ -489,6 +525,7 @@ public class Main {
                         board.find(39).data.setOwner(currentPlayer);
                         board.find(39).data.setPurchased(true);
                         currentPlayer.getProperties().add(board.find(39).data);
+                        board.find(currentPlayer.getLocation()).data.setPrice(0);
                     }
                 }
                 break;
@@ -520,6 +557,7 @@ public class Main {
                         board.find(24).data.setOwner(currentPlayer);
                         board.find(24).data.setPurchased(true);
                         currentPlayer.getProperties().add(board.find(24).data);
+                        board.find(currentPlayer.getLocation()).data.setPrice(0);
                     }
                 }
                 break;
@@ -545,6 +583,7 @@ public class Main {
                         board.find(11).data.setOwner(currentPlayer);
                         board.find(11).data.setPurchased(true);
                         currentPlayer.getProperties().add(board.find(11).data);
+                        board.find(currentPlayer.getLocation()).data.setPrice(0);
                     }
                 }
                 break;
@@ -576,6 +615,7 @@ public class Main {
                             board.find(5).data.setPurchased(true);
                             currentPlayer.getProperties().add(board.find(5).data);
                             currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
+                            board.find(currentPlayer.getLocation()).data.setPrice(0);
                         }
                     }
                 }
@@ -599,6 +639,7 @@ public class Main {
                             board.find(5).data.setPurchased(true);
                             currentPlayer.getProperties().add(board.find(5).data);
                             currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
+                            board.find(currentPlayer.getLocation()).data.setPrice(0);
                         }
                     }
                 }
@@ -625,6 +666,7 @@ public class Main {
                             board.find(15).data.setPurchased(true);
                             currentPlayer.getProperties().add(board.find(15).data);
                             currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
+                            board.find(currentPlayer.getLocation()).data.setPrice(0);
                         }
                     }
                 }
@@ -648,6 +690,7 @@ public class Main {
                             board.find(15).data.setPurchased(true);
                             currentPlayer.getProperties().add(board.find(15).data);
                             currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
+                            board.find(currentPlayer.getLocation()).data.setPrice(0);
                         }
                     }
                 }
@@ -674,6 +717,7 @@ public class Main {
                             board.find(25).data.setPurchased(true);
                             currentPlayer.getProperties().add(board.find(25).data);
                             currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
+                            board.find(currentPlayer.getLocation()).data.setPrice(0);
                         }
                     }
                 }
@@ -697,6 +741,7 @@ public class Main {
                             board.find(25).data.setPurchased(true);
                             currentPlayer.getProperties().add(board.find(25).data);
                             currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
+                            board.find(currentPlayer.getLocation()).data.setPrice(0);
                         }
                     }
                 }
@@ -723,6 +768,7 @@ public class Main {
                             board.find(35).data.setPurchased(true);
                             currentPlayer.getProperties().add(board.find(35).data);
                             currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
+                            board.find(currentPlayer.getLocation()).data.setPrice(0);
                         }
                     }
                 }
@@ -746,6 +792,7 @@ public class Main {
                             board.find(35).data.setPurchased(true);
                             currentPlayer.getProperties().add(board.find(35).data);
                             currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
+                            board.find(currentPlayer.getLocation()).data.setPrice(0);
                         }
                     }
                 }
@@ -775,6 +822,7 @@ public class Main {
                             board.find(12).data.setOwner(currentPlayer);
                             board.find(12).data.setPurchased(true);
                             currentPlayer.getProperties().add(board.find(12).data);
+                            board.find(currentPlayer.getLocation()).data.setPrice(0);
                         }
                     }
                 }
@@ -797,6 +845,7 @@ public class Main {
                             board.find(12).data.setOwner(currentPlayer);
                             board.find(12).data.setPurchased(true);
                             currentPlayer.getProperties().add(board.find(12).data);
+                            board.find(currentPlayer.getLocation()).data.setPrice(0);
                         }
                     }
                 }
@@ -822,6 +871,7 @@ public class Main {
                             board.find(28).data.setOwner(currentPlayer);
                             board.find(28).data.setPurchased(true);
                             currentPlayer.getProperties().add(board.find(28).data);
+                            board.find(currentPlayer.getLocation()).data.setPrice(0);
                         }
                     }
                 }
@@ -844,6 +894,7 @@ public class Main {
                             board.find(28).data.setOwner(currentPlayer);
                             board.find(28).data.setPurchased(true);
                             currentPlayer.getProperties().add(board.find(28).data);
+                            board.find(currentPlayer.getLocation()).data.setPrice(0);
                         }
                     }
                 }
@@ -897,6 +948,7 @@ public class Main {
                             board.find(5).data.setPurchased(true);
                             currentPlayer.getProperties().add(board.find(5).data);
                             currentPlayer.setRailroadsOwned(currentPlayer.getRailroadsOwned() + 1);
+                            board.find(currentPlayer.getLocation()).data.setPrice(0);
                         }
                     }
                 break;
