@@ -967,5 +967,17 @@ public class Main {
                 break;
         }
     }
+    public boolean isGameOver(CLL<PlayerPiece> players){
+        PlayerPiece current;
+        for(int i = 0; i<players.length(); i++){
+            if(players.find(i).data.getBalance() <= 0){
+                players.delete(players.find(i).data);
+            }
+        }
+        if(players.length() <= 1){
+            return true;
+        }
+        return false;
+    }
 }
 
