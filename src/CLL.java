@@ -23,6 +23,36 @@ public class CLL<T> {
             last = link;
         }
     }
+    public void delete(T data){
+        Link current = first;
+        if(last==null){
+            return;
+        }
+        while(current.data != data){
+            if(current.next == first){
+                System.out.println("Link does not exist");
+                break;
+            }
+            current = current.next;
+        }
+        if(current == first && current.next == first){
+            first = null;
+        }
+        if(current == first){
+            last = first;
+            while(last.next != first){
+                last = last.next;
+                first = current.next;
+                last.next = first;
+            }
+        }
+        else if(current.next == first){
+            last.next = first;
+        }
+        else{
+            last.next = current.next;
+        }
+    }
 
     public Link<T> findLink(T data) {
         Link<T> current = first;
