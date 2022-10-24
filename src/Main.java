@@ -10,16 +10,16 @@ public class Main {
 
         CLL<BoardPiece> board = new CLL<>();
         CLL<PlayerPiece> players = new CLL<>();
-        BoardPiece zero = new BoardPiece("GO", 0, false, null, 0, false, "", 0, "GO", 0, false);
+        BoardPiece zero = new BoardPiece("GO", 0, false, null, 0, false, "", 0, "", 0, false);
         BoardPiece one = new BoardPiece("Mediterranean Ave.", 60, false, null, 10, true, "", 30, "", 1, false);
         BoardPiece two = new BoardPiece("Community Chest", 0, false, null, 0, false, "Community Chest", 0, "", 2, false);
         BoardPiece three = new BoardPiece("Baltic Ave.", 60, false, null, 20, true, "", 30, "", 3, false);
         BoardPiece four = new BoardPiece("Income Tax", 0, false, null, 0, false, "", 0, "", 4, false);
         BoardPiece five = new BoardPiece("Reading Railroad", 200, false, null, 0, false, "", 0, "", 5, false);
         BoardPiece six = new BoardPiece("Oriental Ave.", 100, false, null, 0, false, "", 0, "", 6, false);
-        BoardPiece seven = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "chance", 7, false);
+        BoardPiece seven = new BoardPiece("Chance", 0, false, null, 0, false, "", 0, "", 7, false);
         BoardPiece eight = new BoardPiece("Vermont Ave.", 100, false, null, 0, false, "", 0, "", 8, false);
-        BoardPiece nine = new BoardPiece("Connecticut Ave.", 120, false, null, 0, false, "", 0, "sy", 9, false);
+        BoardPiece nine = new BoardPiece("Connecticut Ave.", 120, false, null, 0, false, "", 0, "", 9, false);
         BoardPiece ten = new BoardPiece("Jail/Just Visiting", 0, false, null, 0, false, "", 0, "", 10, false);
         BoardPiece eleven = new BoardPiece("St. Charles Place", 140, false, null, 0, false, "", 0, "", 11, false);
         BoardPiece twelve = new BoardPiece("Electric Company", 150, false, null, 0, false, "", 0, "", 12, false);
@@ -106,6 +106,7 @@ public class Main {
         players.insert(P3);
         players.insert(P4);
 
+        printBoard(board);
 
         while(isGameOver) {
                 for (int i = 1; i < players.length(); i++){
@@ -113,15 +114,14 @@ public class Main {
                     int d1 = dice.nextInt(7);
                     int d2 = dice.nextInt(7);
                     int total = d1 + d2;
+                    printBoard(board);
                     if (players.find(i).data.getStatus().equals("free")){
-                        printBoard(board);
                         System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
                         freePlayerTurn(players, board, players.find(i).data, total);
                         printBoard(board);
                         System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
                     }
                     else{
-                        printBoard(board);
                         System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
                         jailPlayerTurn(board, players.find(i).data, d1, d2);
                         printBoard(board);
@@ -130,14 +130,12 @@ public class Main {
                     if (d1 == d2){
                         System.out.println("you rolled doubles, you get to go again");
                         if (players.find(i).data.getStatus().equals("free")){
-                            printBoard(board);
                             System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
                             freePlayerTurn(players, board, players.find(i).data, total);
                             printBoard(board);
                             System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
                         }
                         else{
-                            printBoard(board);
                             System.out.println(players.find(i).data.getName() + " your current balance is " + players.find(i).data.getBalance() + "$");
                             jailPlayerTurn(board, players.find(i).data, d1, d2);
                             printBoard(board);
