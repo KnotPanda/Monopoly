@@ -314,7 +314,7 @@ public class Main {
     public static void freePlayerTurn(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer, int d1, int d2) throws InterruptedException {
             int total = d1 + d2;
             Scanner in = new Scanner(System.in);
-            System.out.println("You Rolled a " + d1 + " and a " + d2);
+            System.out.println("You Rolled A " + d1 + " and a " + d2);
             board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
             //this is for if the player does not pass go, if the player lands on go, the 200 will be given later in this method
             if (currentPlayer.getLocation() + total <= 39) {
@@ -437,7 +437,7 @@ public class Main {
 
         public static void sellActions(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer) {
             Scanner Choice = new Scanner(System.in);
-            System.out.println("Press 1 if you would like to sell any properties, 2 to mortgage any properties, 3 to pay off your debt, or 4 to continue");
+            System.out.println("Press 1 if you would like to sell any properties, 2 to mortgage any properties, 3 to pay off your dept, or 4 to continue");
             int input = Choice.nextInt();
             switch (input) {
                 case 1:
@@ -465,22 +465,22 @@ public class Main {
                             currentPlayer.setBalance(currentPlayer.getBalance() + currentPlayer.getProperties().get(i).getSellValue());
                             System.out.println("You mortgaged " + currentPlayer.getProperties().get(i).getName() + " and got " +  currentPlayer.getProperties().get(i).getSellValue());
                             currentPlayer.getProperties().get(i).setMortgaged(true);
-                            currentPlayer.setDebt(currentPlayer.getDebt() + currentPlayer.getProperties().get(i).getSellValue() + currentPlayer.getProperties().get(i).getSellValue()/10);
+                            currentPlayer.setDept(currentPlayer.getDept() + currentPlayer.getProperties().get(i).getSellValue() + currentPlayer.getProperties().get(i).getSellValue()/10);
                             break;
                         }
                     }
                     break;
                 case 3:
-                    if (currentPlayer.getBalance() < currentPlayer.getDebt()){
-                        System.out.println("You do not have enough balance to pay off your debt");
+                    if (currentPlayer.getBalance() < currentPlayer.getDept()){
+                        System.out.println("You do not have enough balance to pay off your dept");
                         break;
                     }
                     else{
-                        currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getDebt());
+                        currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getDept());
                         for (int i = 0; i < currentPlayer.getProperties().size(); i++){
                             currentPlayer.getProperties().get(i).setMortgaged(false);
                         }
-                        System.out.println("You paid off all your debt, all your properties have now been un-mortgaged. You now have a balance of " + currentPlayer.getBalance());
+                        System.out.println("You paid off all your dept, all your properties have now been un-mortgaged. You now have a balance of " + currentPlayer.getBalance());
                     }
                     break;
                 default:
@@ -990,7 +990,7 @@ public class Main {
                         currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
                         board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
 
-                        System.out.println("You Paid "+board.find(12).data.getRent() * board.find(12).data.getOwner().getRailroadsOwned() * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
+                        System.out.println("You Paid "+board.find(12).data.getRent() * board.find(12).data.getOwner().getUtilitiesOwned() * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
                     }
                     else if (board.find(currentPlayer.getLocation()).data.isMortgaged()){
                         System.out.println("The property you landed on is mortgaged, no rent!");
@@ -1016,7 +1016,7 @@ public class Main {
                         currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
                         board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
 
-                        System.out.println("You Paid "+board.find(12).data.getRent() * board.find(12).data.getOwner().getRailroadsOwned() * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
+                        System.out.println("You Paid "+board.find(12).data.getRent() * board.find(12).data.getOwner().getUtilitiesOwned() * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
                     }
                     else if (board.find(currentPlayer.getLocation()).data.isMortgaged()){
                         System.out.println("The property you landed on is mortgaged, no rent!");
@@ -1045,7 +1045,7 @@ public class Main {
                         currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
                         board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
 
-                        System.out.println("You Paid "+board.find(28).data.getRent() * board.find(28).data.getOwner().getRailroadsOwned() * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
+                        System.out.println("You Paid "+board.find(28).data.getRent() * board.find(28).data.getOwner().getUtilitiesOwned() * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
                     }
                     else if (board.find(currentPlayer.getLocation()).data.isMortgaged()){
                         System.out.println("The property you landed on is mortgaged, no rent!");
@@ -1071,7 +1071,7 @@ public class Main {
                         currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
                         board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
 
-                        System.out.println("You Paid "+board.find(28).data.getRent() * board.find(28).data.getOwner().getRailroadsOwned() * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
+                        System.out.println("You Paid "+board.find(28).data.getRent() * board.find(28).data.getOwner().getUtilitiesOwned() * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
                     }
                     else if (board.find(currentPlayer.getLocation()).data.isMortgaged()){
                         System.out.println("The property you landed on is mortgaged, no rent!");
