@@ -437,7 +437,7 @@ public class Main {
 
         public static void sellActions(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer) {
             Scanner Choice = new Scanner(System.in);
-            System.out.println("Press 1 if you would like to sell any properties, 2 to mortgage any properties, 3 to pay off your dept, or 4 to continue");
+            System.out.println("Press 1 if you would like to sell any properties, 2 to mortgage any properties, 3 to pay off your Debt, or 4 to continue");
             int input = Choice.nextInt();
             switch (input) {
                 case 1:
@@ -465,22 +465,22 @@ public class Main {
                             currentPlayer.setBalance(currentPlayer.getBalance() + currentPlayer.getProperties().get(i).getSellValue());
                             System.out.println("You mortgaged " + currentPlayer.getProperties().get(i).getName() + " and got " +  currentPlayer.getProperties().get(i).getSellValue());
                             currentPlayer.getProperties().get(i).setMortgaged(true);
-                            currentPlayer.setDept(currentPlayer.getDept() + currentPlayer.getProperties().get(i).getSellValue() + currentPlayer.getProperties().get(i).getSellValue()/10);
+                            currentPlayer.setDebt(currentPlayer.getDebt() + currentPlayer.getProperties().get(i).getSellValue() + currentPlayer.getProperties().get(i).getSellValue()/10);
                             break;
                         }
                     }
                     break;
                 case 3:
-                    if (currentPlayer.getBalance() < currentPlayer.getDept()){
-                        System.out.println("You do not have enough balance to pay off your dept");
+                    if (currentPlayer.getBalance() < currentPlayer.getDebt()){
+                        System.out.println("You do not have enough balance to pay off your Debt");
                         break;
                     }
                     else{
-                        currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getDept());
+                        currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getDebt());
                         for (int i = 0; i < currentPlayer.getProperties().size(); i++){
                             currentPlayer.getProperties().get(i).setMortgaged(false);
                         }
-                        System.out.println("You paid off all your dept, all your properties have now been un-mortgaged. You now have a balance of " + currentPlayer.getBalance());
+                        System.out.println("You paid off all your Debt, all your properties have now been un-mortgaged. You now have a balance of " + currentPlayer.getBalance());
                     }
                     break;
                 default:
