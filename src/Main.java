@@ -6,7 +6,7 @@ import java.lang.Math;
 import java.util.concurrent.TimeUnit;
 
 public class Main {
-    public static final String RESET = "\033[0m";
+    public static final String RESET = "\033[0m";  //reset
     public static final String RED = "\033[0;31m";     // square
     public static final String GREEN = "\033[0;32m";   // diamond
     public static final String YELLOW = "\033[0;33m";  // circle
@@ -111,17 +111,17 @@ public class Main {
 
         //creating all the player objects then adding them into a player CLL
         ArrayList<BoardPiece> properties1 = new ArrayList<>();
-        PlayerPiece P1 = new PlayerPiece("square", 1500, false, 0, properties1, "■", "free", 0, 0, 0, 0, 0, RED);
+        PlayerPiece P1 = new PlayerPiece("square", 100, false, 0, properties1, "■", "free", 0, 0, 0, 0, 0, RED);
         ArrayList<BoardPiece> properties2 = new ArrayList<>();
-        PlayerPiece P2 = new PlayerPiece("Diamond", 1500, false, 0, properties2, "◆", "free", 0, 0, 0, 0, 0, GREEN);
+        PlayerPiece P2 = new PlayerPiece("Diamond", 100, false, 0, properties2, "◆", "free", 0, 0, 0, 0, 0, GREEN);
         ArrayList<BoardPiece> properties3 = new ArrayList<>();
-        PlayerPiece P3 = new PlayerPiece("Circle", 1500, false, 0, properties3, "◕", "free", 0, 0, 0, 0, 0, YELLOW);
+        PlayerPiece P3 = new PlayerPiece("Circle", 100, false, 0, properties3, "◕", "free", 0, 0, 0, 0, 0, YELLOW);
         ArrayList<BoardPiece> properties4 = new ArrayList<>();
-        PlayerPiece P4 = new PlayerPiece("Triangle", 1500, false, 0, properties4, "▲", "free", 0, 0, 0, 0, 0, BLUE);
+        PlayerPiece P4 = new PlayerPiece("Triangle", 100, false, 0, properties4, "▲", "free", 0, 0, 0, 0, 0, BLUE);
         ArrayList<BoardPiece> properties5 = new ArrayList<>();
-        PlayerPiece P5 = new PlayerPiece("Checker", 1500, false, 0, properties5, "▞", "free", 0, 0, 0, 0, 0, PURPLE);
+        PlayerPiece P5 = new PlayerPiece("Checker", 100, false, 0, properties5, "▞", "free", 0, 0, 0, 0, 0, PURPLE);
         ArrayList<BoardPiece> properties6 = new ArrayList<>();
-        PlayerPiece P6 = new PlayerPiece("L-shape", 1500, false, 0, properties6, "▙", "free", 0, 0, 0, 0, 0, CYAN);
+        PlayerPiece P6 = new PlayerPiece("L-shape", 100, false, 0, properties6, "▙", "free", 0, 0, 0, 0, 0, CYAN);
 
 
         players.insert(P1);
@@ -141,7 +141,7 @@ public class Main {
 
         //this while loop is the game loop, this cycles through the CLL of players letting each of them go through a turn before moving on to the next. When a player runs out of money, they are removed from the
         //CLL and no longer will have turns
-        while (!isGameOver(players)) {
+        while (!isGameOver(players, board)) {
             for (int i = 0; i < players.length(); i++) {
                 Random dice = new Random();
                 //creating all the dice for the initial roll and the secondary roll in case the first roll is doubles
@@ -172,7 +172,11 @@ public class Main {
                         sellActions(players, board, players.find(i).data);
                     }
                 }
+                if (players.find(i).data.getBalance() <= 0 ){
+                    System.out.println("You went broke!");
+                }
                 System.out.println("Your turn has ended");
+                isGameOver(players, board);
             }
         }
         //prints out congrats to the winning player in randomized rainbow font
@@ -275,7 +279,7 @@ public class Main {
             case 0:
                 return "          ";
             case 1:
-                return "    "+link.getOccupiedBy()+"     ";
+                return "     "+link.getOccupiedBy()+"    ";
             case 2:
                 return "     "+link.getOccupiedBy().substring(0,1)+"  "+link.getOccupiedBy().substring(1,2)+"     ";
             case 3:
@@ -293,6 +297,7 @@ public class Main {
     //returns the string printBoard will print out depending on the price and the status of the board, status takes priority and will be printed first.
     public static String printPrice(BoardPiece link, CLL<BoardPiece> board){
         int count = String.valueOf(link.getPrice()).length();
+        //purchased and mortgaged are the same amount of letters, color is added to these words depending on whom the owner of the property is
         if (link.getPrice() == 0 && link.isPurchasable() && !link.isMortgaged()){
             return "  " + board.find(link.getLocation()).data.getOwner().getColor() + "PURCHASED" + RESET + "  ";
         }
@@ -353,7 +358,7 @@ public class Main {
                     }
                     //if the property to purchase is a utility the process is exactly the same except now we increase the player's utility count by 1
                     if (board.find(currentPlayer.getLocation()).data.getSpecial().equals("utility")){
-                        currentPlayer.setRailroadsOwned(currentPlayer.getUtilitiesOwned() + 1);
+                        currentPlayer.setUtilitiesOwned(currentPlayer.getUtilitiesOwned() + 1);
                     }
                 }
             }
@@ -370,7 +375,7 @@ public class Main {
                 if (board.find(currentPlayer.getLocation()).data.getSpecial().equals("utility") && !board.find(currentPlayer.getLocation()).data.isMortgaged()) {
                     currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * total);
                     board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * total);
-                    System.out.println("You Paid "+currentPlayer.getUtilitiesOwned() * 4 * total+"$ Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
+                    System.out.println("You Paid "+board.find(currentPlayer.getLocation()).data.getOwner().getUtilitiesOwned() * 4 * total+"$ Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
 
                 }
                 //normal rent calculations, this is for a property that is not special (not railroad or utility)
@@ -380,7 +385,7 @@ public class Main {
                     System.out.println("You Paid "+board.find(currentPlayer.getLocation()).data.getRent()+"$ Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
                 }
                 //if it isn't any of these it must be a mortgaged property, so no rent is charged
-                else{
+                if (board.find(currentPlayer.getLocation()).data.isMortgaged()){
                     System.out.println("The property you landed on is mortgaged, no rent!");
                 }
             }
@@ -435,12 +440,15 @@ public class Main {
             }
         }
 
-        public static void sellActions(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer) {
+    public static void sellActions(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer) {
             Scanner Choice = new Scanner(System.in);
+            //prompts the players about their action
             System.out.println("Press 1 if you would like to sell any properties, 2 to mortgage any properties, 3 to pay off your Debt, or 4 to continue");
             int input = Choice.nextInt();
             switch (input) {
                 case 1:
+                    //the first case is if the player wants to sell a property, the program will display all the owned properties and ask the player whitch they would like to sell
+                    //the program will then reset that property and remove it from the player's ownership
                     Scanner scan1 = new Scanner(System.in);
                     printProperties(currentPlayer);
                     String toSell = scan1.nextLine();
@@ -457,6 +465,9 @@ public class Main {
                     }
                     break;
                 case 2:
+                    //the second case is similar to the first, instead of prompting asking the player which property they would like to sell, it is asking which they would like to mortgage
+                    //the program then mortgages the property by setting the isMortgaged property to true, telling the rest of the program (mainly the free player loop) that
+                    //if a player lands on that space, they should not be charged rent.
                     Scanner scan2 = new Scanner(System.in);
                     printProperties(currentPlayer);
                     String toMort = scan2.nextLine();
@@ -471,30 +482,44 @@ public class Main {
                     }
                     break;
                 case 3:
-                    if (currentPlayer.getBalance() < currentPlayer.getDebt()){
-                        System.out.println("You do not have enough balance to pay off your Debt");
-                        break;
-                    }
-                    else{
-                        currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getDebt());
-                        for (int i = 0; i < currentPlayer.getProperties().size(); i++){
-                            currentPlayer.getProperties().get(i).setMortgaged(false);
+                    //case 3 prints out the player's properties and asks them which one they would like to un-mortgage. The code will then charge the sell value + 10% to the player's
+                    //balance and set the property's isMortgaged property to false
+                    for (int i = 0; i<currentPlayer.getProperties().size(); i++){
+                        int debt = currentPlayer.getProperties().get(i).getSellValue() + currentPlayer.getProperties().get(i).getSellValue()/10;
+                        if (currentPlayer.getProperties().get(i).isMortgaged()){
+                            System.out.println(currentPlayer.getProperties().get(i).getName() + "'s price to un-mortgage is " + debt);
                         }
-                        System.out.println("You paid off all your Debt, all your properties have now been un-mortgaged. You now have a balance of " + currentPlayer.getBalance());
+                    }
+                    Scanner Debt = new Scanner(System.in);
+                    String toPay = Debt.nextLine();
+                    for (int i = 0; i < currentPlayer.getProperties().size(); i++) {
+                        if (toPay.equals(currentPlayer.getProperties().get(i).getName())) {
+                            if (currentPlayer.getBalance() < (currentPlayer.getProperties().get(i).getSellValue() + currentPlayer.getProperties().get(i).getSellValue()/10)) {
+                                System.out.println("You do not have enough balance to pay off your Debt");
+                                break;
+                            }
+                            else{
+                                currentPlayer.setBalance(currentPlayer.getBalance() - (currentPlayer.getProperties().get(i).getSellValue() + currentPlayer.getProperties().get(i).getSellValue()/10));
+                                currentPlayer.getProperties().get(i).setMortgaged(false);
+                                System.out.println("You paid off this property's Debt, all your properties have now been un-mortgaged. You now have a balance of " + currentPlayer.getBalance());
+                            }
+                        }
                     }
                     break;
                 default:
+                    //the default (case 4) just ends the method, the program will then move on to the next player's turn unless the current player rolled doubles
                     break;
                     }
             }
-
-        public static void printProperties(PlayerPiece currentPlayer){
+    //printProperties goes through a player's array of properties owned and prints out their names along with their sale/mortgage price.
+    public static void printProperties(PlayerPiece currentPlayer){
             for (int i = 0; i<currentPlayer.getProperties().size(); i++){
                 System.out.println(currentPlayer.getProperties().get(i).getName() + "'s Mortgage/Sell price is " + currentPlayer.getProperties().get(i).getSellValue());
             }
             System.out.println("Which property would you like to sell/mortgage");
         }
-
+    //jailPlayerTurn is what main calls if the player's status is jail, this asks the players what they would like to do (jail choices) and executes that choice
+    //the first few lines of the method is input taking
     public static void jailPlayerTurn(CLL<BoardPiece> board, PlayerPiece currentPlayer, int d1, int d2){
         if (currentPlayer.getJailCount() < 3){
             if (currentPlayer.getGOOJF() > 0){
@@ -503,18 +528,21 @@ public class Main {
                 int input = scan.nextInt();
                 switch (input){
                     case 1:
+                        //the first case is setting the player free and reducing the amount of GOOJF cards they have, this choice is only available if the player has any GOOJF cards
                         currentPlayer.setGOOJF(currentPlayer.getGOOJF() - 1);
                         currentPlayer.setStatus("free");
                         currentPlayer.setJailCount(0);
                         System.out.println("You used a get out of jail free card, you are now just visiting");
                         break;
                     case 2:
+                        //takes 50$ from the player's balance and sets them free
                         currentPlayer.setBalance(currentPlayer.getBalance() - 50);
                         currentPlayer.setStatus("free");
                         currentPlayer.setJailCount(0);
                         System.out.println("You paid the 50$ jail fee, you are now just visiting");
                         break;
                     case 3:
+                        //takes the rolled dice and if they are the same sets the player free, if not, then the jailcount variable goes up and the player's jailturn ends
                         System.out.println("You rolled a " + d1 + " and a " + d2);
                         if (d1 == d2){
                             currentPlayer.setStatus("free");
@@ -529,6 +557,7 @@ public class Main {
                 }
             }
             else {
+                //this loop is exactly the same as the first, exept there is no GOOJF option since the player has none if they get here
                 System.out.println("Enter 1 to pay 50$ and get out of jail, or 2 to attempt to roll doubles");
                 Scanner scan = new Scanner(System.in);
                 int input = scan.nextInt();
@@ -555,6 +584,7 @@ public class Main {
             }
         }
         else{
+            //if this triggers, the player has rolled three times already and failed, they must now pay the 50$ fee and are set free
             System.out.println("It has been 3 turns in jail, you must pay the 50$ fee");
             currentPlayer.setBalance(currentPlayer.getBalance() - 50);
             currentPlayer.setStatus("free");
@@ -563,33 +593,40 @@ public class Main {
     }
 
     public static void CommunityChest(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer) {
+        //this method is if the player lands on a community chest space, a random is made that draws a random card from possible community chest cards
         Random rand = new Random();
         int random = rand.nextInt(17);
         switch (random) {
             case 1:
+                //sends the player to GO, giving them 200$
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
-                currentPlayer.setLocation(40);
-                board.find(40).data.setOccupiedBy(board.find(40).data.getOccupiedBy() + currentPlayer.getPiece());
+                currentPlayer.setLocation(0);
+                board.find(0).data.setOccupiedBy(board.find(0).data.getOccupiedBy() + currentPlayer.getPiece());
                 System.out.println("You Advanced To GO");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                 break;
             case 2:
+                //gives player 200$
                 System.out.println("Bank Error In Your Favor, You Got 200$");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                 break;
             case 3:
+                //takes away 50$ from player
                 System.out.println("Doctor's Fee: 50$");
                 currentPlayer.setBalance(currentPlayer.getBalance() - 50);
                 break;
             case 4:
+                //Gives 50$
                 System.out.println("Sold Some Stock, Got 50$");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 50);
                 break;
             case 5:
+                //gives a GOOJF, increases GOOJF count by one
                 System.out.println("You Got A Get Out Of Jail Free Card");
                 currentPlayer.setGOOJF(currentPlayer.getGOOJF() + 1);
                 break;
             case 6:
+                //send player to jail, sets their status to jail
                 System.out.println("You Got Sent To Jail");
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 currentPlayer.setLocation(10);
@@ -597,14 +634,17 @@ public class Main {
                 currentPlayer.setStatus("jail");
                 break;
             case 7:
+                //gives player 100$
                 System.out.println("Holiday Fund Matures, You Received 100$");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 100);
                 break;
             case 8:
+                //gives player 20$
                 System.out.println("Income Tax Refund, You Received 20$");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 20);
                 break;
             case 9:
+                //goes through the player loop, subtracts 10$ from everyone and gives currentplayer that money
                 System.out.println("It's Your Birthday! You Collect 10$ From Everyone");
                 for (int i = 0; i<Players.length(); i++){
                     if (Players.find(i).data == currentPlayer){
@@ -616,40 +656,50 @@ public class Main {
                 }
                 break;
             case 10:
+                //gives player 100$
                 System.out.println("Life Insurance Matures, You Received 100$");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 100);
                 break;
             case 11:
+                //takes 100$ from player
                 System.out.println("Hospital Fee: 100$");
                 currentPlayer.setBalance(currentPlayer.getBalance() - 100);
                 break;
             case 12:
+                //takes 50$ from player
                 System.out.println("School Fee: 50$");
                 currentPlayer.setBalance(currentPlayer.getBalance() - 50);
                 break;
             case 13:
+                //gives player 50$
                 System.out.println("You Received A 50$ Consultancy Fee");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 50);
                 break;
             case 14:
+                //What did you expect, you were up against the best
                 System.out.println("You Placed Second In a Beauty Contest (Alex Won), You Receive 10$");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 10);
                 break;
             case 15:
+                //gives the player 100$
                 System.out.println("You Inherit 100$");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 100);
                 break;
             case 16:
+                //it's spelled sudo
                 System.out.println("You Spell Sudo Code Right! You get 200$");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                 break;
         }
     }
-    public static void Chance(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer, int roll){
+
+    public static void Chance(CLL<PlayerPiece> Players, CLL<BoardPiece> board, PlayerPiece currentPlayer, int roll) throws InterruptedException {
+        //this method is if the player lands on a chance space, a random is made that draws a random card from possible chance cards
         Random rand = new Random();
         int random = rand.nextInt(16);
         switch (random){
             case 1:
+                //sends the player to boardwalk, gives them the option to buy it if its available, otherwise they are charged rent
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 currentPlayer.setLocation(39);
                 board.find(39).data.setOccupiedBy(board.find(39).data.getOccupiedBy() + currentPlayer.getPiece());
@@ -676,6 +726,7 @@ public class Main {
                 }
                 break;
             case 2:
+                //sends the player to go, gives them 200$
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 currentPlayer.setLocation(0);
                 board.find(0).data.setOccupiedBy(board.find(0).data.getOccupiedBy() + currentPlayer.getPiece());
@@ -683,6 +734,7 @@ public class Main {
                 currentPlayer.setBalance(currentPlayer.getBalance() + 200);
                 break;
             case 3:
+                //sends the player to illinois ave, charge them rent if its owned, allows the player to buy it if it's not purchased
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 if (currentPlayer.getLocation() > 24){
                     currentPlayer.setBalance(currentPlayer.getBalance() + 200);
@@ -711,6 +763,7 @@ public class Main {
                 }
                 break;
             case 4:
+                //sends the player to St. Charles Place, charge them rent if its owned, allows the player to buy it if it's not purchased
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 if (currentPlayer.getLocation() > 11){
                     currentPlayer.setBalance(currentPlayer.getBalance() + 200);
@@ -741,6 +794,10 @@ public class Main {
                 break;
             case 5:
             case 6:
+                //there are typically 2 go to the nearest railroads so the chances of this is doubled, this case sends the nearest railroad, chance card spaces are always near a railroad
+                //so there is pretty much always a clear one to go to (no chance spaces are perfectly between railroads)
+                //if the railroad is owned, the player pays double the rent, if not, they have the opportunity to buy it.
+                //the reason there seems to be 2 duplicates of each railroad is that if the player is closer to a railroad that is behind them, they have to pass go and go all the way around, giving them 200$    Note: I know I didn't do this the smartest way but sunk cost fallacy
                 int reading = Math.abs(currentPlayer.getLocation() - 5);
                 int penn = Math.abs(currentPlayer.getLocation() - 15);
                 int BO = Math.abs(currentPlayer.getLocation() - 25);
@@ -775,7 +832,7 @@ public class Main {
                         }
                     }
                 }
-                if (reading < penn && reading < BO && reading < Short){
+                else if (reading < penn && reading < BO && reading < Short){
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setLocation(5);
                     board.find(5).data.setOccupiedBy(board.find(5).data.getOccupiedBy() + currentPlayer.getPiece());
@@ -833,7 +890,7 @@ public class Main {
                         }
                     }
                 }
-                if (penn < reading && penn < BO && penn < Short){
+                else if (penn < reading && penn < BO && penn < Short){
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setLocation(15);
                     board.find(15).data.setOccupiedBy(board.find(15).data.getOccupiedBy() + currentPlayer.getPiece());
@@ -890,7 +947,7 @@ public class Main {
                         }
                     }
                 }
-                if (BO < reading && BO < penn && BO < Short){
+                else if (BO < reading && BO < penn && BO < Short){
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setLocation(25);
                     board.find(25).data.setOccupiedBy(board.find(25).data.getOccupiedBy() + currentPlayer.getPiece());
@@ -947,7 +1004,7 @@ public class Main {
                         }
                     }
                 }
-                if (Short < reading && Short < penn && Short < BO){
+                else if (Short < reading && Short < penn && Short < BO){
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setLocation(35);
                     board.find(35).data.setOccupiedBy(board.find(35).data.getOccupiedBy() + currentPlayer.getPiece());
@@ -987,10 +1044,10 @@ public class Main {
                     board.find(12).data.setOccupiedBy(board.find(12).data.getOccupiedBy() + currentPlayer.getPiece());
                     System.out.println("You Got Sent To The Electric Company");
                     if (board.find(12).data.isPurchased() && !board.find(currentPlayer.getLocation()).data.isMortgaged() && board.find(currentPlayer.getLocation()).data.getOwner() != currentPlayer){
-                        currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
+                        currentPlayer.setBalance(currentPlayer.getBalance() - board.find(currentPlayer.getLocation()).data.getOwner().getUtilitiesOwned() * 4 * roll * 2);
                         board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
 
-                        System.out.println("You Paid "+board.find(12).data.getRent() * board.find(12).data.getOwner().getUtilitiesOwned() * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
+                        System.out.println("You Paid "+board.find(currentPlayer.getLocation()).data.getOwner().getUtilitiesOwned() * 4 * roll * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
                     }
                     else if (board.find(currentPlayer.getLocation()).data.isMortgaged()){
                         System.out.println("The property you landed on is mortgaged, no rent!");
@@ -1007,7 +1064,7 @@ public class Main {
                         }
                     }
                 }
-                if (Electricity < Water){
+                else if (Electricity < Water){
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setLocation(12);
                     board.find(12).data.setOccupiedBy(board.find(12).data.getOccupiedBy() + currentPlayer.getPiece());
@@ -1016,7 +1073,7 @@ public class Main {
                         currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
                         board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
 
-                        System.out.println("You Paid "+board.find(12).data.getRent() * board.find(12).data.getOwner().getUtilitiesOwned() * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
+                        System.out.println("You Paid "+board.find(currentPlayer.getLocation()).data.getOwner().getUtilitiesOwned() * 4 * roll * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
                     }
                     else if (board.find(currentPlayer.getLocation()).data.isMortgaged()){
                         System.out.println("The property you landed on is mortgaged, no rent!");
@@ -1045,7 +1102,7 @@ public class Main {
                         currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
                         board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
 
-                        System.out.println("You Paid "+board.find(28).data.getRent() * board.find(28).data.getOwner().getUtilitiesOwned() * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
+                        System.out.println("You Paid "+board.find(currentPlayer.getLocation()).data.getOwner().getUtilitiesOwned() * 4 * roll * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
                     }
                     else if (board.find(currentPlayer.getLocation()).data.isMortgaged()){
                         System.out.println("The property you landed on is mortgaged, no rent!");
@@ -1062,7 +1119,7 @@ public class Main {
                         }
                     }
                 }
-                if (Electricity > Water){
+                else if (Electricity > Water){
                     board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                     currentPlayer.setLocation(28);
                     board.find(28).data.setOccupiedBy(board.find(28).data.getOccupiedBy() + currentPlayer.getPiece());
@@ -1071,7 +1128,7 @@ public class Main {
                         currentPlayer.setBalance(currentPlayer.getBalance() - currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
                         board.find(currentPlayer.getLocation()).data.getOwner().setBalance(board.find(currentPlayer.getLocation()).data.getOwner().getBalance() + currentPlayer.getUtilitiesOwned() * 4 * roll * 2);
 
-                        System.out.println("You Paid "+board.find(28).data.getRent() * board.find(28).data.getOwner().getUtilitiesOwned() * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
+                        System.out.println("You Paid "+board.find(currentPlayer.getLocation()).data.getOwner().getUtilitiesOwned() * 4 * roll * 2+"$ (double) Rent to " + board.find(currentPlayer.getLocation()).data.getOwner().getName());
                     }
                     else if (board.find(currentPlayer.getLocation()).data.isMortgaged()){
                         System.out.println("The property you landed on is mortgaged, no rent!");
@@ -1091,20 +1148,48 @@ public class Main {
 
                 break;
             case 8:
+                //player gains 50$
                 System.out.println("The Bank Pays You A Dividend of $50");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 50);
                 break;
             case 9:
+                //player's GOOJF count increased by one
                 System.out.println("You Got A Get Out Of Jail Free Card");
                 currentPlayer.setGOOJF(currentPlayer.getGOOJF() + 1);
                 break;
             case 10:
+                //sends a player back 3 spaces, normally this would be a reason for concirn cuz of passing go and dealing with all that, but in a standard
+                //monopoly board, there are no chance squares in the vicinity of go
                 System.out.println("You Got Sent Back 3 Spaces (You do not pay rent)");
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 currentPlayer.setLocation(currentPlayer.getLocation() - 3);
-                board.find(currentPlayer.getLocation() - 3).data.setOccupiedBy(board.find(currentPlayer.getLocation() - 3).data.getOccupiedBy() + currentPlayer.getPiece());
+                board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy() + currentPlayer.getPiece());
+
+                //this switch is for the two special cases, if u land on chance and get this case 10, there is the chance you will land on a community chest or income tax
+                switch (board.find(currentPlayer.getLocation()).data.getSpecial()) {
+                    //calls the communtiy chest method
+                    case "community chest":
+                        System.out.println("Community Chest!");
+                        TimeUnit.SECONDS.sleep(2);
+                        CommunityChest(Players, board, currentPlayer);
+                        break;
+                    //gives the player a choice between 10% of their balance or 200$, accepts the player response and does the corresponding action
+                    case "income tax":
+                        Scanner taxChoice = new Scanner(System.in);
+                        System.out.println("You landed on income tax, enter 1 to pay 10% of your balance or 2 to pay 200$");
+                        int choice = taxChoice.nextInt();
+                        if (choice == 1) {
+                            System.out.println("You paid " + currentPlayer.getBalance() / 10 + " to the feds");
+                            currentPlayer.setBalance((9 * currentPlayer.getBalance()) / 10);
+                        } else {
+                            System.out.println("You paid 200$");
+                            currentPlayer.setBalance(currentPlayer.getBalance() - 200);
+                        }
+                        break;
+                }
                 break;
             case 11:
+                //sends player to jail, sets status to jail, sets jailturns to 0
                 System.out.println("You Got Sent To Jail");
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 currentPlayer.setLocation(10);
@@ -1112,10 +1197,13 @@ public class Main {
                 currentPlayer.setStatus("jail");
                 break;
             case 12:
+                //subtracts 15$ from balance
                 System.out.println("Speeding Fine: 15$");
                 currentPlayer.setBalance(currentPlayer.getBalance() - 15);
                 break;
             case 13:
+                //same as the code for send player to the nearest railroad except in this case, it is always reading railroad
+                //player pays rent if it is purchased, and can buy the railroad if it has not been already
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
                 if (currentPlayer.getLocation() > 5) {
                     currentPlayer.setBalance(currentPlayer.getBalance() + 200);
@@ -1143,10 +1231,12 @@ public class Main {
                     }
                 break;
             case 14:
+                //gives player 150$
                 System.out.println("Your building loan matures, You get 150$");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 150);
                 break;
             case 15:
+                //goes through the player CLL and pays each player 50$, takes away total from currentplayer
                 System.out.println("You have been elected Chairman of the Board. You pay each player $50");
                 for (int i = 0; i<Players.length(); i++){
                     if (Players.find(i).data == currentPlayer){
@@ -1159,17 +1249,22 @@ public class Main {
                 break;
         }
     }
-    public static boolean isGameOver(CLL<PlayerPiece> players){
-        PlayerPiece current;
+
+    public static boolean isGameOver(CLL<PlayerPiece> players, CLL<BoardPiece> board){
+        //runs through all the players checking if their balance is less than 0, if so, they are removed from the game loop, once one player if left, they win
         for(int i = 0; i<players.length(); i++){
             if(players.find(i).data.getBalance() <= 0){
                 players.delete(players.find(i).data);
+                board.find(players.find(i).data.getLocation()).data.setOccupiedBy(board.find(players.find(i).data.getLocation()).data.getOccupiedBy().replace(players.find(i).data.getPiece(), ""));
+                for (int j = 0; j < players.find(i).data.getProperties().size(); j++) {
+                    players.find(i).data.getProperties().get(j).setPrice(players.find(j).data.getProperties().get(j).getSellValue() * 2);
+                    players.find(i).data.getProperties().get(j).setPurchased(false);
+                    players.find(i).data.getProperties().get(j).setOwner(null);
+                    players.find(i).data.getProperties().remove(j);
+                }
             }
         }
-        if(players.length() <= 1){
-            return true;
-        }
-        return false;
+        return players.length() <= 1;
     }
 }
 
