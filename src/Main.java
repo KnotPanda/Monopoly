@@ -174,6 +174,7 @@ public class Main {
                 }
                 if (players.find(i).data.getBalance() <= 0 ){
                     System.out.println("You went broke!");
+                    i--;
                 }
                 System.out.println("Your turn has ended");
                 isGameOver(players, board);
@@ -793,8 +794,7 @@ public class Main {
                 }
                 break;
             case 5:
-            case 6:
-                //there are typically 2 go to the nearest railroads so the chances of this is doubled, this case sends the nearest railroad, chance card spaces are always near a railroad
+                //this case sends the nearest railroad, chance card spaces are always near a railroad
                 //so there is pretty much always a clear one to go to (no chance spaces are perfectly between railroads)
                 //if the railroad is owned, the player pays double the rent, if not, they have the opportunity to buy it.
                 //the reason there seems to be 2 duplicates of each railroad is that if the player is closer to a railroad that is behind them, they have to pass go and go all the way around, giving them 200$    Note: I know I didn't do this the smartest way but sunk cost fallacy
@@ -1033,7 +1033,7 @@ public class Main {
                 }
                 break;
 
-            case 7:
+            case 6:
                 int Electricity = Math.abs(currentPlayer.getLocation() - 12);
                 int Water = Math.abs(currentPlayer.getLocation() - 28);
 
@@ -1147,17 +1147,17 @@ public class Main {
                 }
 
                 break;
-            case 8:
+            case 7:
                 //player gains 50$
                 System.out.println("The Bank Pays You A Dividend of $50");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 50);
                 break;
-            case 9:
+            case 8:
                 //player's GOOJF count increased by one
                 System.out.println("You Got A Get Out Of Jail Free Card");
                 currentPlayer.setGOOJF(currentPlayer.getGOOJF() + 1);
                 break;
-            case 10:
+            case 9:
                 //sends a player back 3 spaces, normally this would be a reason for concirn cuz of passing go and dealing with all that, but in a standard
                 //monopoly board, there are no chance squares in the vicinity of go
                 System.out.println("You Got Sent Back 3 Spaces (You do not pay rent)");
@@ -1188,7 +1188,7 @@ public class Main {
                         break;
                 }
                 break;
-            case 11:
+            case 10:
                 //sends player to jail, sets status to jail, sets jailturns to 0
                 System.out.println("You Got Sent To Jail");
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
@@ -1196,12 +1196,12 @@ public class Main {
                 board.find(10).data.setOccupiedBy(board.find(currentPlayer.getLocation() - 3).data.getOccupiedBy() + currentPlayer.getPiece());
                 currentPlayer.setStatus("jail");
                 break;
-            case 12:
+            case 11:
                 //subtracts 15$ from balance
                 System.out.println("Speeding Fine: 15$");
                 currentPlayer.setBalance(currentPlayer.getBalance() - 15);
                 break;
-            case 13:
+            case 12:
                 //same as the code for send player to the nearest railroad except in this case, it is always reading railroad
                 //player pays rent if it is purchased, and can buy the railroad if it has not been already
                 board.find(currentPlayer.getLocation()).data.setOccupiedBy(board.find(currentPlayer.getLocation()).data.getOccupiedBy().replace(currentPlayer.getPiece(), ""));
@@ -1230,12 +1230,12 @@ public class Main {
                         }
                     }
                 break;
-            case 14:
+            case 13:
                 //gives player 150$
                 System.out.println("Your building loan matures, You get 150$");
                 currentPlayer.setBalance(currentPlayer.getBalance() + 150);
                 break;
-            case 15:
+            case 14:
                 //goes through the player CLL and pays each player 50$, takes away total from currentplayer
                 System.out.println("You have been elected Chairman of the Board. You pay each player $50");
                 for (int i = 0; i<Players.length(); i++){
@@ -1252,20 +1252,23 @@ public class Main {
 
     public static boolean isGameOver(CLL<PlayerPiece> players, CLL<BoardPiece> board){
         //runs through all the players checking if their balance is less than 0, if so, they are removed from the game loop, once one player if left, they win
-        for(int i = 0; i<players.length() - 1; i++){
+        for(int i = 0; i<players.length(); i++){
             if(players.find(i).data.getBalance() <= 0){
-                players.delete(players.find(i).data);
                 board.find(players.find(i).data.getLocation()).data.setOccupiedBy(board.find(players.find(i).data.getLocation()).data.getOccupiedBy().replace(players.find(i).data.getPiece(), ""));
-                for (int j = 0; j < players.find(i).data.getProperties().size() - 1; j++) {
+                for (int j = 0; j < players.find(i).data.getProperties().size(); j++) {
                     players.find(i).data.getProperties().get(j).setPrice(players.find(j).data.getProperties().get(j).getSellValue() * 2);
                     players.find(i).data.getProperties().get(j).setPurchased(false);
                     players.find(i).data.getProperties().get(j).setOwner(null);
                     players.find(i).data.getProperties().remove(j);
-                    j--;
+                    if (players.find(i).data.getProperties().size() > 0){
+                        j--;
+                    }
                 }
+                players.delete(players.find(i).data);
+                i--;
             }
         }
-        return players.length() <= 1;
+        return players.length() < 2;
     }
 }
 

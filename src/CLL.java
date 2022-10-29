@@ -23,34 +23,23 @@ public class CLL<T> {
             last = link;
         }
     }
-    public void delete(T data){
-        Link current = first;
-        if(last==null){
-            return;
-        }
-        while(current.data != data){
-            if(current.next == first){
-                System.out.println("Link does not exist");
-                break;
-            }
-            current = current.next;
-        }
-        if(current == first && current.next == first){
-            first = null;
-        }
-        if(current == first){
-            last = first;
-            while(last.next != first){
-                last = last.next;
-                first = current.next;
-                last.next = first;
-            }
-        }
-        else if(current.next == first){
+    public void delete (T key){
+        Link<T> current = first;
+        Boolean done = true;
+        if(first.data.equals(key)) {
+            first = first.next;
             last.next = first;
         }
         else{
-            last.next = current.next;
+                while(done){
+                    if(current.next.data.equals(key)){
+                        current.next=current.next.next;
+                        done = false;}
+                    if (current.next.equals(first)){
+                        last = current;
+                    }
+                    current = current.next;
+                }
         }
     }
 
