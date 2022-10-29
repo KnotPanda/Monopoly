@@ -111,17 +111,17 @@ public class Main {
 
         //creating all the player objects then adding them into a player CLL
         ArrayList<BoardPiece> properties1 = new ArrayList<>();
-        PlayerPiece P1 = new PlayerPiece("square", 100, false, 0, properties1, "■", "free", 0, 0, 0, 0, 0, RED);
+        PlayerPiece P1 = new PlayerPiece("square", 1500, false, 0, properties1, "■", "free", 0, 0, 0, 0, 0, RED);
         ArrayList<BoardPiece> properties2 = new ArrayList<>();
-        PlayerPiece P2 = new PlayerPiece("Diamond", 100, false, 0, properties2, "◆", "free", 0, 0, 0, 0, 0, GREEN);
+        PlayerPiece P2 = new PlayerPiece("Diamond", 1500, false, 0, properties2, "◆", "free", 0, 0, 0, 0, 0, GREEN);
         ArrayList<BoardPiece> properties3 = new ArrayList<>();
-        PlayerPiece P3 = new PlayerPiece("Circle", 100, false, 0, properties3, "◕", "free", 0, 0, 0, 0, 0, YELLOW);
+        PlayerPiece P3 = new PlayerPiece("Circle", 1500, false, 0, properties3, "◕", "free", 0, 0, 0, 0, 0, YELLOW);
         ArrayList<BoardPiece> properties4 = new ArrayList<>();
-        PlayerPiece P4 = new PlayerPiece("Triangle", 100, false, 0, properties4, "▲", "free", 0, 0, 0, 0, 0, BLUE);
+        PlayerPiece P4 = new PlayerPiece("Triangle", 1500, false, 0, properties4, "▲", "free", 0, 0, 0, 0, 0, BLUE);
         ArrayList<BoardPiece> properties5 = new ArrayList<>();
-        PlayerPiece P5 = new PlayerPiece("Checker", 100, false, 0, properties5, "▞", "free", 0, 0, 0, 0, 0, PURPLE);
+        PlayerPiece P5 = new PlayerPiece("Checker", 1500, false, 0, properties5, "▞", "free", 0, 0, 0, 0, 0, PURPLE);
         ArrayList<BoardPiece> properties6 = new ArrayList<>();
-        PlayerPiece P6 = new PlayerPiece("L-shape", 100, false, 0, properties6, "▙", "free", 0, 0, 0, 0, 0, CYAN);
+        PlayerPiece P6 = new PlayerPiece("L-shape", 1500, false, 0, properties6, "▙", "free", 0, 0, 0, 0, 0, CYAN);
 
 
         players.insert(P1);
@@ -141,7 +141,7 @@ public class Main {
 
         //this while loop is the game loop, this cycles through the CLL of players letting each of them go through a turn before moving on to the next. When a player runs out of money, they are removed from the
         //CLL and no longer will have turns
-        while (!isGameOver(players, board)) {
+        while (true) {
             for (int i = 0; i < players.length(); i++) {
                 Random dice = new Random();
                 //creating all the dice for the initial roll and the secondary roll in case the first roll is doubles
@@ -178,6 +178,12 @@ public class Main {
                 }
                 System.out.println("Your turn has ended");
                 isGameOver(players, board);
+                if (players.length() == 1){
+                    break;
+                }
+            }
+            if (players.length() == 1){
+                break;
             }
         }
         //prints out congrats to the winning player in randomized rainbow font
