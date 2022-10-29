@@ -18,7 +18,7 @@ public class CLL<T> {
             last = link;
             link.next = last;
         } else {
-            last.next = link.next;
+            link.next = first;
             last.next = link;
             last = link;
         }
@@ -39,6 +39,7 @@ public class CLL<T> {
             first = null;
         }
         if(current == first){
+            last = first;
             while(last.next != first){
                 last = last.next;
                 first = current.next;
@@ -62,15 +63,51 @@ public class CLL<T> {
             return current;
     }
 
-    //length runs through the whole CLL incrimenting a counter for event link it passes by, returns that counter once it reaches the end of the CLL
+    //length runs through the whole CLL incrementing a counter for event link it passes by, returns that counter once it reaches the end of the CLL
     public int length(){
         Link<T> current = first;
         int counter = 1;
-        while (current != last){
+        while (current.data != last.data){
             counter++;
             current = current.next;
         }
         return counter;
+    }
+    public int count() {
+        Link<T> current = first;
+        int counter = 0;
+        if (first != null) {
+            while(current != first){
+                current = current.next;
+                counter++;
+            }
+        }
+        return counter;
+    }
+    public void delete2(T data){
+        Link current = first;
+        if(last==null){
+            return;
+        }
+        while(current != first){
+            Link next = current.next;
+            if (next.data == data) {
+                if (next.data == first) {
+                    first = null;
+                    last = null;
+                } else {
+                    current.next = next.next;
+                    if (first == next) {
+                        first = first.next;
+                    }
+                    if (last == next) {
+                        last = current;
+                    }
+                }
+                break;
+            }
+            current = next;
+        }
     }
 }
 

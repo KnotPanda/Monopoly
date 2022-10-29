@@ -298,7 +298,7 @@ public class Main {
     public static String printPrice(BoardPiece link, CLL<BoardPiece> board){
         int count = String.valueOf(link.getPrice()).length();
         //purchased and mortgaged are the same amount of letters, color is added to these words depending on whom the owner of the property is
-        if (link.getPrice() == 0 && link.isPurchasable() && !link.isMortgaged()){
+        if (link.isPurchased() && !link.isMortgaged()){
             return "  " + board.find(link.getLocation()).data.getOwner().getColor() + "PURCHASED" + RESET + "  ";
         }
         if (link.isMortgaged()){
@@ -1252,15 +1252,16 @@ public class Main {
 
     public static boolean isGameOver(CLL<PlayerPiece> players, CLL<BoardPiece> board){
         //runs through all the players checking if their balance is less than 0, if so, they are removed from the game loop, once one player if left, they win
-        for(int i = 0; i<players.length(); i++){
+        for(int i = 0; i<players.length() - 1; i++){
             if(players.find(i).data.getBalance() <= 0){
                 players.delete(players.find(i).data);
                 board.find(players.find(i).data.getLocation()).data.setOccupiedBy(board.find(players.find(i).data.getLocation()).data.getOccupiedBy().replace(players.find(i).data.getPiece(), ""));
-                for (int j = 0; j < players.find(i).data.getProperties().size(); j++) {
+                for (int j = 0; j < players.find(i).data.getProperties().size() - 1; j++) {
                     players.find(i).data.getProperties().get(j).setPrice(players.find(j).data.getProperties().get(j).getSellValue() * 2);
                     players.find(i).data.getProperties().get(j).setPurchased(false);
                     players.find(i).data.getProperties().get(j).setOwner(null);
                     players.find(i).data.getProperties().remove(j);
+                    j--;
                 }
             }
         }
